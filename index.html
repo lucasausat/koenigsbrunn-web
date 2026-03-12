@@ -3,272 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Königsbrunn RP | Das Kleinstadt-Erlebnis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Königsbrunn RP | Urban Roleplay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2ecc71;
-            --primary-glow: rgba(46, 204, 113, 0.4);
-            --bg: #080a09;
-            --card-bg: rgba(20, 24, 22, 0.9);
-            --text: #e5e7eb;
-        }
-
-        body.ghost-mode {
-            --bg: #030504;
-            --primary: #27ae60;
-            --primary-glow: rgba(39, 174, 96, 0.2);
+            --primary: #00ff88;
+            --accent: #00d4ff;
+            --bg: #050608;
+            --card-bg: rgba(15, 18, 22, 0.8);
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
         * { cursor: none; margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; transition: background 0.5s; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            color: #fff; 
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, #10141a 0%, #050608 100%);
+        }
+
+        /* --- STÄDTISCHE ANIMATIONEN --- */
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        @keyframes pulse-glow { 0% { box-shadow: 0 0 5px var(--primary); } 50% { box-shadow: 0 0 20px var(--primary); } 100% { box-shadow: 0 0 5px var(--primary); } }
 
         /* --- CUSTOM CURSOR --- */
         #cursor {
-            width: 20px; height: 20px; border: 2px solid var(--primary); border-radius: 50%;
-            position: fixed; pointer-events: none; z-index: 9999;
-            box-shadow: 0 0 15px var(--primary-glow); transform: translate(-50%, -50%); transition: transform 0.1s ease;
+            width: 8px; height: 8px; background: var(--primary); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 10000; transition: transform 0.1s;
+        }
+        #cursor-follower {
+            width: 35px; height: 35px; border: 1px solid var(--primary); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.15s ease-out;
+            background: rgba(0, 255, 136, 0.05);
         }
 
-        /* --- LOADER --- */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        /* --- NAV BAR --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 25px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
         }
-        .tree-particle { position: absolute; color: var(--primary); opacity: 0.3; animation: fall linear forwards; pointer-events: none; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-        .loader-bar-container { width: 250px; height: 2px; background: #222; margin-top: 20px; overflow: hidden; }
-        .loader-bar { width: 0%; height: 100%; background: var(--primary); transition: width 0.3s ease; }
+        .logo { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 5px; color: var(--primary); }
 
-        /* --- MODAL (BAUSTELLEN MELDUNG) --- */
-        #work-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.92); z-index: 9000; display: none;
-            align-items: center; justify-content: center; backdrop-filter: blur(10px);
-        }
-        .modal-box {
-            background: var(--card-bg); padding: 40px; border: 2px solid var(--primary);
-            border-radius: 20px; text-align: center; max-width: 450px;
-            box-shadow: 0 0 40px var(--primary-glow);
-        }
-
-        /* --- HERO --- */
+        /* --- HERO SECTION --- */
         header {
-            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), var(--bg)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000');
-            background-size: cover; background-position: center; background-attachment: fixed;
-        }
-        h1 {
-            font-size: clamp(2.5rem, 10vw, 7rem); font-weight: 900; text-transform: uppercase; letter-spacing: 15px;
-            background: linear-gradient(to bottom, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 30px var(--primary-glow));
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: linear-gradient(rgba(5, 6, 8, 0.4), var(--bg)), url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2000');
+            background-size: cover; background-position: center; position: relative;
         }
 
-        /* --- VERSCHLÜSSELTE KARTE --- */
-        .map-section { padding: 100px 20px; text-align: center; }
-        .map-locked {
-            max-width: 900px; margin: 40px auto; height: 450px;
-            background: #0a0a0a; border: 1px solid var(--primary);
-            border-radius: 20px; position: relative; overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: inset 0 0 50px #000;
+        header h1 {
+            font-family: 'Syncopate', sans-serif; font-size: clamp(2rem, 8vw, 6rem);
+            text-transform: uppercase; line-height: 0.9; text-align: center;
         }
-        .scanlines {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(rgba(18, 16, 16, 0) 0, rgba(46, 204, 113, 0.1) 50%, rgba(18, 16, 16, 0) 100%);
-            background-size: 100% 4px; pointer-events: none; z-index: 2; animation: scan 10s linear infinite;
-        }
-        @keyframes scan { from { background-position: 0 0; } to { background-position: 0 100%; } }
-        .lock-content { z-index: 3; text-align: center; backdrop-filter: blur(15px); padding: 30px; border-radius: 20px; }
 
-        /* --- GRID & CARDS --- */
-        .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card {
-            background: var(--card-bg); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.4s; opacity: 0; transform: translateY(30px);
+        .outline-text {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+            color: transparent; display: block;
         }
-        .card.visible { opacity: 1; transform: translateY(0); }
-        .card:hover { border-color: var(--primary); box-shadow: 0 0 30px var(--primary-glow); transform: translateY(-5px); }
+
+        .hero-stats {
+            display: flex; gap: 40px; margin-top: 50px;
+            background: var(--glass); padding: 20px 40px; border-radius: 100px;
+            border: 1px solid var(--border); backdrop-filter: blur(20px);
+        }
+
+        /* --- GRID CONTENT --- */
+        .city-grid {
+            display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px;
+            max-width: 1400px; margin: -100px auto 100px; padding: 0 20px;
+            position: relative; z-index: 10;
+        }
+
+        .feature-box {
+            grid-column: span 4; background: var(--card-bg);
+            border: 1px solid var(--border); border-radius: 24px; padding: 40px;
+            backdrop-filter: blur(10px); transition: 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+        }
+
+        .feature-box:hover {
+            border-color: var(--primary); transform: translateY(-10px) scale(1.02);
+            background: rgba(0, 255, 136, 0.02);
+        }
+
+        .feature-box h3 { color: var(--primary); margin-bottom: 15px; font-family: 'Syncopate'; font-size: 0.9rem; }
+
+        /* --- MAP SCANNER --- */
+        .map-section {
+            grid-column: span 8; height: 500px; background: #000;
+            border-radius: 24px; border: 1px solid var(--border); overflow: hidden;
+            position: relative;
+        }
+
+        .scanner-line {
+            position: absolute; width: 100%; height: 2px; background: var(--primary);
+            box-shadow: 0 0 15px var(--primary); top: 0; z-index: 5;
+            animation: scan-move 4s linear infinite;
+        }
+        @keyframes scan-move { 0% { top: 0; } 100% { top: 100%; } }
+
+        .map-info {
+            position: absolute; bottom: 30px; left: 30px; z-index: 10;
+        }
 
         /* --- BUTTONS --- */
-        .btn {
-            background: var(--primary); color: #000; padding: 18px 45px; border-radius: 50px;
-            text-decoration: none; font-weight: 900; display: inline-block; transition: 0.3s;
-            box-shadow: 0 0 20px var(--primary-glow); border: none; cursor: pointer;
+        .cta-btn {
+            background: var(--primary); color: #000; padding: 20px 50px;
+            border-radius: 12px; font-weight: 900; text-decoration: none;
+            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;
+            transition: 0.3s; display: inline-block; border: none;
         }
-        .btn:hover { transform: scale(1.05); background: #fff; }
+        .cta-btn:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,255,136,0.3); }
 
-        #ghost-switch {
-            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
-            background: var(--card-bg); border: 1px solid var(--primary); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5000;
+        /* --- TEAM SECTION --- */
+        .team-container { max-width: 1400px; margin: 100px auto; padding: 0 20px; }
+        .team-title { font-family: 'Syncopate'; font-size: 1.5rem; margin-bottom: 50px; text-align: center; }
+        
+        .team-card-modern {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 30px; border-radius: 15px; display: flex; align-items: center; gap: 20px;
+            transition: 0.3s;
         }
+        .team-card-modern:hover { background: var(--border); }
+        .status-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; animation: pulse-glow 2s infinite; }
 
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px; }
-        .team-member { background: rgba(255,255,255,0.02); padding: 30px; border-radius: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
-        .role-tag { font-size: 0.7rem; padding: 4px 10px; border-radius: 50px; text-transform: uppercase; font-weight: bold; }
+        footer { padding: 80px; text-align: center; font-size: 0.8rem; color: #555; letter-spacing: 3px; }
 
-        footer { padding: 60px; text-align: center; color: #444; border-top: 1px solid #111; }
+        /* REVEAL ON SCROLL */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
     </style>
 </head>
 <body>
 
 <div id="cursor"></div>
-<div id="ghost-switch" onclick="toggleGhostMode()">🌲</div>
+<div id="cursor-follower"></div>
 
-<div id="work-modal">
-    <div class="modal-box">
-        <h2 style="color: var(--primary); letter-spacing: 2px; margin-bottom: 15px;">PROJEKT IN ARBEIT 🏗️</h2>
-        <p style="color: #ccc; margin-bottom: 25px;">Willkommen in der Planungsphase von <b>Königsbrunn</b>. Das Game ist aktuell in Arbeit.<br><br>Der Roblox Link kommt demnächst!</p>
-        <button class="btn" onclick="closeModal()">Verstanden</button>
+<nav>
+    <div class="logo">KÖNIGSBRUNN</div>
+    <div style="display: flex; gap: 30px; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;">
+        <span style="color: var(--primary);">STATUT: AKTIV</span>
+        <span>VERSION: 0.0.1A</span>
     </div>
-</div>
-
-<div id="loader">
-    <h2 style="letter-spacing: 10px; color: #fff;">KÖNIGSBRUNN</h2>
-    <div class="loader-bar-container"><div class="loader-bar" id="l-bar"></div></div>
-</div>
+</nav>
 
 <header>
-    <div style="border: 1px solid var(--primary); color: var(--primary); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; margin-bottom: 20px; letter-spacing: 2px;">50KM² KLEINSTADT RP</div>
-    <h1>Königsbrunn</h1>
-    <div id="liveCounter" style="color: var(--primary); font-weight: bold; margin-top: 20px;">INITIALISIERE INFRASTRUKTUR...</div>
-    <button class="btn" style="margin-top: 40px;" onclick="openModal()">ERKUNDEN</button>
+    <div style="letter-spacing: 10px; font-size: 0.8rem; color: var(--primary); margin-bottom: 20px; font-family: 'Syncopate';">UPBAN ENVIRONMENT v.2</div>
+    <h1>
+        <span class="outline-text">THE CITY OF</span>
+        KÖNIGSBRUNN
+    </h1>
+    
+    <div class="hero-stats">
+        <div><small style="color: var(--primary); font-family: 'Syncopate'; font-size: 0.6rem;">FLÄCHE</small><br><strong>50 KM²</strong></div>
+        <div style="width: 1px; background: var(--border);"></div>
+        <div><small style="color: var(--primary); font-family: 'Syncopate'; font-size: 0.6rem;">POPULATION</small><br><strong id="liveCount">LÄDT...</strong></div>
+    </div>
+
+    <a href="#" class="cta-btn" style="margin-top: 50px;" onclick="document.getElementById('about').scrollIntoView()">Datenzugriff</a>
 </header>
 
-<div class="container" id="about">
-    <div class="grid">
-        <div class="card reveal">
-            <h3>🏙️ Die Kleinstadt</h3>
-            <p>Erlebe eine riesige, detaillierte Karte. Von modernen Wohnvierteln bis hin zu weitläufigen Landstrichen bietet Königsbrunn alles.</p>
+<div class="city-grid" id="about">
+    <div class="feature-box reveal">
+        <h3>01 / INFRASTRUKTUR</h3>
+        <p>Eine voll vernetzte Kleinstadt mit Autobahnanbindung, Schienennetz und komplexen Stadtvierteln.</p>
+    </div>
+    
+    <div class="map-section reveal" style="grid-row: span 2;">
+        <div class="scanner-line"></div>
+        <div style="width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000'); background-size: cover; opacity: 0.3; filter: grayscale(1);"></div>
+        <div class="map-info">
+            <h2 style="font-family: 'Syncopate'; font-size: 1.5rem;">TOPOGRAFIE</h2>
+            <p style="color: var(--primary); font-size: 0.7rem; letter-spacing: 3px;">VERSCHLÜSSELTE KOORDINATEN</p>
         </div>
-        <div class="card reveal">
-            <h3>🎭 Reines Roleplay</h3>
-            <p>Wir setzen auf Immersion. Tauche ein in ein authentisches Leben, in dem deine Entscheidungen den Alltag prägen.</p>
-        </div>
-        <div class="card reveal">
-            <h3>📏 Massive Fläche</h3>
-            <p>Mit über 50km² bespielbarer Fläche gibt es immer etwas Neues zu entdecken – perfekt für Erkunder und Entdecker.</p>
-        </div>
+    </div>
+
+    <div class="feature-box reveal">
+        <h3>02 / REALSIMUS</h3>
+        <p>Dynamic Weather 2.0 & High-Fidelity Scripts für das nächste Level des deutschen Roleplays.</p>
+    </div>
+
+    <div class="feature-box reveal">
+        <h3>03 / ÖKONOMIE</h3>
+        <p>Ein komplexes Wirtschaftssystem steuert die Entwicklung von Gewerbegebieten und Wohnraum.</p>
+    </div>
+
+    <div class="feature-box reveal" style="grid-column: span 4; background: linear-gradient(45deg, rgba(0,255,136,0.1), transparent);">
+        <h3>04 / GEMEINSCHAFT</h3>
+        <p>Werde Teil des größten städtischen Projekts auf 50km².</p>
+        <a href="https://discord.gg/QX5xj22dGW" class="cta-btn" style="margin-top: 20px; padding: 10px 20px; font-size: 0.6rem;">Discord Connect</a>
     </div>
 </div>
 
-<section class="map-section reveal">
-    <h2>Stadtplan von Königsbrunn</h2>
-    <div class="map-locked">
-        <div class="scanlines"></div>
-        <div class="lock-content">
-            <div style="font-size: 4rem; margin-bottom: 10px;">🔒</div>
-            <h3 style="letter-spacing: 8px; color: var(--primary); text-transform: uppercase;">Daten Verschlüsselt</h3>
-            <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 15px; max-width: 400px; margin-left: auto; margin-right: auto;">
-                Der Zugriff auf topografische Daten ist während der Bauphase gesperrt. Karten-Update folgt mit Release.
-            </p>
+<div class="team-container reveal">
+    <h2 class="team-title">PROJEKTLEITUNG</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;" id="team-list">
         </div>
-    </div>
-</section>
-
-<div class="container reveal" style="text-align: center;">
-    <h2>Das Projekt-Team</h2>
-    <div class="team-grid" id="team-list"></div>
-</div>
-
-<div class="container reveal" style="text-align: center; padding-bottom: 100px;">
-    <h2>Werde Teil der Entwicklung</h2>
-    <a href="https://discord.gg/QX5xj22dGW" class="btn">DEM DISCORD BEITRETEN</a>
 </div>
 
 <footer>
-    © 2026 Königsbrunn RP Project | Offizielles Portal
+    <p>EST 2026 // KÖNIGSBRUNN URBAN DEVELOPMENT // ALL RIGHTS RESERVED</p>
 </footer>
 
 <script>
-    // --- MODAL FUNKTIONEN ---
-    function openModal() { document.getElementById('work-modal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('work-modal').style.display = 'none'; }
-
-    // --- LOADER & PARTIKEL ---
-    function createTree() {
-        const loader = document.getElementById('loader');
-        if(!loader) return;
-        const p = document.createElement('div');
-        p.className = 'tree-particle';
-        p.innerHTML = '🌲';
-        p.style.left = Math.random() * 100 + 'vw';
-        p.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        loader.appendChild(p);
-        setTimeout(() => p.remove(), 5000);
-    }
-    const partInt = setInterval(createTree, 300);
-
-    window.onload = () => {
-        let bar = document.getElementById('l-bar');
-        let w = 0;
-        let int = setInterval(() => {
-            w += Math.random() * 25;
-            if(w >= 100) {
-                w = 100; clearInterval(int); clearInterval(partInt);
-                setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 500);
-            }
-            bar.style.width = w + '%';
-        }, 150);
-    };
-
-    // --- CURSOR ---
+    // --- CURSOR LOGIC ---
     const cursor = document.getElementById("cursor");
-    document.addEventListener("mousemove", e => {
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
+    const follower = document.getElementById("cursor-follower");
+    document.addEventListener("mousemove", (e) => {
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        follower.style.transform = `translate(${e.clientX - 14}px, ${e.clientY - 14}px)`;
     });
 
-    // --- GHOST MODE ---
-    function toggleGhostMode() {
-        document.body.classList.toggle('ghost-mode');
-        const btn = document.getElementById('ghost-switch');
-        btn.innerHTML = document.body.classList.contains('ghost-mode') ? '🌑' : '🌲';
-    }
+    // --- REVEAL LOGIC ---
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add("active");
+        });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
 
-    // --- TEAM DATEN ---
+    // --- TEAM LOAD ---
     const team = [
-        { name: "lucas.aus.at", role: "Management", col: "#ff4757" },
-        { name: "joge2286", role: "Management", col: "#ff7f50" },
-        { name: "benschi1503", role: "Lead Dev", col: "#3498db" },
-        { name: "mrlenny13", role: "Developer", col: "#9b59b6" }
+        { name: "lucas.aus.at", role: "Management" },
+        { name: "joge2286", role: "Management" },
+        { name: "benschi1503", role: "Lead Dev" },
+        { name: "mrlenny13", role: "Developer" }
     ];
 
-    const teamList = document.getElementById('team-list');
+    const teamContainer = document.getElementById('team-list');
     team.forEach(m => {
-        teamList.innerHTML += `
-            <div class="team-member">
-                <div style="font-weight: 900;">${m.name}</div>
-                <span class="role-tag" style="border: 1px solid ${m.col}; color: ${m.col};">${m.role}</span>
+        teamContainer.innerHTML += `
+            <div class="team-card-modern">
+                <div class="status-dot"></div>
+                <div>
+                    <div style="font-size: 0.9rem; font-weight: 900; letter-spacing: 1px;">${m.name.toUpperCase()}</div>
+                    <div style="font-size: 0.6rem; color: var(--primary); font-family: 'Syncopate';">${m.role}</div>
+                </div>
             </div>
         `;
     });
 
-    // --- REVEAL ANIMATION ---
-    function reveal() {
-        document.querySelectorAll(".reveal").forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-                el.classList.add("visible");
-            }
-        });
-    }
-    window.addEventListener("scroll", reveal);
-    reveal();
-
-    // --- DISCORD COUNTER ---
-    async function updateCounter() {
+    // --- LIVE DATA SIM ---
+    async function updateStats() {
         try {
             const r = await fetch("https://discord.com/api/guilds/1477240537693028414/widget.json");
             const d = await r.json();
-            document.getElementById("liveCounter").innerHTML = `🟢 ${d.presence_count} BÜRGER IN DER STADT`;
+            document.getElementById("liveCount").innerText = d.presence_count + " UNITS";
         } catch (e) {
-            document.getElementById("liveCounter").innerHTML = `🟢 STATUS: ENTWICKLUNG`;
+            document.getElementById("liveCount").innerText = "DEVELOPMENT";
         }
     }
-    updateCounter();
+    updateStats();
 </script>
 
 </body>
