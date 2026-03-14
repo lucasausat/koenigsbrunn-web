@@ -9,7 +9,7 @@
         :root {
             --bg: #05070a;
             --surface: #0d1117;
-            --primary: #3b82f6; /* Modernes Blau */
+            --primary: #3b82f6;
             --accent: #60a5fa;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
@@ -27,7 +27,6 @@
             overflow-x: hidden;
         }
 
-        /* --- Header & Navigation --- */
         nav {
             position: fixed;
             top: 0; width: 100%;
@@ -41,13 +40,7 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .logo {
-            font-weight: 800;
-            font-size: 1.4rem;
-            letter-spacing: -1px;
-            color: var(--text-main);
-        }
-
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; color: var(--text-main); }
         .logo span { color: var(--primary); }
 
         .nav-links { display: flex; gap: 40px; }
@@ -60,7 +53,6 @@
         }
         .nav-links a:hover { color: var(--primary); }
 
-        /* --- Hero Section --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -69,32 +61,10 @@
             padding: 0 10%;
             background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 40%);
         }
+        .hero-label { color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-size: 0.8rem; }
+        .hero h1 { font-size: clamp(3rem, 8vw, 6rem); line-height: 1; font-weight: 800; margin-bottom: 30px; max-width: 900px; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; }
 
-        .hero-label {
-            color: var(--primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            font-size: 0.8rem;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 1;
-            font-weight: 800;
-            margin-bottom: 30px;
-            max-width: 900px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 40px;
-        }
-
-        /* --- Buttons --- */
         .btn-group { display: flex; gap: 20px; }
         .btn {
             padding: 18px 35px;
@@ -104,120 +74,58 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-size: 1rem;
         }
-
         .btn-primary {
             background: var(--primary);
             color: white;
             box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
         }
-
-        .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
-        }
-
+        .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4); }
         .btn-secondary {
             border: 1px solid var(--border);
             color: var(--text-main);
             background: rgba(255,255,255,0.03);
         }
-
         .btn-secondary:hover { background: rgba(255,255,255,0.08); }
 
-        /* --- Content Sections --- */
         section { padding: 120px 10%; }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            font-weight: 800;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+        .section-title { font-size: 2.5rem; margin-bottom: 60px; font-weight: 800; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
         .card {
             background: var(--surface);
             padding: 50px;
             border-radius: 24px;
             border: 1px solid var(--border);
-            transition: 0.4s;
+            transition: all 0.5s ease;
             position: relative;
             overflow: hidden;
         }
-
-        .card:hover {
-            border-color: rgba(59, 130, 246, 0.3);
-            transform: translateY(-10px);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--text-main);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
+        .card:hover { border-color: rgba(59,130,246,0.3); transform: translateY(-8px); box-shadow: 0 15px 25px rgba(59,130,246,0.2); }
 
         .card-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 12px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
+            width: 60px; height: 60px; border-radius: 12px;
+            margin-bottom: 25px; display: flex; align-items: center; justify-content: center;
             font-weight: bold;
+            background: rgba(59,130,246,0.1);
+            color: var(--primary);
+            transition: all 0.3s;
         }
+        .card:hover .card-icon { background: var(--primary); color: white; transform: scale(1.2); }
 
-        /* --- Status Section --- */
-        .status-box {
-            background: linear-gradient(145deg, var(--surface), #080a0f);
-            padding: 60px;
-            border-radius: 32px;
-            border: 1px solid var(--border);
-        }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--text-main); }
+        .card p { color: var(--text-muted); font-size: 1rem; }
 
+        .status-box { background: linear-gradient(145deg, var(--surface), #080a0f); padding: 60px; border-radius: 32px; border: 1px solid var(--border); }
         .status-list { list-style: none; }
-        .status-item {
-            padding: 25px 0;
-            border-bottom: 1px solid var(--border);
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            align-items: center;
-        }
-
+        .status-item { padding: 25px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 250px 1fr; align-items: center; }
         .status-item:last-child { border: none; }
         .status-label { font-weight: 600; color: var(--primary); }
         .status-desc { color: var(--text-muted); }
 
-        /* --- Footer --- */
-        footer {
-            padding: 80px 10%;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            color: #4b5563;
-            font-size: 0.9rem;
-        }
+        footer { padding: 80px 10%; border-top: 1px solid var(--border); text-align: center; color: #4b5563; font-size: 0.9rem; }
 
-        /* Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
@@ -253,17 +161,34 @@
         <h2 class="section-title">Die Struktur</h2>
         <div class="grid">
             <div class="card">
-                <div class="card-icon">01</div>
+                <div class="card-icon">
+                    <!-- Verwaltung Icon -->
+                    <svg width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M2 2h12v2H2V2zm0 3h12v2H2V5zm0 3h12v2H2V8zm0 3h12v2H2v-2z"/>
+                    </svg>
+                </div>
                 <h3>Verwaltung</h3>
                 <p>Ein smartes System für Gewerbe, Wohnsitz und Identität. Alles zentral gesteuert für maximalen Realismus.</p>
             </div>
             <div class="card">
-                <div class="card-icon">02</div>
+                <div class="card-icon">
+                    <!-- Sicherheit Icon -->
+                    <svg width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 0L1 4v8l7 4 7-4V4L8 0zm0 1.5l6 3.428V11.5l-6 3.428L2 11.5V4.928L8 1.5z"/>
+                        <path d="M5.5 7h5v2h-5V7z"/>
+                    </svg>
+                </div>
                 <h3>Sicherheit</h3>
                 <p>Modernste Exekutiv-Tools für die Polizei. Prävention und taktisches Vorgehen stehen im Vordergrund.</p>
             </div>
             <div class="card">
-                <div class="card-icon">03</div>
+                <div class="card-icon">
+                    <!-- Medizin Icon -->
+                    <svg width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 100 16A8 8 0 008 0zm0 1.5a6.5 6.5 0 110 13 6.5 6.5 0 010-13z"/>
+                        <path d="M8 4v8M4 8h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                </div>
                 <h3>Medizin</h3>
                 <p>Ein logistikbasiertes Rettungswesen, das mehr ist als nur "Heilen". Echte Notfallsimulation.</p>
             </div>
@@ -296,16 +221,10 @@
 </footer>
 
 <script>
-    // Reveal Animation beim Scrollen
     const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, observerOptions);
-
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
