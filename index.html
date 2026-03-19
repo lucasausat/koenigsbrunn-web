@@ -1,223 +1,87 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Königsbrunn Projekt-Zentrum</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-<style>
-:root {
-    --bg: #05070a;
-    --surface: #0d1117;
-    --primary: #3b82f6;
-    --accent: #60a5fa;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --glass: rgba(13, 17, 23, 0.8);
-    --border: rgba(255, 255, 255, 0.05);
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wartungsarbeiten | Königsbrunn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #05070a;
+            --surface: #0d1117;
+            --primary: #3b82f6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            text-align: center;
+        }
 
-nav { position: fixed; top: 0; width: 100%; padding: 25px 5%; display: flex; justify-content: space-between; backdrop-filter: blur(12px); background: var(--glass); border-bottom: 1px solid var(--border); }
+        .container {
+            padding: 40px;
+            max-width: 600px;
+        }
 
-.logo { font-weight: 800; font-size: 1.4rem; }
-.logo span { color: var(--primary); }
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
 
-.nav-links { display: flex; gap: 40px; }
-.nav-links a { color: var(--text-muted); text-decoration: none; }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
 
-.hero { height: 100vh; display: flex; align-items: center; padding: 0 10%; }
+        h1 span { color: var(--primary); }
 
-.btn { padding: 14px 25px; border-radius: 10px; text-decoration: none; }
-.btn-primary { background: var(--primary); color: white; }
+        p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
 
-section { padding: 100px 10%; }
+        .status-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
 
-.card {
-    background: var(--surface);
-    padding: 30px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
-
-input, textarea, select {
-    width: 100%;
-    padding: 10px;
-    background: #0d1117;
-    border: 1px solid var(--border);
-    color: white;
-    border-radius: 8px;
-    margin-top: 5px;
-}
-</style>
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
 </head>
-
 <body>
 
-<nav>
-<div class="logo">KÖNIGS<span>BRUNN</span></div>
-<div class="nav-links">
-<a href="#bewerbung">Bewerbung</a>
-<a href="#dashboard">Dashboard</a>
-</div>
-</nav>
-
-<section class="hero">
-<h1>Willkommen</h1>
-</section>
-
-<section id="bewerbung">
-<h2>Bewerbung</h2>
-
-<div class="card">
-<form id="form">
-
-<label>Discord ID</label>
-<input id="discord" required>
-
-<label>Alter</label>
-<input id="age" type="number" required>
-
-<label>Bereich</label>
-<select id="role" required>
-<option value="">Auswählen</option>
-<option value="mod">Moderation</option>
-<option value="dev">Developer</option>
-</select>
-
-<div id="dynamicQuestions"></div>
-
-<button class="btn btn-primary">Absenden</button>
-</form>
-</div>
-</section>
-
-<section id="dashboard">
-<h2>Dashboard</h2>
-
-<div class="card">
-<button onclick="loadApps()">Laden</button>
-<div id="list"></div>
-</div>
-</section>
-
-<script>
-const webhook = "https://discord.com/api/webhooks/1482362165343289554/dxmV3m784pljdjVccnOUj5j6Fxpjph3YeBIHgogwdZ2DN9Rus8CDJs7PWqWh2T5vhz3V";
-let last = 0;
-
-const modQuestions = [
-"Warum möchtest du Moderator werden?",
-"Wie reagierst du bei Streit?",
-"Wie gehst du mit Provokationen um?",
-"Wie gehst du mit Kritik um?",
-"Wann bannen vs verwarnen?",
-"Freund bricht Regeln – was tun?",
-"Wie aktiv bist du?",
-"Was ist ein guter Mod?",
-"Erfahrung?",
-"Warum du?"
-];
-
-const devQuestions = [
-"Programmiersprachen?",
-"Projekt beschreiben",
-"Bug lösen wie?",
-"Sauberer Code?",
-"Frontend vs Backend?",
-"Fehlerhandling?",
-"API Erfahrung?",
-"Spam-Schutz bauen?",
-"Teamarbeit?",
-"Warum du?"
-];
-
-document.getElementById("role").onchange = () => {
-let role = document.getElementById("role").value;
-let container = document.getElementById("dynamicQuestions");
-container.innerHTML = "";
-
-let questions = role === "mod" ? modQuestions : devQuestions;
-
-questions.forEach((q, i) => {
-container.innerHTML += `
-<label>${i+1}. ${q}</label>
-<textarea required minlength="20"></textarea>
-`;
-});
-};
-
-document.getElementById("form").onsubmit = async e => {
-e.preventDefault();
-
-if (Date.now() - last < 30000) {
-alert("Anti-Spam aktiv");
-return;
-}
-
-last = Date.now();
-
-let discord = document.getElementById("discord").value;
-let age = document.getElementById("age").value;
-let role = document.getElementById("role").value;
-
-let answers = [...document.querySelectorAll("#dynamicQuestions textarea")].map(a => a.value);
-
-if (answers.some(a => a.length < 20)) {
-alert("Antworten zu kurz");
-return;
-}
-
-let app = {discord, age, role, answers, date: new Date().toLocaleString()};
-
-// speichern
-let data = JSON.parse(localStorage.getItem("apps") || "[]");
-data.push(app);
-localStorage.setItem("apps", JSON.stringify(data));
-
-// Discord senden
-fetch(webhook, {
-method: "POST",
-headers: {"Content-Type": "application/json"},
-body: JSON.stringify({
-content: "Neue Bewerbung (" + role.toUpperCase() + ")",
-embeds: [{
-title: "Bewerbung",
-description: answers.map((a,i)=>`**${i+1}.** ${a}`).join("\n\n"),
-fields: [
-{name:"Discord", value: discord},
-{name:"Alter", value: age},
-{name:"Bereich", value: role}
-],
-footer:{text:"SYSTEM:APPLICATION"}
-}]
-})
-});
-
-// **NEU: Weiterleitung nach Absenden**
-alert("Bewerbung erfolgreich gesendet!");
-window.location.href = "https://lucasausat.github.io/koenigsbrunn-web/bewerbungsportal"; 
-};
-
-// Dashboard
-function loadApps() {
-let list = document.getElementById("list");
-let data = JSON.parse(localStorage.getItem("apps") || "[]");
-
-list.innerHTML = "";
-
-data.reverse().forEach(a => {
-list.innerHTML += `
-<div style="margin:10px; padding:10px; border:1px solid #333;">
-<b>${a.discord}</b> (${a.role})<br>
-${a.age}<br>
-${a.answers.join("<br><br>")}<br>
-${a.date}
-</div>`;
-});
-}
-</script>
+    <div class="container">
+        <div class="icon">⚠️</div>
+        <h1>KÖNIGS<span>BRUNN</span></h1>
+        <p>
+            Wir haben aktuell mit größeren technischen Problemen zu kämpfen. 
+            Daher ist das Projekt-Zentrum bis auf Weiteres <strong>offline</strong>.
+        </p>
+        <div class="status-badge">Status: In Arbeit</div>
+    </div>
 
 </body>
 </html>
