@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Königsbrunn  Projekt-Zentrum</title>
+<title>Königsbrunn Projekt-Zentrum</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
 :root {
     --bg: #05070a;
@@ -17,157 +18,206 @@
     --border: rgba(255, 255, 255, 0.05);
 }
 
-/* --- Basics --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); }
 
-/* --- Navigation --- */
-nav { position: fixed; top: 0; width: 100%; padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; backdrop-filter: blur(12px); background: var(--glass); border-bottom: 1px solid var(--border); }
-.logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; color: var(--text-main); }
+nav { position: fixed; top: 0; width: 100%; padding: 25px 5%; display: flex; justify-content: space-between; backdrop-filter: blur(12px); background: var(--glass); border-bottom: 1px solid var(--border); }
+
+.logo { font-weight: 800; font-size: 1.4rem; }
 .logo span { color: var(--primary); }
+
 .nav-links { display: flex; gap: 40px; }
-.nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
-.nav-links a:hover { color: var(--primary); }
+.nav-links a { color: var(--text-muted); text-decoration: none; }
 
-/* --- Hero Section (Pure Dark Design) --- */
-.hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 10%;
-    position: relative;
-    overflow: hidden;
-    /* Ein eleganter, dunkler Verlauf statt eines unsicheren Bildes */
-    background: 
-        radial-gradient(circle at 20% -10%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 80% -10%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
-        linear-gradient(135deg, #05070a 0%, #0f172a 100%);
-}
+.hero { height: 100vh; display: flex; align-items: center; padding: 0 10%; }
 
-/* Hintergrund-Muster (Subtiles Grid) */
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    mask-image: linear-gradient(to bottom, black, transparent);
-    pointer-events: none;
-}
-
-.hero-content { position: relative; z-index: 10; }
-.hero-label { color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-size: 0.8rem; }
-.hero h1 { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1.1; font-weight: 800; margin-bottom: 30px; max-width: 900px; letter-spacing: -2px; }
-.hero h1 span { color: var(--primary); }
-.hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 550px; margin-bottom: 40px; }
-
-/* --- Buttons --- */
-.btn-group { display: flex; gap: 15px; }
-.btn { padding: 16px 32px; border-radius: 10px; text-decoration: none; font-weight: 600; transition: 0.3s; font-size: 0.95rem; display: inline-block; }
+.btn { padding: 14px 25px; border-radius: 10px; text-decoration: none; }
 .btn-primary { background: var(--primary); color: white; }
-.btn-primary:hover { background: var(--accent); transform: translateY(-3px); }
-.btn-secondary { border: 1px solid var(--border); color: var(--text-main); background: rgba(255,255,255,0.03); }
-.btn-secondary:hover { background: rgba(255,255,255,0.08); transform: translateY(-3px); }
 
-/* --- Sections --- */
 section { padding: 100px 10%; }
-.section-title { font-size: 2.2rem; margin-bottom: 50px; font-weight: 800; letter-spacing: -1px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
 
 .card {
     background: var(--surface);
-    padding: 40px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    transition: 0.4s;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
 }
-.card:hover { border-color: var(--primary); transform: translateY(-5px); }
-.card h3 { font-size: 1.4rem; margin-bottom: 12px; color: var(--text-main); }
-.card p { color: var(--text-muted); font-size: 0.95rem; }
 
-/* --- Status Box --- */
-.status-box { background: #080a0f; padding: 50px; border-radius: 24px; border: 1px solid var(--border); }
-.status-item { padding: 20px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 220px 1fr; align-items: center; }
-.status-item:last-child { border: none; }
-.status-label { font-weight: 600; color: var(--primary); font-size: 0.9rem; text-transform: uppercase; }
-.status-desc { color: var(--text-muted); font-size: 1rem; }
-
-footer { padding: 60px 10%; border-top: 1px solid var(--border); text-align: center; color: #4b5563; font-size: 0.85rem; }
-
-@media (max-width: 768px) {
-    .nav-links { display: none; }
-    .status-item { grid-template-columns: 1fr; gap: 8px; }
-    .hero h1 { font-size: 3rem; }
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    background: #0d1117;
+    border: 1px solid var(--border);
+    color: white;
+    border-radius: 8px;
+    margin-top: 5px;
 }
 </style>
 </head>
+
 <body>
 
 <nav>
-    <div class="logo">KÖNIGS<span>BRUNN</span></div>
-    <div class="nav-links">
-        <a href="#struktur">Struktur</a>
-        <a href="#status">Status</a>
-        <a href="https://discord.gg/qg4gYuxUgx">Discord</a>
-    </div>
+<div class="logo">KÖNIGS<span>BRUNN</span></div>
+<div class="nav-links">
+<a href="#bewerbung">Bewerbung</a>
+<a href="#dashboard">Dashboard</a>
+</div>
 </nav>
 
-<main>
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-label"> Dev Phase 2026</div>
-            <h1>Willkommen in<br><span>Königsbrunn </span></h1>
-            <p>Ein detailreiches RP Game  auf Basis der  Roblox Engine. Wir setzen neue Maßstäbe für Performance und Realismus.</p>
-            <div class="btn-group">
-                <a href="https://discord.gg/qg4gYuxUgx" class="btn btn-primary">Discord beitreten</a>
-                <a href="#status" class="btn btn-secondary">Projekt-Status</a>
-            </div>
-        </div>
-    </section>
+<section class="hero">
+<h1>Willkommen</h1>
+</section>
 
-    <section id="struktur">
-        <h2 class="section-title">Die Struktur</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Verwaltung</h3>
-                <p>Ein intelligentes System für Fraktionen, Lizenzen und Besitztümer.</p>
-            </div>
-            <div class="card">
-                <h3>Sicherheit</h3>
-                <p>Realistische Polizei-Systeme und taktische Möglichkeiten für Notfallteams.</p>
-            </div>
-            <div class="card">
-                <h3>Wirtschaft</h3>
-                <p>Ein dynamischer Markt, der von den Aktionen der Spieler beeinflusst wird.</p>
-            </div>
-        </div>
-    </section>
+<section id="bewerbung">
+<h2>Bewerbung</h2>
 
-    <section id="status">
-        <div class="status-box">
-            <h2 class="section-title">Spezifikationen</h2>
-            <div class="status-list">
-                <div class="status-item">
-                    <div class="status-label">Status</div>
-                    <div class="status-desc">Early Alpha - Interne Entwicklung</div>
-                </div>
-                <div class="status-item">
-                    <div class="status-label">Engine</div>
-                    <div class="status-desc">Optimiertes Luau / Custom Framework</div>
-                </div>
-                <div class="status-item">
-                    <div class="status-label">Bewerbungen</div>
-                    <div class="status-desc">Derzeit geschlossen ( Dev Arbeiten) (Teambuilding-Phase)</div>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
+<div class="card">
+<form id="form">
 
-<footer>
-    <p>&copy; 2026 Königsbrunn RP .<br>Alle Rechte vorbehalten.</p>
-</footer>
+<label>Discord ID</label>
+<input id="discord" required>
+
+<label>Alter</label>
+<input id="age" type="number" required>
+
+<label>Bereich</label>
+<select id="role" required>
+<option value="">Auswählen</option>
+<option value="mod">Moderation</option>
+<option value="dev">Developer</option>
+</select>
+
+<div id="dynamicQuestions"></div>
+
+<button class="btn btn-primary">Absenden</button>
+</form>
+</div>
+</section>
+
+<section id="dashboard">
+<h2>Dashboard</h2>
+
+<div class="card">
+<button onclick="loadApps()">Laden</button>
+<div id="list"></div>
+</div>
+</section>
+
+<script>
+const webhook = "https://discord.com/api/webhooks/1482362165343289554/dxmV3m784pljdjVccnOUj5j6Fxpjph3YeBIHgogwdZ2DN9Rus8CDJs7PWqWh2T5vhz3V";
+
+let last = 0;
+
+const modQuestions = [
+"Warum möchtest du Moderator werden?",
+"Wie reagierst du bei Streit?",
+"Wie gehst du mit Provokationen um?",
+"Wie gehst du mit Kritik um?",
+"Wann bannen vs verwarnen?",
+"Freund bricht Regeln – was tun?",
+"Wie aktiv bist du?",
+"Was ist ein guter Mod?",
+"Erfahrung?",
+"Warum du?"
+];
+
+const devQuestions = [
+"Programmiersprachen?",
+"Projekt beschreiben",
+"Bug lösen wie?",
+"Sauberer Code?",
+"Frontend vs Backend?",
+"Fehlerhandling?",
+"API Erfahrung?",
+"Spam-Schutz bauen?",
+"Teamarbeit?",
+"Warum du?"
+];
+
+document.getElementById("role").onchange = () => {
+let role = document.getElementById("role").value;
+let container = document.getElementById("dynamicQuestions");
+container.innerHTML = "";
+
+let questions = role === "mod" ? modQuestions : devQuestions;
+
+questions.forEach((q, i) => {
+container.innerHTML += `
+<label>${i+1}. ${q}</label>
+<textarea required minlength="20"></textarea>
+`;
+});
+};
+
+document.getElementById("form").onsubmit = async e => {
+e.preventDefault();
+
+if (Date.now() - last < 30000) {
+alert("Anti-Spam aktiv");
+return;
+}
+
+last = Date.now();
+
+let discord = document.getElementById("discord").value;
+let age = document.getElementById("age").value;
+let role = document.getElementById("role").value;
+
+let answers = [...document.querySelectorAll("#dynamicQuestions textarea")].map(a => a.value);
+
+if (answers.some(a => a.length < 20)) {
+alert("Antworten zu kurz");
+return;
+}
+
+let app = {discord, age, role, answers, date: new Date().toLocaleString()};
+
+// speichern
+let data = JSON.parse(localStorage.getItem("apps") || "[]");
+data.push(app);
+localStorage.setItem("apps", JSON.stringify(data));
+
+// Discord senden
+fetch(webhook, {
+method: "POST",
+headers: {"Content-Type": "application/json"},
+body: JSON.stringify({
+content: "Neue Bewerbung (" + role.toUpperCase() + ")",
+embeds: [{
+title: "Bewerbung",
+description: answers.map((a,i)=>`**${i+1}.** ${a}`).join("\n\n"),
+fields: [
+{name:"Discord", value: discord},
+{name:"Alter", value: age},
+{name:"Bereich", value: role}
+],
+footer:{text:"SYSTEM:APPLICATION"}
+}]
+})
+});
+
+alert("Bewerbung erfolgreich gesendet!");
+};
+
+// Dashboard
+function loadApps() {
+let list = document.getElementById("list");
+let data = JSON.parse(localStorage.getItem("apps") || "[]");
+
+list.innerHTML = "";
+
+data.reverse().forEach(a => {
+list.innerHTML += `
+<div style="margin:10px; padding:10px; border:1px solid #333;">
+<b>${a.discord}</b> (${a.role})<br>
+${a.age}<br>
+${a.answers.join("<br><br>")}<br>
+${a.date}
+</div>`;
+});
+}
+</script>
 
 </body>
 </html>
