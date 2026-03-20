@@ -22,21 +22,35 @@
             color: var(--text-main);
             margin: 0;
             height: 100vh;
+            overflow: hidden; /* Verhindert Scrollen während Wartung */
+        }
+
+        /* Das Overlay, das alles verdeckt */
+        #maintenance-overlay {
+            position: fixed;
+            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            z-index: 9999;
+            background-color: var(--bg);
         }
 
-        /* Hintergrund-Animation */
+        /* Hintergrund-Animation (Jetzt bewegt!) */
         .grid-bg {
             position: absolute;
             inset: 0;
             background-image: linear-gradient(var(--primary) 1px, transparent 1px), 
                               linear-gradient(90deg, var(--primary) 1px, transparent 1px);
             background-size: 50px 50px;
-            opacity: 0.05;
+            opacity: 0.08;
             mask-image: radial-gradient(circle, black, transparent 80%);
+            animation: gridFlow 20s linear infinite;
+        }
+
+        @keyframes gridFlow {
+            from { background-position: 0 0; }
+            to { background-position: 100px 100px; }
         }
 
         .container {
@@ -45,11 +59,12 @@
             width: 90%;
             max-width: 500px;
             text-align: center;
-            background: rgba(13, 17, 23, 0.6);
+            background: rgba(13, 17, 23, 0.7);
             padding: 40px;
             border-radius: 24px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
         .logo { font-weight: 800; font-size: 1.8rem; margin-bottom: 10px; letter-spacing: -1px; }
@@ -72,7 +87,7 @@
         h2 { margin-bottom: 15px; font-weight: 600; }
         p { color: var(--text-muted); line-height: 1.6; margin-bottom: 30px; font-size: 0.95rem; }
 
-        /* Progress Bar */
+        /* Progress Bar (Fixiert auf 25%) */
         .progress-container {
             background: rgba(255,255,255,0.05);
             height: 8px;
@@ -82,10 +97,9 @@
         }
         .progress-fill {
             height: 100%;
-            width: 25%; /* Start-Wert */
-            background: linear-gradient(25deg, var(--primary), var(--accent));
+            width: 25%; /* Festgelegt */
+            background: linear-gradient(90deg, var(--primary), var(--accent));
             box-shadow: 0 0 15px var(--primary);
-            animation: progressAnim 10s infinite alternate ease-in-out;
         }
 
         .progress-label {
@@ -107,64 +121,101 @@
             display: flex;
             justify-content: space-between;
             font-size: 0.8rem;
-            padding: 5px 0;
+            padding: 8px 0;
             border-bottom: 1px solid rgba(255,255,255,0.03);
         }
         .system-item:last-child { border: none; }
-        .dot { height: 8px; width: 8px; background: orange; border-radius: 50%; display: inline-block; margin-right: 5px; }
+        .dot { height: 8px; width: 8px; background: orange; border-radius: 50%; display: inline-block; margin-right: 8px; }
         .dot.loading { animation: blink 1s infinite; }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        @keyframes blink { 
+            0% { background: orange; box-shadow: 0 0 5px orange; } 
+            50% { background: #333; box-shadow: none; } 
+            100% { background: orange; box-shadow: 0 0 5px orange; }
         }
-        @keyframes blink {
-            0%, 100% { background: orange; box-shadow: 0 0 5px orange; }
-            50% { background: #333; box-shadow: none; }
-        }
-        @keyframes progressAnim {
-            0% { width: 30%; }
-            100% { width: 45%; }
+
+        /* Content-Bereich (Hier arbeitest du) */
+        #main-content {
+            padding: 50px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="grid-bg"></div>
+    <div id="maintenance-overlay">
+        <div class="grid-bg"></div>
+        <div class="container">
+            <div class="status-tag">System-Upgrade läuft</div>
+            <div class="logo">KÖNIGS<span>BRUNN</span></div>
+            
+            <h2>Komplette Neustrukturierung</h2>
+            <p>
+                Wir migrieren aktuell auf eine neue System-Architektur. 
+                Die Arbeiten beanspruchen voraussichtlich <b>2 bis 4 Tage</b>.
+            </p>
 
-    <div class="container">
-        <div class="status-tag">System-Upgrade läuft</div>
-        <div class="logo">KÖNIGS<span>BRUNN</span></div>
-        
-        <h2>Komplette Neustrukturierung</h2>
-        <p>
-            Wir migrieren aktuell auf eine neue System-Architektur und binden mehrere externe Schnittstellen an.
-            Die Arbeiten werden voraussichtlich <b>2 bis 4 Tage</b> beanspruchen.
-        </p>
-
-        <div class="progress-container">
-            <div class="progress-fill"></div>
-        </div>
-        <div class="progress-label">
-            <span>Core-Migration</span>
-            <span>ca. 27% abgeschlossen</span>
-        </div>
-
-        <div class="system-list">
-            <div class="system-item">
-                <span>Moderasierung </span>
-                <span><span class="dot loading"></span> Reconnecting...</span>
+            <div class="progress-container">
+                <div class="progress-fill"></div>
             </div>
-            <div class="system-item">
-                <span>API-Schnittstellen</span>
-                <span><span class="dot loading"></span> Restructuring...</span>
+            <div class="progress-label">
+                <span>Core-Migration</span>
+                <span>25% abgeschlossen</span>
             </div>
-            <div class="system-item">
-                <span>Design</span>
-                <span><span class="dot loading"></span> Restructuring...</span>
+
+            <div class="system-list">
+                <div class="system-item">
+                    <span>Modernisierung</span>
+                    <span><span class="dot loading"></span> Reconnecting...</span>
+                </div>
+                <div class="system-item">
+                    <span>API-Schnittstellen</span>
+                    <span><span class="dot loading" style="animation-delay: 0.3s"></span> Restructuring...</span>
+                </div>
+                <div class="system-item">
+                    <span>UI/UX Design</span>
+                    <span><span class="dot loading" style="animation-delay: 0.6s"></span> Updating...</span>
+                </div>
             </div>
         </div>
     </div>
 
+    <div id="main-content">
+        <h1>Willkommen im Arbeitsbereich!</h1>
+        <p>Hier kannst du nun am neuen Design basteln.</p>
+        <div style="background: var(--surface); padding: 20px; border-radius: 10px; border: 1px solid var(--primary);">
+            Neues Feature-Modul v1.0
+        </div>
+    </div>
+
+    <script>
+        // DEIN MANAGEMENT KEY
+        const ADMIN_KEY = "admin123"; 
+
+        const overlay = document.getElementById('maintenance-overlay');
+
+        // Check beim Laden, ob man bereits eingeloggt ist
+        if (localStorage.getItem('unlock_key') === ADMIN_KEY) {
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Tastatur-Event: Drücke "L" (für Login) um den Key einzugeben
+        window.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'l') {
+                const input = prompt("Management-Key eingeben:");
+                if (input === ADMIN_KEY) {
+                    localStorage.setItem('unlock_key', ADMIN_KEY);
+                    overlay.style.fadeOut(); // Optionaler Effekt
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    alert("Zugriff gewährt. Viel Spaß beim Bauen!");
+                } else if (input !== null) {
+                    alert("Falscher Key!");
+                }
+            }
+        });
+    </script>
 </body>
 </html>
