@@ -13,8 +13,8 @@
     --accent: #60a5fa;
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
-    --glass: rgba(13, 17, 23, 0.8);
-    --border: rgba(255, 255, 255, 0.05);
+    --glass: rgba(13,17,23,0.8);
+    --border: rgba(255,255,255,0.05);
 }
 
 /* Base */
@@ -24,10 +24,10 @@ body {
     background: radial-gradient(circle at top, #111827, #05070a);
     color:var(--text-main);
     animation: fadeIn 1s ease;
+    overflow-x:hidden;
 }
-
-/* Fade-In */
 @keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
+@keyframes glow { 0% {text-shadow:0 0 5px #3b82f6;} 50% {text-shadow:0 0 20px #60a5fa;} 100% {text-shadow:0 0 5px #3b82f6;} }
 
 /* Navbar */
 nav {
@@ -56,26 +56,42 @@ nav {
     justify-content:center;
     padding:0 10%;
     gap:20px;
+    position:relative;
+}
+.hero::before {
+    content:"";
+    position:absolute;
+    top:0; left:0; width:100%; height:100%;
+    background: radial-gradient(circle, rgba(59,130,246,0.15), transparent 70%);
+    filter: blur(60px);
+    z-index:0;
 }
 .hero h1 {
-    font-size:3.5rem;
+    font-size:3.8rem;
     font-weight:800;
     background: linear-gradient(90deg, #3b82f6, #60a5fa, #a78bfa);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: glow 2s infinite;
+    position:relative;
+    z-index:1;
 }
 .hero p {
     color:var(--text-muted);
-    max-width:600px;
-    font-size:1.2rem;
+    max-width:700px;
+    font-size:1.25rem;
+    position:relative;
+    z-index:1;
 }
 .btn {
-    padding:14px 28px;
-    border-radius:12px;
+    padding:16px 32px;
+    border-radius:14px;
     text-decoration:none;
     font-weight:600;
     display:inline-block;
     transition:0.3s;
+    position:relative;
+    z-index:1;
 }
 .btn-primary {
     background:linear-gradient(90deg,#3b82f6,#60a5fa);
@@ -83,8 +99,8 @@ nav {
     box-shadow:0 0 20px rgba(59,130,246,0.4);
 }
 .btn-primary:hover {
-    transform:translateY(-2px);
-    box-shadow:0 0 30px rgba(59,130,246,0.7);
+    transform:translateY(-3px);
+    box-shadow:0 0 40px rgba(59,130,246,0.7);
 }
 
 /* Features */
@@ -96,17 +112,19 @@ nav {
     padding:80px 10%;
 }
 .card {
-    flex:1 1 250px;
+    flex:1 1 260px;
     padding:30px;
-    border-radius:15px;
+    border-radius:18px;
     background:rgba(255,255,255,0.03);
     border:1px solid var(--border);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     text-align:center;
     transition:0.3s;
+    opacity:0;
+    transform:translateY(20px);
 }
-.card:hover { transform:translateY(-8px); border-color:var(--primary); }
-.card h3 { margin-bottom:10px; color:var(--primary); }
+.card.visible { opacity:1; transform:translateY(0); transition:0.8s ease-out; }
+.card h3 { margin-bottom:12px; color:var(--primary); }
 .card p { color:var(--text-muted); line-height:1.5; }
 
 /* Footer */
@@ -125,37 +143,57 @@ footer {
 <div class="logo">KÖNIGS<span>BRUNN</span></div>
 <div class="nav-links">
     <a href="#features">Features</a>
+    <a href="https://discord.com" target="_blank">Discord</a>
 </div>
 </nav>
 
 <section class="hero">
 <h1>Projekt Königsbrunn</h1>
-<p>Ein zentrales System für Organisation, Entwicklung und Verwaltung – modern, übersichtlich und effizient.</p>
+<p>Organisiere, entwickle und verwalte Projekte zentral, modern und effizient. Voller Kontrolle, klare Übersicht und schnelle Entscheidungen – alles auf einen Blick.</p>
 <a class="btn btn-primary" href="#features">Mehr erfahren</a>
 </section>
 
 <section id="features" class="features">
 <div class="card">
 <h3>System</h3>
-<p>Alle Projekte, Daten und Tools zentralisiert an einem Ort – übersichtlich und schnell zugänglich.</p>
+<p>Zentrale Verwaltung aller Tools, Projekte und Daten. Alles was du brauchst – sofort verfügbar.</p>
 </div>
 <div class="card">
 <h3>Dashboard</h3>
-<p>Alles im Blick – von Status-Übersichten bis zu Live-Statistiken für schnelle Entscheidungen.</p>
+<p>Live-Statistiken, Übersicht über Aktivitäten, Serverstatus & Teamübersicht. Immer wissen, was läuft.</p>
 </div>
 <div class="card">
 <h3>Automation</h3>
-<p>Automatische Abläufe für wiederkehrende Aufgaben, damit du dich auf die wichtigen Dinge konzentrieren kannst.</p>
+<p>Wiederkehrende Aufgaben werden automatisch erledigt, damit du dich auf das Wesentliche konzentrieren kannst.</p>
 </div>
 <div class="card">
 <h3>Security</h3>
-<p>Moderne Sicherheitsmechanismen schützen Daten und Prozesse rund um die Uhr.</p>
+<p>Datenschutz & Sicherheitsmechanismen schützen alle Prozesse rund um die Uhr.</p>
+</div>
+<div class="card">
+<h3>Team-Integration</h3>
+<p>Verwalte Teamrollen, Aufgaben & Verantwortlichkeiten direkt im System – perfekt für Moderation und Developer.</p>
+</div>
+<div class="card">
+<h3>Live Status</h3>
+<p>Server online/offline, laufende Prozesse und Aktivitätslevel jederzeit sichtbar. (Demo-Modus für Entwicklung)</p>
 </div>
 </section>
 
 <footer>
 © 2026 Projekt Königsbrunn – Alle Rechte vorbehalten
 </footer>
+
+<script>
+// Scroll Animation für Features
+const cards = document.querySelectorAll('.card');
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+    });
+},{ threshold:0.2 });
+cards.forEach(card=>observer.observe(card));
+</script>
 
 </body>
 </html>
