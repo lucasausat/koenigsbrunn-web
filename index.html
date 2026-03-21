@@ -44,13 +44,13 @@ nav {
 }
 .logo { font-weight:800; font-size:1.5rem; }
 .logo span { color:var(--primary); }
-.nav-links { display:flex; gap:40px; }
+.nav-links { display:flex; gap:30px; }
 .nav-links a { color:var(--text-muted); text-decoration:none; transition:0.3s; }
 .nav-links a:hover { color:var(--primary); }
 
 /* Hero */
 .hero {
-    height:100vh;
+    min-height:80vh;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -63,11 +63,11 @@ nav {
     position:absolute;
     top:0; left:0; width:100%; height:100%;
     background: radial-gradient(circle, rgba(59,130,246,0.15), transparent 70%);
-    filter: blur(60px);
+    filter: blur(50px);
     z-index:0;
 }
 .hero h1 {
-    font-size:3.8rem;
+    font-size:3.5rem;
     font-weight:800;
     background: linear-gradient(90deg, #3b82f6, #60a5fa, #a78bfa);
     -webkit-background-clip: text;
@@ -84,8 +84,8 @@ nav {
     z-index:1;
 }
 .btn {
-    padding:16px 32px;
-    border-radius:14px;
+    padding:14px 28px;
+    border-radius:12px;
     text-decoration:none;
     font-weight:600;
     display:inline-block;
@@ -96,12 +96,17 @@ nav {
 .btn-primary {
     background:linear-gradient(90deg,#3b82f6,#60a5fa);
     color:#fff;
-    box-shadow:0 0 20px rgba(59,130,246,0.4);
+    box-shadow:0 0 15px rgba(59,130,246,0.4);
 }
 .btn-primary:hover {
-    transform:translateY(-3px);
-    box-shadow:0 0 40px rgba(59,130,246,0.7);
+    transform:translateY(-2px);
+    box-shadow:0 0 30px rgba(59,130,246,0.6);
 }
+
+/* Sections */
+.section { padding:80px 10%; }
+.section h2 { font-size:2.5rem; margin-bottom:30px; color:var(--primary); }
+.section p { color:var(--text-muted); font-size:1.1rem; line-height:1.6; max-width:800px; margin-bottom:20px; }
 
 /* Features */
 .features {
@@ -109,12 +114,11 @@ nav {
     flex-wrap:wrap;
     justify-content:center;
     gap:20px;
-    padding:80px 10%;
 }
 .card {
-    flex:1 1 260px;
-    padding:30px;
-    border-radius:18px;
+    flex:1 1 300px;
+    padding:25px;
+    border-radius:16px;
     background:rgba(255,255,255,0.03);
     border:1px solid var(--border);
     backdrop-filter: blur(12px);
@@ -127,8 +131,11 @@ nav {
 .card h3 { margin-bottom:12px; color:var(--primary); }
 .card p { color:var(--text-muted); line-height:1.5; }
 
-/* Fun Features */
-.status-dot { width:12px; height:12px; border-radius:50%; display:inline-block; margin-right:5px; }
+/* Coming Soon */
+.coming-soon { color:#facc15; font-weight:600; }
+
+/* Status Dot */
+.status-dot { width:12px; height:12px; border-radius:50%; display:inline-block; margin-right:6px; }
 .status-online { background:#10b981; }
 .status-offline { background:#ef4444; }
 
@@ -148,50 +155,69 @@ footer {
 <div class="logo">KÖNIGS<span>BRUNN</span></div>
 <div class="nav-links">
     <a href="#features">Features</a>
-    <a href="https://discord.com" target="_blank">Discord</a>
+    <a href="https://discord.gg/DM2Au3f6" target="_blank">Discord</a>
 </div>
 </nav>
 
 <section class="hero">
 <h1>Projekt Königsbrunn</h1>
-<p>Deine Gaming- & Projektplattform: Spiele, Team-Management, Live-Status und Admin-Tools zentral auf einer modernen Website.</p>
+<p>Deine Gaming- & Projektplattform: Spiele, Team-Management, Live-Status und Admin-Tools zentral auf einer modernen Website. Das Spiel befindet sich aktuell in der Entwicklung, Veröffentlichung voraussichtlich Mitte 2026.</p>
 <a class="btn btn-primary" href="#features">Los geht's</a>
 </section>
 
-<section id="features" class="features">
+<section id="features" class="section">
+<h2>Features & Infos</h2>
+
+<div class="features">
 <div class="card">
-<h3>System</h3>
-<p>Zentrale Verwaltung von Tools, Projekten und Spielern – alles sofort verfügbar.</p>
+<h3>Spiel-System</h3>
+<p>Erkunde Welten, verdiene Punkte, level deine Charaktere und verbessere Ausrüstung. Veröffentlichung voraussichtlich Mitte 2026.</p>
 </div>
+
 <div class="card">
-<h3>Dashboard</h3>
-<p>Live-Statistiken, Aktivitäten, Serverstatus & Teamübersicht.</p>
-<span class="status-dot status-online"></span>Server Online
+<h3>Dashboard & Fortschritt</h3>
+<p>Behalte deine Spieler-Fortschritte, Ranglisten, Events und Aktivitäten im Blick – alles in Echtzeit.</p>
 </div>
+
 <div class="card">
-<h3>Minispiele</h3>
-<p>Verwalte kleine Games direkt auf der Plattform, inklusive Punktesystem & Ranglisten.</p>
+<h3>Team & Moderation</h3>
+<p>Verwalte Teamrollen, Aufgaben, Spielerberichte und Developer-Tools direkt auf der Plattform.</p>
 </div>
+
 <div class="card">
-<h3>Team-Integration</h3>
-<p>Teamrollen, Aufgaben & Verantwortlichkeiten für Moderation und Developer verwalten.</p>
+<h3>Minispiele <span class="coming-soon">Coming Soon</span></h3>
+<p>Kleinere Games für Zwischendurch, Punktesystem & Ranglisten. Aktiv nach Spielstart.</p>
 </div>
+
 <div class="card">
-<h3>VIP-Bereich</h3>
-<p>Exklusive Features, Belohnungen und Zugang für VIP-Mitglieder.</p>
+<h3>VIP-Bereich <span class="coming-soon">Coming Soon</span></h3>
+<p>Exklusive Belohnungen und Zugang für VIP-Mitglieder. Wird mit Spielstart verfügbar sein.</p>
 </div>
+
 <div class="card">
-<h3>Live Status & Fortschritt</h3>
-<p>Server online/offline, Aktivitätslevel, Spielerfortschritte und laufende Prozesse – alles in Echtzeit.</p>
+<h3>Live Status</h3>
+<p><span class="status-dot status-online"></span>Server Online</p>
+<p>Laufende Prozesse, Spieleraktivität & Fortschritt in Echtzeit.</p>
 </div>
+
 <div class="card">
-<h3>Security</h3>
-<p>Schutz von Daten, Admin-Tools und Spielerinformationen rund um die Uhr.</p>
+<h3>Community & Discord</h3>
+<p>Diskutiere mit anderen Spielern, Events, Updates und News direkt im <a href="https://discord.gg/DM2Au3f6" target="_blank" style="color:var(--primary);">Discord Server</a>.</p>
 </div>
+
 <div class="card">
-<h3>Community</h3>
-<p>Verlinkung zu Discord, Events, Chats und Forum – alle Spieler an einem Ort.</p>
+<h3>Sicherheit</h3>
+<p>Moderne Sicherheitsmechanismen schützen Accounts, Fortschritte und Admin-Tools rund um die Uhr.</p>
 </div>
+</div>
+</section>
+
+<section class="section">
+<h2>Ankündigungen</h2>
+<p>- Spiel aktuell in Entwicklung, voraussichtlicher Release Mitte 2026.</p>
+<p>- VIP- & Minispiele-Bereich wird mit Spielstart freigeschaltet.</p>
+<p>- Discord-Server offen für Community und Feedback: <a href="https://discord.gg/DM2Au3f6" target="_blank" style="color:var(--primary);">Hier beitreten</a>.</p>
+<p>- Weitere Features wie Ranking-System, tägliche Quests und Events folgen in kommenden Updates.</p>
 </section>
 
 <footer>
@@ -199,7 +225,7 @@ footer {
 </footer>
 
 <script>
-// Scroll Animation für Features
+// Scroll Animation für Cards
 const cards = document.querySelectorAll('.card');
 const observer = new IntersectionObserver(entries=>{
     entries.forEach(entry=>{
