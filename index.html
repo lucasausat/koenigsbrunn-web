@@ -38,11 +38,6 @@ section { padding:120px 10%; }
 
 .card { background:var(--surface); padding:25px 30px; border-radius:15px; margin-bottom:20px; box-shadow:0 5px 20px rgba(0,0,0,0.3); }
 
-input, textarea, select {
-    width:100%; padding:12px; margin-top:6px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text-main); transition:0.2s;
-}
-input:focus, textarea:focus, select:focus { border-color:var(--primary); outline:none; }
-
 button { cursor:pointer; border:none; border-radius:10px; padding:12px 25px; font-weight:600; transition:0.2s; }
 button:hover { opacity:0.9; }
 .btn-primary { background:var(--primary); color:#fff; }
@@ -75,13 +70,98 @@ button:hover { opacity:0.9; }
 </section>
 
 <script>
-// --- Wartungsmodus automatisch bis 21.03. 12 Uhr ---
+// ===== Launch Zeit =====
 const launchDate = new Date('2026-03-21T12:00:00').getTime();
-if(Date.now() < launchDate){
-    document.body.innerHTML = '<section style="height:100vh; display:flex; justify-content:center; align-items:center; font-size:2rem; color:'+getComputedStyle(document.documentElement).getPropertyValue('--text-muted')+';">Wartungsmodus aktiv – neue Seite ab 21.03. 12 Uhr</section>';
+
+// ===== Wartungsmodus UI =====
+function renderMaintenance() {
+    document.body.innerHTML = `
+    <div id="maintenance">
+        <div class="box">
+            <h1>KÖNIGS<span>BRUNN</span></h1>
+            <p>Neue Version wird vorbereitet</p>
+            <div id="timer">Lädt...</div>
+        </div>
+    </div>
+    `;
+
+    const style = document.createElement("style");
+    style.innerHTML = `
+    #maintenance {
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background: radial-gradient(circle at top, #111827, #05070a);
+        color:#f8fafc;
+        font-family:'Plus Jakarta Sans', sans-serif;
+    }
+
+    .box {
+        text-align:center;
+        background: rgba(255,255,255,0.03);
+        border:1px solid rgba(255,255,255,0.08);
+        padding:50px 60px;
+        border-radius:20px;
+        backdrop-filter: blur(15px);
+        box-shadow:0 10px 40px rgba(0,0,0,0.6);
+    }
+
+    .box h1 {
+        font-size:2.2rem;
+        margin-bottom:10px;
+    }
+
+    .box span {
+        color:#3b82f6;
+    }
+
+    .box p {
+        color:#94a3b8;
+        margin-bottom:25px;
+    }
+
+    #timer {
+        font-size:2rem;
+        font-weight:600;
+        letter-spacing:1px;
+    }
+    `;
+    document.head.appendChild(style);
 }
 
-// --- Dashboard / LocalStorage ---
+// ===== Countdown =====
+function startTimer() {
+    const timerEl = document.getElementById("timer");
+
+    const interval = setInterval(() => {
+        const now = Date.now();
+        const diff = launchDate - now;
+
+        if (diff <= 0) {
+            clearInterval(interval);
+            location.reload();
+            return;
+        }
+
+        const h = Math.floor(diff / 1000 / 60 / 60);
+        const m = Math.floor((diff / 1000 / 60) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        timerEl.textContent =
+            String(h).padStart(2, '0') + ":" +
+            String(m).padStart(2, '0') + ":" +
+            String(s).padStart(2, '0');
+    }, 1000);
+}
+
+// ===== Aktivieren =====
+if (Date.now() < launchDate) {
+    renderMaintenance();
+    startTimer();
+}
+
+// ===== Dashboard =====
 function loadApps(){
     let list = document.getElementById("list");
     let data = JSON.parse(localStorage.getItem("apps") || "[]");
