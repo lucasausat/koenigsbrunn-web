@@ -4,36 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Königsbrunn Projekt-Zentrum</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-
 <style>
 :root {
-    --bg: #0c0e13;
-    --surface: #161b24;
+    --bg: #05070a;
+    --surface: #0d1117;
     --primary: #3b82f6;
     --accent: #60a5fa;
-    --text-main: #f0f3f7;
-    --text-muted: #8a94a6;
-    --glass: rgba(22,27,36,0.75);
-    --border: rgba(255,255,255,0.08);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass: rgba(13, 17, 23, 0.8);
+    --border: rgba(255, 255, 255, 0.05);
 }
 
+/* Base */
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
     font-family:'Plus Jakarta Sans', sans-serif;
-    background:var(--bg);
+    background: radial-gradient(circle at top, #111827, #05070a);
     color:var(--text-main);
     animation: fadeIn 1s ease;
 }
 
-/* Fade Animation */
-@keyframes fadeIn {
-    from { opacity:0; transform:translateY(10px); }
-    to { opacity:1; transform:translateY(0); }
-}
+/* Fade-In */
+@keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
 
-/* NAV */
+/* Navbar */
 nav {
     position:fixed;
     top:0;
@@ -41,15 +37,18 @@ nav {
     padding:20px 5%;
     display:flex;
     justify-content:space-between;
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(14px);
     background:var(--glass);
     border-bottom:1px solid var(--border);
+    z-index:1000;
 }
-
 .logo { font-weight:800; font-size:1.5rem; }
 .logo span { color:var(--primary); }
+.nav-links { display:flex; gap:40px; }
+.nav-links a { color:var(--text-muted); text-decoration:none; transition:0.3s; }
+.nav-links a:hover { color:var(--primary); }
 
-/* HERO */
+/* Hero */
 .hero {
     height:100vh;
     display:flex;
@@ -58,25 +57,64 @@ nav {
     padding:0 10%;
     gap:20px;
 }
-
 .hero h1 {
-    font-size:3rem;
+    font-size:3.5rem;
+    font-weight:800;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-
 .hero p {
     color:var(--text-muted);
     max-width:600px;
+    font-size:1.2rem;
+}
+.btn {
+    padding:14px 28px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+    display:inline-block;
+    transition:0.3s;
+}
+.btn-primary {
+    background:linear-gradient(90deg,#3b82f6,#60a5fa);
+    color:#fff;
+    box-shadow:0 0 20px rgba(59,130,246,0.4);
+}
+.btn-primary:hover {
+    transform:translateY(-2px);
+    box-shadow:0 0 30px rgba(59,130,246,0.7);
 }
 
-/* BUTTON */
-.btn {
-    padding:14px 25px;
-    border-radius:10px;
-    background:var(--primary);
-    color:#fff;
-    text-decoration:none;
-    display:inline-block;
-    width:fit-content;
+/* Features */
+.features {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    padding:80px 10%;
+}
+.card {
+    flex:1 1 250px;
+    padding:30px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--border);
+    backdrop-filter: blur(10px);
+    text-align:center;
+    transition:0.3s;
+}
+.card:hover { transform:translateY(-8px); border-color:var(--primary); }
+.card h3 { margin-bottom:10px; color:var(--primary); }
+.card p { color:var(--text-muted); line-height:1.5; }
+
+/* Footer */
+footer {
+    text-align:center;
+    padding:40px 10%;
+    color:var(--text-muted);
+    font-size:0.9rem;
 }
 </style>
 </head>
@@ -85,137 +123,39 @@ nav {
 
 <nav>
 <div class="logo">KÖNIGS<span>BRUNN</span></div>
+<div class="nav-links">
+    <a href="#features">Features</a>
+</div>
 </nav>
 
 <section class="hero">
 <h1>Projekt Königsbrunn</h1>
-<p>Ein zentrales System für Organisation, Entwicklung und Verwaltung – übersichtlich, modern und effizient.</p>
-<a class="btn">System wird geladen...</a>
+<p>Ein zentrales System für Organisation, Entwicklung und Verwaltung – modern, übersichtlich und effizient.</p>
+<a class="btn btn-primary" href="#features">Mehr erfahren</a>
 </section>
 
-<script>
-// ===== Wien Zeit =====
-function getViennaTime() {
-    const now = new Date();
-    return new Date(now.toLocaleString("en-US", { timeZone: "Europe/Vienna" }));
-}
+<section id="features" class="features">
+<div class="card">
+<h3>System</h3>
+<p>Alle Projekte, Daten und Tools zentralisiert an einem Ort – übersichtlich und schnell zugänglich.</p>
+</div>
+<div class="card">
+<h3>Dashboard</h3>
+<p>Alles im Blick – von Status-Übersichten bis zu Live-Statistiken für schnelle Entscheidungen.</p>
+</div>
+<div class="card">
+<h3>Automation</h3>
+<p>Automatische Abläufe für wiederkehrende Aufgaben, damit du dich auf die wichtigen Dinge konzentrieren kannst.</p>
+</div>
+<div class="card">
+<h3>Security</h3>
+<p>Moderne Sicherheitsmechanismen schützen Daten und Prozesse rund um die Uhr.</p>
+</div>
+</section>
 
-// ===== Zielzeit =====
-function getLaunchDate() {
-    const v = getViennaTime();
-    const t = new Date(v);
-    t.setHours(12,0,0,0);
-    return t.getTime();
-}
-
-const launchDate = getLaunchDate();
-
-// ===== Wartungs UI =====
-function renderMaintenance() {
-    document.body.innerHTML = `
-    <div id="maintenance">
-        <div class="box">
-            <h1>KÖNIGS<span>BRUNN</span></h1>
-            <p>Neue Version wird vorbereitet</p>
-
-            <div id="timer">00:00:00</div>
-
-            <div class="progress">
-                <div id="bar"></div>
-            </div>
-
-            <small>Release: 12:00 (Wien Zeit)</small>
-        </div>
-    </div>
-    `;
-
-    const style = document.createElement("style");
-    style.innerHTML = `
-    #maintenance {
-        height:100vh;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        background: radial-gradient(circle at top, #111827, #05070a);
-        animation: fadeIn 1s ease;
-    }
-
-    .box {
-        text-align:center;
-        padding:50px 60px;
-        border-radius:20px;
-        background:rgba(255,255,255,0.03);
-        border:1px solid rgba(255,255,255,0.08);
-        backdrop-filter:blur(15px);
-    }
-
-    .box span { color:#3b82f6; }
-
-    #timer {
-        font-size:2.5rem;
-        margin:15px 0;
-        font-weight:600;
-        color:#3b82f6;
-        text-shadow:0 0 15px rgba(59,130,246,0.5);
-    }
-
-    .progress {
-        width:250px;
-        height:6px;
-        background:#1f2937;
-        border-radius:10px;
-        margin:10px auto 20px;
-        overflow:hidden;
-    }
-
-    #bar {
-        height:100%;
-        width:0%;
-        background:linear-gradient(90deg,#3b82f6,#60a5fa);
-        transition:width 1s linear;
-    }
-    `;
-    document.head.appendChild(style);
-}
-
-// ===== Timer =====
-function startTimer() {
-    const timer = document.getElementById("timer");
-    const bar = document.getElementById("bar");
-
-    const total = launchDate - getViennaTime().getTime();
-
-    const interval = setInterval(() => {
-        const now = getViennaTime().getTime();
-        const diff = launchDate - now;
-
-        if (diff <= 0) {
-            clearInterval(interval);
-            location.reload();
-            return;
-        }
-
-        const h = Math.floor(diff/1000/60/60);
-        const m = Math.floor((diff/1000/60)%60);
-        const s = Math.floor((diff/1000)%60);
-
-        timer.textContent =
-            String(h).padStart(2,'0')+":"+
-            String(m).padStart(2,'0')+":"+
-            String(s).padStart(2,'0');
-
-        const progress = 100 - (diff / total * 100);
-        bar.style.width = progress + "%";
-
-    },1000);
-}
-
-// ===== Aktivieren =====
-if (getViennaTime().getTime() < launchDate) {
-    renderMaintenance();
-    startTimer();
-}
-</script>
+<footer>
+© 2026 Projekt Königsbrunn – Alle Rechte vorbehalten
+</footer>
 
 </body>
 </html>
