@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -28,6 +27,21 @@ body {
     color: var(--text-main);
     overflow-x: hidden;
     line-height: 1.6;
+}
+
+/* Smooth Section Fade */
+.section {
+    padding: 100px 10%;
+    border-top: 1px solid var(--border);
+
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @keyframes glow {
@@ -124,11 +138,6 @@ nav {
     box-shadow: 0 0 20px rgba(88,101,242,0.6);
 }
 
-.section {
-    padding: 100px 10%;
-    border-top: 1px solid var(--border);
-}
-
 h2 {
     font-size: 2.5rem;
     text-align: center;
@@ -148,16 +157,14 @@ h2 span { color: var(--primary); }
     border-radius: 20px;
     border: 1px solid var(--border);
     transition: 0.4s;
+
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
 }
+
 .card.visible {
     opacity: 1;
     transform: translateY(0);
-}
-.card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }
 
 .map-preview {
@@ -174,8 +181,82 @@ footer {
     padding: 60px;
     color: var(--text-muted);
 }
-</style>
 
+/* ROADMAP */
+.roadmap-v {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 40px;
+}
+
+.roadmap-v::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--border);
+}
+
+.step-v {
+    margin-bottom: 60px;
+    position: relative;
+
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: all 0.8s ease;
+}
+
+.step-v::before {
+    content: '';
+    position: absolute;
+    left: -46px;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    background: var(--surface);
+}
+
+.step-v.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.step-v h3 {
+    color: var(--accent);
+}
+
+.step-v p {
+    color: var(--text-muted);
+}
+
+/* LIVE PROGRESS */
+.live-progress {
+    max-width: 600px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.live-bar {
+    width: 100%;
+    height: 10px;
+    background: var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.live-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transition: width 1s ease;
+}
+</style>
 </head>
 
 <body>
@@ -187,7 +268,6 @@ footer {
 <a href="#roadmap">Roadmap</a>
 <a href="#devlog">Devlog</a>
 <a href="#community">Community</a>
-<a href="https://discord.gg/DM2Au3f6" target="_blank">Discord</a>
 <a href="#" onclick="toggleLang()">🌍</a>
 </div>
 </nav>
@@ -205,41 +285,60 @@ footer {
 <div class="progress"><div class="bar" style="width:35%"></div></div>
 <p>Fortschritt ~35%</p>
 
-<a href="#features" class="btn">Erkunden</a> <a href="https://discord.gg/DM2Au3f6" class="btn btn-discord">Discord</a>
-
+<a href="#features" class="btn">Erkunden</a>
+<a href="https://discord.gg/DM2Au3f6" class="btn btn-discord">Discord</a>
 </section>
 
 <section id="features" class="section">
-<h2>Unsere <span>Highlights</span></h2>
+<h2>Highlights</h2>
 
 <div class="grid">
 <div class="card"><h3>Living World</h3><p>Dynamische Welt im Aufbau.</p></div>
 <div class="card"><h3>Performance</h3><p>Optimierung läuft.</p></div>
 <div class="card"><h3>Stats</h3><p>Live-System geplant.</p></div>
 </div>
-
-<div class="map-preview">
-<h3>Map System (In Entwicklung)</h3>
-<p>Diese Funktion wird nach Release verfügbar sein.</p>
-</div>
-</section>
-
-<section id="devlog" class="section">
-<h2>Development <span>Updates</span></h2>
-<div class="grid">
-<div class="card"><h3>März</h3><p>Start Entwicklung</p></div>
-<div class="card"><h3>April</h3><p>Systeme Aufbau</p></div>
-</div>
 </section>
 
 <section id="roadmap" class="section">
 <h2>Roadmap</h2>
-<p style="text-align:center;">Geplant für 2026 (kann sich ändern)</p>
+
+<div class="roadmap-v">
+
+<div class="step-v">
+<h3>Januar 2026</h3>
+<p>Projektstart & Systemplanung</p>
+</div>
+
+<div class="step-v">
+<h3>März 2026</h3>
+<p>Bauphase & Core-Systeme</p>
+</div>
+
+<div class="step-v">
+<h3>Sommer 2026</h3>
+<p>Erste Tests</p>
+</div>
+
+<div class="step-v">
+<h3>Ende 2026</h3>
+<p>Release (geplant)</p>
+</div>
+
+</div>
+
+<div class="live-progress">
+<h3>Live Dev Progress</h3>
+<div class="live-bar">
+<div class="live-fill" id="liveFill"></div>
+</div>
+<p id="liveText">Berechnung läuft...</p>
+</div>
+
 </section>
 
 <section id="community" class="section">
 <h2>Community</h2>
-<p style="text-align:center;">Werde Teil unseres Projekts auf Discord.</p>
+<p style="text-align:center;">Discord beitreten & Updates erhalten</p>
 </section>
 
 <footer>
@@ -247,18 +346,41 @@ footer {
 </footer>
 
 <script>
-// Animation
-const observer = new IntersectionObserver(entries=>{
+// SECTION ANIMATION (SMOOTH)
+const sectionObserver = new IntersectionObserver(entries=>{
 entries.forEach(e=>{
 if(e.isIntersecting) e.target.classList.add('visible');
 });
-});
-document.querySelectorAll('.card').forEach((el,i)=>{
-el.style.transitionDelay = i*0.1+"s";
-observer.observe(el);
+},{threshold:0.15});
+
+document.querySelectorAll('.section').forEach(el=>{
+sectionObserver.observe(el);
 });
 
-// Language
+// ROADMAP ANIMATION
+const roadmapObserver = new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting) e.target.classList.add('active');
+});
+},{threshold:0.3});
+
+document.querySelectorAll('.step-v').forEach((el,i)=>{
+el.style.transitionDelay = i*0.2 + "s";
+roadmapObserver.observe(el);
+});
+
+// LIVE PROGRESS (DEV ACTIVITY SIMULATION)
+function updateLiveProgress(){
+let progress = 35 + Math.floor(Math.random()*10);
+document.getElementById("liveFill").style.width = progress + "%";
+document.getElementById("liveText").innerText =
+"Dev Activity: " + progress + "% aktiv (simuliert)";
+}
+
+updateLiveProgress();
+setInterval(updateLiveProgress, 5000);
+
+// LANGUAGE
 let lang="de";
 function toggleLang(){
 if(lang==="de"){
