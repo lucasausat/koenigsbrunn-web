@@ -35,8 +35,6 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    top: 0;
-    left: 0;
 }
 
 /* SECTION */
@@ -47,7 +45,6 @@ body {
     transform: translateY(60px);
     transition: all 0.8s ease;
 }
-
 .section.visible {
     opacity: 1;
     transform: translateY(0);
@@ -87,7 +84,6 @@ nav {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 10%;
 }
 
 .hero h1 {
@@ -98,33 +94,25 @@ nav {
     -webkit-text-fill-color: transparent;
 }
 
-.hero p { color: var(--text-muted); max-width: 700px; margin: 20px 0; }
+.hero p { color: var(--text-muted); margin: 20px 0; }
 
-.stats { display: flex; gap: 40px; margin: 20px 0; }
+.stats {
+    display: flex;
+    gap: 40px;
+    margin: 20px 0;
+}
 .stats h3 { color: var(--primary); }
 
-.progress {
-    width: 300px;
-    height: 8px;
-    background: var(--border);
-    border-radius: 20px;
-}
-.bar { height: 100%; background: var(--primary); border-radius: 20px; }
-
-/* BUTTONS */
+/* BUTTON */
 .btn {
     padding: 14px 32px;
     border-radius: 50px;
-    text-decoration: none;
-    font-weight: 700;
-    display: inline-block;
     background: var(--primary);
     color: #fff;
-    margin-top: 20px;
+    text-decoration: none;
+    font-weight: 700;
 }
-.btn-discord {
-    background: #5865F2;
-}
+.btn-discord { background: #5865F2; }
 
 /* GRID */
 .grid {
@@ -138,67 +126,26 @@ nav {
     padding: 30px;
     border-radius: 20px;
     border: 1px solid var(--border);
+    transition: 0.3s;
 }
 
-/* ROADMAP */
-.roadmap-v {
-    max-width: 800px;
-    margin: auto;
-    padding-left: 40px;
-    position: relative;
-}
-.roadmap-v::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 4px;
-    height: 100%;
-    background: var(--border);
-}
-.step-v {
-    margin-bottom: 50px;
-    opacity: 0;
-    transform: translateX(-40px);
-    transition: 0.8s;
-}
-.step-v.active { opacity: 1; transform: translateX(0); }
-.step-v h3 { color: var(--accent); }
-
-/* SLIDER */
-.slider {
-    display: flex;
-    overflow-x: auto;
-    gap: 20px;
-    scroll-snap-type: x mandatory;
-}
-.slide {
-    min-width: 300px;
-    height: 180px;
-    background: var(--glass);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    scroll-snap-align: center;
-    border: 1px solid var(--border);
+/* 🔥 GLOW + PARALLAX */
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 0 25px rgba(59,130,246,0.4);
 }
 
-/* PATCH NOTES */
-.patch {
-    background: var(--glass);
-    padding: 20px;
-    margin: 10px 0;
-    border-radius: 15px;
+/* PATCH NOTES TAGS */
+.tag {
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:10px;
+    font-size:12px;
+    margin-right:5px;
 }
-
-/* DISCORD */
-.discord {
-    width: 100%;
-    height: 400px;
-    border-radius: 20px;
-    border: none;
-}
+.tag.new { background:#22c55e; }
+.tag.fix { background:#ef4444; }
+.tag.update { background:#3b82f6; }
 
 /* FOOTER */
 footer {
@@ -227,7 +174,13 @@ footer {
 <h1>Dein Leben in Königsbrunn</h1>
 <p>Projekt im Aufbau – wir sind noch in der Entwicklungsphase 🚧</p>
 
-<a href="https://discord.gg/DM2Au3f6" class="btn btn-discord">Discord beitreten & Updates erhalten</a>
+<!-- 💬 LIVE DISCORD STATS -->
+<div class="stats">
+<div><h3 id="members">--</h3><p>Members</p></div>
+<div><h3 id="online">--</h3><p>Online</p></div>
+</div>
+
+<a href="https://discord.gg/DM2Au3f6" class="btn btn-discord">Discord beitreten</a>
 </section>
 
 <!-- FEATURES -->
@@ -240,46 +193,79 @@ footer {
 </div>
 </section>
 
-<!-- ROADMAP -->
+<!-- 🧠 MODERN ROADMAP -->
 <section id="roadmap" class="section">
 <h2>Roadmap</h2>
+<div class="grid">
 
-<div class="roadmap-v">
-<div class="step-v"><h3>2026 Start</h3></div>
-<div class="step-v"><h3>Build Phase</h3></div>
-<div class="step-v"><h3>Alpha</h3></div>
+<div class="card">
+<h3>🚀 Foundation</h3>
+<p>Core Systeme & Setup</p>
+<div style="background:var(--border);height:8px;border-radius:20px;">
+<div style="width:90%;height:100%;background:var(--primary);border-radius:20px;"></div>
+</div>
+</div>
+
+<div class="card">
+<h3>🏗️ Build</h3>
+<p>Map & Features</p>
+<div style="background:var(--border);height:8px;border-radius:20px;">
+<div style="width:60%;height:100%;background:var(--primary);border-radius:20px;"></div>
+</div>
+</div>
+
+<div class="card">
+<h3>🧪 Alpha</h3>
+<p>Testing Phase</p>
+<div style="background:var(--border);height:8px;border-radius:20px;">
+<div style="width:20%;height:100%;background:var(--primary);border-radius:20px;"></div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- 🧭 PATCH NOTES -->
+<section id="devlog" class="section">
+<h2>Patch Notes</h2>
+
+<div class="card">
+<h3>v0.1.2</h3>
+<span class="tag new">NEW</span>
+<span class="tag update">UPDATE</span>
+<p>Map System gestartet + UI verbessert</p>
+</div>
+
+<div class="card">
+<h3>v0.1.1</h3>
+<span class="tag fix">FIX</span>
+<p>Bugfixes im Core System</p>
 </div>
 
 </section>
 
-<!-- DEVLOG -->
-<section id="devlog" class="section">
-<h2>Devlog</h2>
-<div class="patch">System Aufbau läuft aktuell 🚧</div>
-<div class="patch">Map wird aktiv gebaut 🗺️</div>
-</section>
-
-<!-- MAP SLIDER -->
+<!-- 🗺️ MAP WARTUNG -->
 <section class="section">
 <h2>Map Preview</h2>
-<div class="slider">
-<div class="slide">Area 1</div>
-<div class="slide">City Center</div>
-<div class="slide">Industrial Zone</div>
+<div class="card" style="text-align:center;">
+<h3>🛠️ In Wartung</h3>
+<p style="color:var(--text-muted)">Sneak Peeks kommen bald 👀</p>
 </div>
 </section>
 
-<!-- COMMUNITY -->
+<!-- 🔧 COMMUNITY -->
 <section id="community" class="section">
 <h2>Community</h2>
 
-<iframe class="discord"
-src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark">
-</iframe>
+<div style="display:flex; justify-content:center;">
+<iframe 
+src="https://discord.com/widget?id=1477240537693028414&theme=dark" 
+width="350" 
+height="500" 
+style="border-radius:20px;"
+></iframe>
+</div>
 
-<p style="text-align:center; margin-top:20px;">
-Discord beitreten & Updates erhalten 🚀
-</p>
 </section>
 
 <footer>
@@ -287,29 +273,29 @@ Discord beitreten & Updates erhalten 🚀
 </footer>
 
 <script>
-// SCROLL ANIMATION
+// SCROLL
 const observer = new IntersectionObserver(entries=>{
 entries.forEach(e=>{
 if(e.isIntersecting) e.target.classList.add("visible");
 });
 },{threshold:0.2});
-
 document.querySelectorAll(".section").forEach(el=>observer.observe(el));
 
-// ROADMAP
-document.querySelectorAll(".step-v").forEach((el,i)=>{
-setTimeout(()=>el.classList.add("active"), i*400);
+// 💬 DISCORD LIVE STATS
+fetch("https://discord.com/api/guilds/1477240537693028414/widget.json")
+.then(res=>res.json())
+.then(data=>{
+document.getElementById("members").innerText = data.members.length;
+document.getElementById("online").innerText = data.presence_count;
 });
 
 // PARTICLES
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
-
 for(let i=0;i<60;i++){
 particles.push({
 x:Math.random()*canvas.width,
@@ -324,7 +310,7 @@ ctx.clearRect(0,0,canvas.width,canvas.height);
 ctx.fillStyle="rgba(255,255,255,0.3)";
 particles.forEach(p=>{
 ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
 ctx.fill();
 p.y += p.d;
 if(p.y>canvas.height){p.y=0;}
