@@ -7,27 +7,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Dark Mode (Standard) - Dunkelblaues Setup */
-            --bg: #050a15; 
-            --surface: #0a1224;
+            /* Dark Mode Standard - Dunkelblau */
+            --bg: #040812; 
+            --surface: #08101f;
             --primary: #6366f1;
             --text-main: #ffffff;
             --text-muted: #8892b0;
             --border: rgba(255, 255, 255, 0.06);
-            --card-bg: rgba(15, 23, 42, 0.8);
-            --nav-bg: rgba(5, 10, 21, 0.8);
+            --card-bg: rgba(10, 18, 35, 0.8);
+            --nav-bg: rgba(4, 8, 18, 0.85);
         }
 
         [data-theme="light"] {
-            /* Light Mode Setup */
-            --bg: #f8fafc;
+            /* Light Mode */
+            --bg: #f5f7fa;
             --surface: #ffffff;
             --primary: #4f46e5;
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border: rgba(0, 0, 0, 0.08);
             --card-bg: rgba(255, 255, 255, 0.9);
-            --nav-bg: rgba(248, 250, 252, 0.8);
+            --nav-bg: rgba(245, 247, 250, 0.85);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -41,12 +41,12 @@
             transition: background-color 0.4s, color 0.4s;
         }
 
-        /* Hintergrund-Effekt ohne Kästchen */
+        /* Entfernung der Kästchen, stattdessen sanfter Glow */
         .bg-glow {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, var(--primary), transparent 40%);
-            opacity: 0.15;
+            background: radial-gradient(circle at 50% -20%, var(--primary), transparent 45%);
+            opacity: 0.12;
             z-index: -2;
             pointer-events: none;
         }
@@ -66,8 +66,9 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px; text-transform: uppercase; }
-        .logo span { color: var(--primary); }
+        /* Name im Logo dünner */
+        .logo { font-weight: 200; font-size: 1.3rem; letter-spacing: 1px; text-transform: uppercase; cursor: default; }
+        .logo b { font-weight: 600; color: var(--primary); }
 
         .nav-right { display: flex; align-items: center; gap: 30px; }
         .nav-links { display: flex; gap: 25px; }
@@ -82,17 +83,17 @@
         }
         .nav-links a:hover { color: var(--primary); }
 
-        /* Theme Toggle Button */
+        /* Light/Dark Toggle */
         #theme-toggle {
             background: var(--border);
             border: none;
             color: var(--text-main);
-            padding: 8px;
-            border-radius: 50%;
+            padding: 8px 12px;
+            border-radius: 4px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
             transition: 0.3s;
         }
 
@@ -106,21 +107,21 @@
             padding: 0 5%;
         }
 
+        /* Hero Name - Viel dünner */
         .hero h1 {
             font-size: clamp(3rem, 10vw, 6.5rem);
-            font-weight: 200; /* Extra Dünn */
-            letter-spacing: -2px;
+            font-weight: 200; 
+            letter-spacing: -1px;
             line-height: 1;
             margin-bottom: 25px;
             text-transform: uppercase;
         }
-
-        .hero h1 b { font-weight: 800; color: var(--primary); }
+        .hero h1 b { font-weight: 500; color: var(--primary); }
 
         .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin-bottom: 40px; font-weight: 300; }
 
         .stats { display: flex; gap: 60px; margin-bottom: 50px; }
-        .stats-item h3 { font-size: 2.5rem; font-weight: 300; color: var(--text-main); }
+        .stats-item h3 { font-size: 2.8rem; font-weight: 200; color: var(--text-main); }
         .stats-item p { font-size: 0.65rem; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
 
         .btn {
@@ -134,13 +135,13 @@
             transition: 0.4s;
             letter-spacing: 1px;
             text-transform: uppercase;
-            border: none;
+            display: inline-block;
         }
-        .btn:hover { filter: brightness(1.2); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
         .section { padding: 100px 10%; opacity: 0; transform: translateY(20px); transition: 0.8s ease; }
         .section.visible { opacity: 1; transform: translateY(0); }
-        .section h2 { font-size: 2rem; margin-bottom: 50px; font-weight: 300; text-transform: uppercase; letter-spacing: 4px; }
+        .section h2 { font-size: 2rem; margin-bottom: 50px; font-weight: 200; text-transform: uppercase; letter-spacing: 5px; }
 
         .bento-grid {
             display: grid;
@@ -188,29 +189,26 @@
 <canvas id="particles"></canvas>
 
 <nav>
-    <div class="logo">Königs<span>brunn</span></div>
+    <div class="logo">Königs<b>brunn</b></div>
     <div class="nav-right">
         <div class="nav-links">
             <a href="#features">Systeme</a>
-            <a href="#roadmap">Status</a>
             <a href="#contact">Support</a>
         </div>
-        <button id="theme-toggle" title="Design wechseln">
-            <svg style="margin:0; width:18px; height:18px;" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
-        </button>
+        <button id="theme-toggle">Light Mode</button>
     </div>
 </nav>
 
 <section class="hero">
     <h1>Königs<br><b>Brunn</b></h1>
-    <p>Premium Roleplay auf technischer Exzellenz. Ein Ort für Visionäre, erschaffen für die Community.</p>
+    <p>Premium Roleplay auf technischer Exzellenz. Ein klares Design für ein unvergleichliches Erlebnis.</p>
 
     <div class="stats">
         <div class="stats-item"><h3 id="members">--</h3><p>Bürger</p></div>
         <div class="stats-item"><h3 id="online">--</h3><p>Online</p></div>
     </div>
 
-    <a href="https://discord.gg/DM2Au3f6RS" class="btn">Projekt beitreten</a>
+    <a href="https://discord.gg/DM2Au3f6RS" class="btn">Discord Beitreten</a>
 </section>
 
 <section id="features" class="section">
@@ -218,28 +216,28 @@
     <div class="bento-grid">
         <div class="card large">
             <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-            <h3>Exzellente Sicherheit</h3>
-            <p>Ein faires System für alle. Von der Justiz bis zum Schutz deiner Daten – wir setzen auf High-End Lösungen.</p>
+            <h3>Justiz & Sicherheit</h3>
+            <p>Vollständig integriertes Rechtssystem mit Staatsanwaltschaft und Polizei.</p>
         </div>
         <div class="card">
             <svg viewBox="0 0 24 24"><path d="M10 16v-1H3.01L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-4h-7v1h-4zm10-9h-4.01V5l-2-2h-4l-2 2v2H3c-1.1 0-2 .9-2 2v3c0 1.1.89 2 2 2h18c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-6 0h-4V5h4v2z"/></svg>
-            <h3>Firmenwesen</h3>
-            <p>Gründe dein Imperium. Dynamische Märkte warten auf dich.</p>
+            <h3>Wirtschaft</h3>
+            <p>Echte Marktwirtschaft durch eigene Firmen.</p>
         </div>
         <div class="card tall">
             <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
-            <h3>Fahrzeuge</h3>
-            <p>Eigene Physiken und hunderte Custom-Modelle.</p>
+            <h3>Mobilität</h3>
+            <p>High-End Fahrzeug-Tuning und Handling.</p>
         </div>
         <div class="card">
             <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
             <h3>Immobilien</h3>
-            <p>Dein Zuhause, individuell eingerichtet.</p>
+            <p>Einzigartiges Housing-System.</p>
         </div>
         <div class="card">
             <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/></svg>
-            <h3>Voice Support</h3>
-            <p>Kristallklarer Sound ohne externe Plugins.</p>
+            <h3>Social RP</h3>
+            <p>Voice-RP ohne nötige Plugins.</p>
         </div>
     </div>
 </section>
@@ -249,21 +247,21 @@
     <div class="support-grid">
         <div class="support-card">
             <h3>Support Ticket</h3>
-            <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 20px;">Nutze unser Discord-System für schnelle Hilfe bei technischen Fragen.</p>
-            <a href="#" class="btn" style="width: 100%; text-align: center; display: block;">Ticket erstellen</a>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 25px;">Eröffne ein Ticket auf unserem Discord für technische Hilfe.</p>
+            <a href="https://discord.gg/DM2Au3f6RS" class="btn" style="width: 100%; text-align: center;">Ticket öffnen</a>
         </div>
         <div class="support-card">
-            <h3>Voice Zeiten</h3>
+            <h3>Voice Support</h3>
             <ul>
-                <li><span>Werktags</span> <span>16:00 - 22:00</span></li>
-                <li><span>Wochenende</span> <span>12:00 - 00:00</span></li>
+                <li><span>Mo - Fr</span> <span>16 - 21 Uhr</span></li>
+                <li><span>Wochenende</span> <span>12 - 22 Uhr</span></li>
             </ul>
         </div>
     </div>
 </section>
 
 <footer>
-    &copy; 2026 PROJEKT KÖNIGSBRUNN | EXCELLENCE IN ROLEPLAY
+    &copy; 2026 PROJEKT KÖNIGSBRUNN | ESTABLISHED FOR EXCELLENCE
 </footer>
 
 <script>
@@ -274,9 +272,10 @@
     themeBtn.addEventListener('click', () => {
         const isLight = body.getAttribute('data-theme') === 'light';
         body.setAttribute('data-theme', isLight ? 'dark' : 'light');
+        themeBtn.innerText = isLight ? 'Light Mode' : 'Dark Mode';
     });
 
-    // Reveal Animation
+    // Intersection Observer
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if(entry.isIntersecting) entry.target.classList.add("visible");
@@ -284,7 +283,18 @@
     }, { threshold: 0.1 });
     document.querySelectorAll(".section").forEach(el => observer.observe(el));
 
-    // Particle System (Dunkelblau/Weiß)
+    // Discord Stats
+    fetch("https://discord.com/api/guilds/1477240537693028414/widget.json")
+    .then(r => r.json())
+    .then(d => {
+        document.getElementById("members").innerText = d.members ? d.members.length : "150";
+        document.getElementById("online").innerText = d.presence_count || "24";
+    }).catch(() => {
+        document.getElementById("members").innerText = "150";
+        document.getElementById("online").innerText = "24";
+    });
+
+    // Particles
     const canvas = document.getElementById("particles");
     const ctx = canvas.getContext("2d");
     let particles = [];
@@ -296,16 +306,16 @@
         reset() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.s = Math.random() * 1;
-            this.v = Math.random() * 0.3;
+            this.s = Math.random() * 0.8;
+            this.v = Math.random() * 0.2;
         }
         update() { this.y -= this.v; if(this.y < 0) this.reset(); }
         draw() {
-            ctx.fillStyle = body.getAttribute('data-theme') === 'light' ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.1)";
+            ctx.fillStyle = body.getAttribute('data-theme') === 'light' ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.05)";
             ctx.beginPath(); ctx.arc(this.x, this.y, this.s, 0, Math.PI*2); ctx.fill();
         }
     }
-    for(let i=0; i<60; i++) particles.push(new P());
+    for(let i=0; i<70; i++) particles.push(new P());
     function anim() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         particles.forEach(p => { p.update(); p.draw(); });
