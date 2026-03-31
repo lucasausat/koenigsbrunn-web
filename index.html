@@ -1,88 +1,180 @@
---bg: #05070a;
---surface: #0d1117;
---primary: #3b82f6;
-            --accent: #fbbf24; /* Edles Gold */
---text-main: #f8fafc;
---text-muted: #94a3b8;
---glass: rgba(13, 21, 32, 0.8);
-@@ -27,7 +27,6 @@
-line-height: 1.6;
-}
-
-        /* Glow Effekt für Überschriften */
-@keyframes glow { 0%, 100% { text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); } 50% { text-shadow: 0 0 25px rgba(96, 165, 250, 0.8); } }
-
-nav {
-@@ -67,10 +66,7 @@
-h2 { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
-h2 span { color: var(--primary); }
-
-        /* Features & Team Grid */
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+mach es nehr an Discord Nteflix steam Gui art wenn es geht und mach es das es weniger nach Ki ausssieht aber kein Dashbaord  hier mal eine anderee seite e seite von der du bsischen das design holen jannst hier hol davon nur das design her  <!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt Königsbrunn | Offizielles Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #05070a;
+            --surface: #0d1117;
+            --primary: #3b82f6;
+            --accent: #fbbf24;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass: rgba(13, 21, 32, 0.8);
+            --border: rgba(255, 255, 255, 0.08);
         }
-.card {
-background: var(--glass); padding: 35px; border-radius: 24px;
-border: 1px solid var(--border); transition: 0.4s;
-@@ -80,10 +76,21 @@
-.card:hover { border-color: var(--primary); background: rgba(255,255,255,0.03); }
-.card h3 { color: var(--accent); margin-bottom: 15px; }
 
-        /* Roadmap */
-        .roadmap { display: flex; flex-direction: column; gap: 20px; max-width: 800px; margin: 0 auto; }
-        .step { padding: 20px; border-left: 3px solid var(--primary); background: rgba(59, 130, 246, 0.05); border-radius: 0 15px 15px 0; }
-        .step.active { border-left-color: var(--accent); background: rgba(251, 191, 36, 0.05); }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top, #111827, #05070a);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-footer { text-align: center; padding: 60px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border); }
-</style>
-@@ -101,7 +108,7 @@
+        @keyframes glow { 0%, 100% { text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); } 50% { text-shadow: 0 0 25px rgba(96, 165, 250, 0.8); } }
+
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(15px); background: var(--glass);
+            border-bottom: 1px solid var(--border); z-index: 1000;
+        }
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: 1px; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        .hero {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            padding: 0 10%; position: relative;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800;
+            background: linear-gradient(135deg, #fff 40%, var(--primary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: glow 3s infinite; margin-bottom: 20px;
+        }
+        .hero p { color: var(--text-muted); max-width: 700px; font-size: 1.2rem; margin-bottom: 30px; }
+
+        .btn {
+            padding: 14px 32px; border-radius: 50px; text-decoration: none;
+            font-weight: 700; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block; background: var(--primary); color: #fff;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.5); }
+
+        .section { padding: 100px 10%; border-top: 1px solid var(--border); }
+        h2 { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
+        h2 span { color: var(--primary); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card {
+            background: var(--glass); padding: 35px; border-radius: 24px;
+            border: 1px solid var(--border); transition: 0.4s;
+            opacity: 0; transform: translateY(30px);
+        }
+        .card.visible { opacity: 1; transform: translateY(0); }
+        .card:hover { border-color: var(--primary); background: rgba(255,255,255,0.03); }
+        .card h3 { color: var(--accent); margin-bottom: 15px; }
+
+        /* Vertikale Roadmap */
+        .roadmap-v { position: relative; max-width: 800px; margin: 0 auto; padding-left: 40px; }
+        .roadmap-v::before { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: var(--border); border-radius: 2px; }
+        .step-v { position: relative; margin-bottom: 50px; }
+        .step-v::before { content: ''; position: absolute; left: -46px; top: 5px; width: 16px; height: 16px; border-radius: 50%; background: var(--surface); border: 4px solid var(--primary); z-index: 2; }
+        .step-v.active::before { border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
+        .step-v h3 { color: var(--accent); font-size: 1.1rem; margin-bottom: 8px; }
+        .step-v p { color: var(--text-muted); }
+
+        /* Map Preview Card */
+        .map-preview {
+            background: linear-gradient(rgba(13,17,23,0.9), rgba(13,17,23,0.9)), url('https://via.placeholder.com/1200x600/111/444?text=3D+Karten+Vorschau') center/cover;
+            border-radius: 30px; padding: 60px; text-align: center; border: 1px solid var(--border); margin-top: 40px;
+        }
+        .badge { background: var(--accent); color: #000; padding: 4px 12px; border-radius: 8px; font-weight: 800; font-size: 0.7rem; vertical-align: middle; margin-left: 10px; }
+
+        footer { text-align: center; padding: 60px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">KÖNIGS<span>BRUNN</span></div>
+    <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="https://discord.gg/DM2Au3f6" target="_blank">Discord</a>
+    </div>
+</nav>
 
 <section class="hero">
-<h1>Dein Leben in Königsbrunn</h1>
-    <p>Erlebe das authentische Kleinstadtleben auf Roblox. Projekt Königsbrunn vereint tiefgreifenden Realismus, modernste Technik und eine starke Community zu einem einzigartigen Rollenspiel-Erlebnis. Veröffentlichung geplant für 2026.</p>
-<div class="btn-group">
-<a href="#features" class="btn">Welt erkunden</a>
-<a href="https://discord.gg/DM2Au3f6" class="btn" style="background: transparent; border: 2px solid var(--primary); margin-left: 10px;">Discord beitreten</a>
-@@ -113,32 +120,44 @@ <h2>Unsere <span>Highlights</span></h2>
-<div class="grid">
-<div class="card">
-<h3>Living World</h3>
-            <p>Werde Teil einer lebendigen Wirtschaft. Deine Berufe und Entscheidungen haben direkten Einfluss auf den Markt und das Stadtgeschehen.</p>
-</div>
-<div class="card">
-<h3>High Performance</h3>
-            <p>Dank modernster Custom-Scripts bieten wir ein flüssiges und bugfreies Spielerlebnis – egal ob auf PC, Konsole oder Mobile.</p>
-</div>
-<div class="card">
-            <h3>Echtzeit-Anbindung</h3>
-            <p>Behalte alles im Blick: Deine Statistiken, In-Game Events und wichtige Ankündigungen werden live mit diesem Portal synchronisiert.</p>
-</div>
-</div>
+    <h1>Dein Leben in Königsbrunn</h1>
+    <p>Erlebe das authentische Kleinstadtleben auf Roblox. Projekt Königsbrunn vereint Realismus, Technik und eine starke Community. Start der Vision: Januar 2026.</p>
+    <div class="btn-group">
+        <a href="#features" class="btn">Welt erkunden</a>
+        <a href="https://discord.gg/DM2Au3f6" class="btn" style="background: transparent; border: 2px solid var(--primary); margin-left: 10px;">Discord beitreten</a>
+    </div>
 </section>
-    
+
+<section id="features" class="section">
+    <h2>Unsere <span>Highlights</span></h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Living World</h3>
+            <p>Ein dynamisches Wirtschaftssystem und Berufe, die wirklich Einfluss auf die Welt haben.</p>
+        </div>
+        <div class="card">
+            <h3>High Performance</h3>
+            <p>Modernste Scripts garantieren ein flüssiges Erlebnis auf PC, Konsole und Mobile.</p>
+        </div>
+        <div class="card">
+            <h3>Echtzeit-Statistik</h3>
+            <p>Deine Erfolge und Events werden live mit diesem Web-Portal synchronisiert.</p>
+        </div>
+    </div>
+
+    <div class="map-preview" data-reveal>
+        <h3>Interaktive 3D-Stadtkarte <span class="badge">COMING SOON</span></h3>
+        <p style="color: var(--text-muted); max-width: 600px; margin: 20px auto;">
+            Plane deinen nächsten Raubzug oder finde deinen neuen Arbeitsplatz. Nach dem offiziellen Release wird hier eine interaktive Live-Karte von Königsbrunn verfügbar sein.
+        </p>
+    </div>
 </section>
 
 <section id="roadmap" class="section">
-    <h2>Roadmap bis <span>2026</span></h2>
-    <div class="roadmap">
-        <div class="step">
-            <strong>JETZT:</strong> Entwicklung der Core-Systeme und Map-Design.
-</div>
-        <div class="step active">
-            <strong>2025:</strong> Start der geschlossenen Alpha-Phase für Discord-Mitglieder.
-</div>
-        <div class="step">
-            <strong>2026:</strong> Offizieller Release.
-</div>
-</div>
+    <h2>Roadmap & <span>Verlauf</span></h2>
+    <div class="roadmap-v">
+        <div class="step-v">
+            <h3>Januar 2026: Der Grundstein</h3>
+            <p>Offizieller Start der Entwicklung. Konzeption der Kern-Systeme und erste Tests der Engine.</p>
+        </div>
+        <div class="step-v active">
+            <h3>März 2026: Die Bauphase</h3>
+            <p>Aktuelle Phase: Massive Skript-Arbeiten und detailreiches Map-Building im Roblox Studio.</p>
+        </div>
+        <div class="step-v">
+            <h3>Mitte 2026: Closed Alpha</h3>
+            <p>Erste Testläufe für loyale Discord-Mitglieder und Feedback-Runden.</p>
+        </div>
+        <div class="step-v">
+            <h3>Herbst 2026: Der Thron</h3>
+            <p>Spätestmögliche Veröffentlichung (Release) für alle Spieler weltweit.</p>
+        </div>
+    </div>
 </section>
-@@ -152,9 +171,9 @@ <h2>Roadmap bis <span>2026</span></h2>
-entries.forEach(entry => {
-if(entry.isIntersecting) entry.target.classList.add('visible');
-});
-    }, { threshold: 0.2 });
 
-    document.querySelectorAll('.card').forEach(card => observer.observe(card));
+<footer>
+    <p>© 2026 Projekt Königsbrunn – Alle Rechte vorbehalten.<br>Dieses Projekt steht in keiner direkten Verbindung zur Roblox Corporation.</p>
+</footer>
+
+<script>
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.card, .map-preview').forEach(el => observer.observe(el));
 </script>
 
 </body>
+</html>
