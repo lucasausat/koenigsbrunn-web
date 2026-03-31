@@ -26,7 +26,6 @@ body {
     background: radial-gradient(circle at top, #111827, #05070a);
     color: var(--text-main);
     overflow-x: hidden;
-    line-height: 1.6;
 }
 
 /* PARTICLES */
@@ -43,7 +42,7 @@ body {
     border-top: 1px solid var(--border);
     opacity: 0;
     transform: translateY(60px);
-    transition: all 0.8s ease;
+    transition: 0.8s;
 }
 .section.visible {
     opacity: 1;
@@ -58,101 +57,69 @@ nav {
     padding: 15px 5%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     backdrop-filter: blur(20px);
     background: var(--glass);
-    border-bottom: 1px solid var(--border);
-    z-index: 1000;
 }
 
-.logo { font-weight: 800; font-size: 1.4rem; }
+.logo { font-weight: 800; }
 .logo span { color: var(--accent); }
 
-.nav-links { display: flex; gap: 25px; }
-.nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-weight: 600;
-}
+.nav-links { display: flex; gap: 20px; }
+.nav-links a { color: var(--text-muted); text-decoration:none; }
 .nav-links a:hover { color: var(--accent); }
 
 /* HERO */
 .hero {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
 }
 
 .hero h1 {
     font-size: clamp(2.5rem, 8vw, 4rem);
-    font-weight: 800;
-    background: linear-gradient(135deg, #fff 40%, var(--primary));
+    background: linear-gradient(135deg,#fff,var(--primary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.hero p { color: var(--text-muted); margin: 20px 0; }
-
-.stats {
-    display: flex;
-    gap: 40px;
-    margin: 20px 0;
-}
-.stats h3 { color: var(--primary); }
+.stats { display:flex; gap:40px; margin:20px 0; }
 
 /* BUTTON */
 .btn {
-    padding: 14px 32px;
-    border-radius: 50px;
-    background: var(--primary);
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
+    padding:14px 30px;
+    border-radius:50px;
+    background:var(--primary);
+    color:#fff;
+    text-decoration:none;
 }
-.btn-discord { background: #5865F2; }
 
 /* GRID */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 25px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
 }
 
 .card {
     background: var(--glass);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    transition: 0.3s;
+    padding:25px;
+    border-radius:20px;
+    border:1px solid var(--border);
+    transition:0.3s;
 }
-
-/* 🔥 GLOW + PARALLAX */
 .card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 0 25px rgba(59,130,246,0.4);
+    transform: translateY(-8px);
+    box-shadow:0 0 30px rgba(59,130,246,0.5);
 }
 
-/* PATCH NOTES TAGS */
-.tag {
-    display:inline-block;
-    padding:5px 10px;
-    border-radius:10px;
-    font-size:12px;
-    margin-right:5px;
-}
-.tag.new { background:#22c55e; }
-.tag.fix { background:#ef4444; }
-.tag.update { background:#3b82f6; }
+/* TAGS */
+.tag { padding:5px 10px; border-radius:10px; font-size:12px; }
+.new{background:#22c55e;} .fix{background:#ef4444;} .update{background:#3b82f6;}
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 60px;
-    color: var(--text-muted);
-}
+footer { text-align:center; padding:50px; color:var(--text-muted); }
 </style>
 </head>
 
@@ -172,148 +139,134 @@ footer {
 
 <section class="hero">
 <h1>Dein Leben in Königsbrunn</h1>
-<p>Projekt im Aufbau – wir sind noch in der Entwicklungsphase 🚧</p>
+<p>Projekt im Aufbau 🚧</p>
 
-<!-- 💬 LIVE DISCORD STATS -->
 <div class="stats">
 <div><h3 id="members">--</h3><p>Members</p></div>
 <div><h3 id="online">--</h3><p>Online</p></div>
+<div><h3 id="offline">--</h3><p>Offline</p></div>
 </div>
 
-<a href="https://discord.gg/DM2Au3f6" class="btn btn-discord">Discord beitreten</a>
+<a href="https://discord.gg/DM2Au3f6" class="btn">Discord</a>
 </section>
 
 <!-- FEATURES -->
 <section id="features" class="section">
 <h2>Highlights</h2>
 <div class="grid">
-<div class="card">Living World</div>
-<div class="card">Core Systems</div>
-<div class="card">Roleplay System</div>
+<div class="card">👮 Polizei & Fraktionen</div>
+<div class="card">💼 Jobs & Wirtschaft</div>
+<div class="card">🏠 Immobilien System</div>
+<div class="card">🚗 Fahrzeuge & Tuning</div>
+<div class="card">⚖️ Justizsystem</div>
+<div class="card">🧍 Realistisches RP</div>
 </div>
 </section>
 
-<!-- 🧠 MODERN ROADMAP -->
+<!-- ROADMAP -->
 <section id="roadmap" class="section">
 <h2>Roadmap</h2>
 <div class="grid">
 
 <div class="card">
-<h3>🚀 Foundation</h3>
-<p>Core Systeme & Setup</p>
-<div style="background:var(--border);height:8px;border-radius:20px;">
-<div style="width:90%;height:100%;background:var(--primary);border-radius:20px;"></div>
+<h3>🚀 Start</h3>
+<p>Konzept & Planung</p>
+<div style="background:var(--border);height:8px;">
+<div style="width:10%;height:100%;background:var(--primary);"></div>
 </div>
 </div>
 
 <div class="card">
-<h3>🏗️ Build</h3>
-<p>Map & Features</p>
-<div style="background:var(--border);height:8px;border-radius:20px;">
-<div style="width:60%;height:100%;background:var(--primary);border-radius:20px;"></div>
+<h3>🏗️ Aufbau</h3>
+<p>Map + Systeme</p>
+<div style="background:var(--border);height:8px;">
+<div style="width:5%;height:100%;background:var(--primary);"></div>
 </div>
 </div>
 
 <div class="card">
 <h3>🧪 Alpha</h3>
-<p>Testing Phase</p>
-<div style="background:var(--border);height:8px;border-radius:20px;">
-<div style="width:20%;height:100%;background:var(--primary);border-radius:20px;"></div>
+<p>Testing</p>
+<div style="background:var(--border);height:8px;">
+<div style="width:0%;height:100%;background:var(--primary);"></div>
 </div>
 </div>
 
 </div>
 </section>
 
-<!-- 🧭 PATCH NOTES -->
+<!-- PATCH NOTES -->
 <section id="devlog" class="section">
 <h2>Patch Notes</h2>
 
 <div class="card">
-<h3>v0.1.2</h3>
+<h3>v0.1.0</h3>
 <span class="tag new">NEW</span>
-<span class="tag update">UPDATE</span>
-<p>Map System gestartet + UI verbessert</p>
-</div>
-
-<div class="card">
-<h3>v0.1.1</h3>
-<span class="tag fix">FIX</span>
-<p>Bugfixes im Core System</p>
+<p>Projekt gestartet</p>
 </div>
 
 </section>
 
-<!-- 🗺️ MAP WARTUNG -->
+<!-- MAP -->
 <section class="section">
 <h2>Map Preview</h2>
 <div class="card" style="text-align:center;">
-<h3>🛠️ In Wartung</h3>
-<p style="color:var(--text-muted)">Sneak Peeks kommen bald 👀</p>
+🛠️ In Wartung
 </div>
 </section>
 
-<!-- 🔧 COMMUNITY -->
+<!-- COMMUNITY -->
 <section id="community" class="section">
 <h2>Community</h2>
-
 <div style="display:flex; justify-content:center;">
-<iframe 
-src="https://discord.com/widget?id=1477240537693028414&theme=dark" 
-width="350" 
-height="500" 
-style="border-radius:20px;"
-></iframe>
+<iframe src="https://discord.com/widget?id=1477240537693028414&theme=dark" width="350" height="500"></iframe>
 </div>
-
 </section>
 
-<footer>
-© 2026 Projekt Königsbrunn
-</footer>
+<footer>© 2026 Projekt Königsbrunn</footer>
 
 <script>
 // SCROLL
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting) e.target.classList.add("visible");
-});
-},{threshold:0.2});
+const observer=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add("visible")})});
 document.querySelectorAll(".section").forEach(el=>observer.observe(el));
 
-// 💬 DISCORD LIVE STATS
+// DISCORD (best effort ohne bots)
 fetch("https://discord.com/api/guilds/1477240537693028414/widget.json")
-.then(res=>res.json())
-.then(data=>{
-document.getElementById("members").innerText = data.members.length;
-document.getElementById("online").innerText = data.presence_count;
+.then(r=>r.json())
+.then(d=>{
+let humans=d.members.filter(m=>!m.bot);
+let online=humans.filter(m=>m.status!=="offline");
+let offline=humans.filter(m=>m.status==="offline");
+
+members.innerText=humans.length;
+onlineEl=document.getElementById("online");
+offlineEl=document.getElementById("offline");
+
+onlineEl.innerText=online.length;
+offlineEl.innerText=offline.length;
 });
 
-// PARTICLES
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// PARTICLES UPGRADE
+const c=document.getElementById("particles");
+const ctx=c.getContext("2d");
+c.width=innerWidth; c.height=innerHeight;
 
-let particles = [];
-for(let i=0;i<60;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*2,
-d:Math.random()*1
-});
+let p=[];
+for(let i=0;i<90;i++){
+p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2,dx:(Math.random()-0.5)*0.4,dy:Math.random()*0.6});
 }
 
 function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="rgba(255,255,255,0.3)";
-particles.forEach(p=>{
+ctx.clearRect(0,0,c.width,c.height);
+p.forEach(a=>{
 ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.arc(a.x,a.y,a.r,0,6.28);
+ctx.fillStyle="rgba(255,255,255,0.25)";
 ctx.fill();
-p.y += p.d;
-if(p.y>canvas.height){p.y=0;}
+
+a.x+=a.dx; a.y+=a.dy;
+
+if(a.y>c.height){a.y=0;a.x=Math.random()*c.width;}
 });
 requestAnimationFrame(draw);
 }
