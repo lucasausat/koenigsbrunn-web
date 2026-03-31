@@ -3,49 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projekt Königsbrunn | Offizielles Portal</title>
+<title>Projekt Königsbrunn</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --bg: #040812;
-    --surface: #08101f;
-    --primary: #6366f1;
-    --text-main: #ffffff;
-    --text-muted: #8892b0;
-    --border: rgba(255,255,255,0.06);
-    --card-bg: rgba(10,18,35,0.8);
-    --nav-bg: rgba(4,8,18,0.85);
+    --bg:#040812;
+    --primary:#6366f1;
+    --text:#fff;
+    --muted:#8892b0;
+    --card:rgba(10,18,35,0.7);
+    --border:rgba(255,255,255,0.06);
 }
 
-/* Light Mode */
-[data-theme="light"] {
-    --bg: #f5f7fa;
-    --surface: #ffffff;
-    --primary: #4f46e5;
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --border: rgba(0,0,0,0.08);
-    --card-bg: rgba(255,255,255,0.9);
-    --nav-bg: rgba(245,247,250,0.85);
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
+/* BASE */
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text-main);
-    overflow-x: hidden;
+    margin:0;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
 }
 
-/* Glow */
+/* GLOW BG */
 .bg-glow {
-    position: fixed;
-    width:100%; height:100%;
-    background: radial-gradient(circle at 50% -20%, var(--primary), transparent 50%);
-    opacity:0.15;
+    position:fixed;
+    width:100%;height:100%;
+    background:radial-gradient(circle at 50% 0%, var(--primary), transparent 60%);
+    opacity:.12;
     z-index:-2;
 }
 
@@ -53,33 +39,16 @@ body {
 nav {
     position:fixed;
     width:100%;
-    padding:15px 8%;
+    padding:18px 8%;
     display:flex;
     justify-content:space-between;
-    backdrop-filter:blur(15px);
-    background:var(--nav-bg);
+    backdrop-filter:blur(12px);
+    background:rgba(0,0,0,.4);
     border-bottom:1px solid var(--border);
-    z-index:1000;
 }
 
-.logo { font-weight:200; font-size:1.3rem; }
-.logo b { font-weight:600; color:var(--primary); }
-
-.nav-links { display:flex; gap:25px; }
-.nav-links a {
-    color:var(--text-muted);
-    text-decoration:none;
-    font-size:0.7rem;
-    letter-spacing:1px;
-}
-.nav-links a:hover { color:var(--primary); }
-
-#theme-toggle {
-    background:var(--border);
-    border:none;
-    padding:6px 10px;
-    cursor:pointer;
-}
+.logo { font-weight:200; }
+.logo b { color:var(--primary); }
 
 /* HERO */
 .hero {
@@ -94,31 +63,47 @@ nav {
 .hero h1 {
     font-size:clamp(3rem,10vw,6rem);
     font-weight:200;
+    letter-spacing:-2px;
 }
 
 .hero h1 b { color:var(--primary); }
 
-.hero p { color:var(--text-muted); margin:20px 0; }
+.hero p { color:var(--muted); }
 
-.stats { display:flex; gap:40px; }
+/* HUD STATS */
+.stats {
+    display:flex;
+    gap:40px;
+    margin-top:30px;
+}
 
+.stats div {
+    background:rgba(0,0,0,.3);
+    border:1px solid var(--border);
+    padding:15px 25px;
+    backdrop-filter:blur(8px);
+}
+
+/* BUTTON */
 .btn {
     margin-top:30px;
     padding:14px 30px;
     background:var(--primary);
     color:#fff;
     text-decoration:none;
+    transition:.3s;
+}
+.btn:hover {
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(99,102,241,.3);
 }
 
-/* SECTIONS */
+/* SECTION */
 .section {
     padding:100px 10%;
-    opacity:0;
-    transform:translateY(20px);
-    transition:0.6s;
 }
-.section.visible { opacity:1; transform:none; }
 
+/* CARDS */
 .bento-grid {
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -126,13 +111,31 @@ nav {
 }
 
 .card {
-    background:var(--card-bg);
+    background:var(--card);
     border:1px solid var(--border);
     padding:30px;
+    transition:.3s;
+    position:relative;
+    overflow:hidden;
 }
 
-.large { grid-column:span 2; grid-row:span 2; }
-.tall { grid-row:span 2; }
+/* RP Hover Effekt */
+.card::after {
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:radial-gradient(circle, rgba(99,102,241,.15), transparent);
+    top:-50%;left:-50%;
+    opacity:0;
+    transition:.4s;
+}
+
+.card:hover::after { opacity:1; }
+.card:hover {
+    transform:translateY(-5px);
+    border-color:var(--primary);
+}
 
 /* ROADMAP */
 .roadmap-item {
@@ -142,21 +145,15 @@ nav {
 }
 
 /* SUPPORT */
-.support-grid {
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-}
-
-footer {
-    padding:50px;
-    text-align:center;
-    color:var(--text-muted);
+.support-box {
+    background:var(--card);
+    padding:30px;
+    border:1px solid var(--border);
 }
 
 /* MOBILE */
 @media(max-width:900px){
-    .bento-grid,.support-grid { grid-template-columns:1fr; }
+    .bento-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -164,136 +161,86 @@ footer {
 <body>
 
 <div class="bg-glow"></div>
-<canvas id="particles"></canvas>
 
 <nav>
 <div class="logo">Königs<b>Brunn</b></div>
-<div class="nav-links">
-<a href="#features">Systeme</a>
-<a href="#roadmap">Status</a>
-<a href="#contact">Support</a>
-</div>
-<button id="theme-toggle">Mode</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
 <h1>Königs<br><b>Brunn</b></h1>
-<p>Premium Roleplay trifft auf moderne Technik.</p>
+<p>Roleplay auf einem neuen Level.</p>
 
 <div class="stats">
-<div><h3 id="members">--</h3><p>Bürger</p></div>
-<div><h3 id="online">--</h3><p>Online</p></div>
+<div><h3 id="members">--</h3><small>Bürger</small></div>
+<div><h3 id="online">--</h3><small>Online</small></div>
 </div>
 
 <a href="https://discord.gg/DM2Au3f6RS" class="btn">Discord</a>
 </section>
 
 <!-- FEATURES -->
-<section id="features" class="section">
+<section class="section">
 <h2>Systeme</h2>
 
 <div class="bento-grid">
-<div class="card large"><h3>Justiz</h3><p>Realistisches Rechtssystem.</p></div>
-<div class="card"><h3>Wirtschaft</h3><p>Player Economy.</p></div>
-<div class="card tall"><h3>Mobilität</h3><p>High-End Fahrzeuge.</p></div>
+<div class="card"><h3>Justiz</h3></div>
+<div class="card"><h3>Wirtschaft</h3></div>
+<div class="card"><h3>Mobilität</h3></div>
 <div class="card"><h3>Immobilien</h3></div>
 <div class="card"><h3>Social RP</h3></div>
 </div>
 </section>
 
 <!-- ROADMAP -->
-<section id="roadmap" class="section">
-<h2>Entwicklung</h2>
+<section class="section">
+<h2>Status</h2>
 
 <div class="roadmap-item">
 <h3>Konzept</h3>
-<p>Planung & Struktur.</p>
+<p>Grundsystem geplant</p>
 </div>
 
 <div class="roadmap-item">
 <h3>Aktuell</h3>
-<p>System Entwicklung.</p>
+<p>Entwicklung läuft</p>
 </div>
 
 <div class="roadmap-item">
 <h3>Beta</h3>
-<p>Testing Phase.</p>
+<p>Testing Phase</p>
 </div>
 
 </section>
 
 <!-- SUPPORT -->
-<section id="contact" class="section">
-<h2>Support</h2>
+<section class="section">
+<h2>Support Zeiten</h2>
 
-<div class="support-grid">
-<div class="card">
-<h3>Discord</h3>
-<a href="https://discord.gg/DM2Au3f6RS" class="btn">Join</a>
-</div>
-
-<div class="card">
-<h3>Zeiten</h3>
-<p>Mo-Fr: 16–21 Uhr</p>
-</div>
+<div class="support-box">
+<p><b>Montag:</b> 8–12 & 15–21 Uhr</p>
+<p><b>Dienstag:</b> 8–12 & 15–21 Uhr</p>
+<p><b>Mittwoch:</b> 8–12 & 15–21 Uhr</p>
+<p><b>Donnerstag:</b> 8–12 & 15–21 Uhr</p>
+<p><b>Freitag:</b> 8–12 & 15–23 Uhr</p>
+<p><b>Samstag:</b> 12–24 Uhr</p>
+<p><b>Sonntag:</b> 12–15 Uhr</p>
 </div>
 
 </section>
 
-<footer>
+<footer style="text-align:center;padding:40px;color:#666;">
 © 2026 Projekt Königsbrunn
 </footer>
 
 <script>
-// Theme Toggle
-const btn = document.getElementById("theme-toggle");
-btn.onclick = () => {
-document.body.dataset.theme =
-document.body.dataset.theme === "light" ? "dark" : "light";
-};
-
-// Scroll Animation
-const obs = new IntersectionObserver(e=>{
-e.forEach(x=>x.isIntersecting && x.target.classList.add("visible"));
-});
-document.querySelectorAll(".section").forEach(el=>obs.observe(el));
-
 // Discord Stats
 fetch("https://discord.com/api/guilds/1477240537693028414/widget.json")
 .then(r=>r.json())
 .then(d=>{
-document.getElementById("members").innerText = d.members.length;
-document.getElementById("online").innerText = d.presence_count;
+document.getElementById("members").innerText=d.members.length;
+document.getElementById("online").innerText=d.presence_count;
 });
-
-// Particles
-const c = document.getElementById("particles");
-const ctx = c.getContext("2d");
-
-function resize(){
-c.width=innerWidth;
-c.height=innerHeight;
-}
-resize();
-addEventListener("resize",resize);
-
-let p=[];
-for(let i=0;i<80;i++){
-p.push({x:Math.random()*c.width,y:Math.random()*c.height,v:Math.random()*0.5});
-}
-
-function draw(){
-ctx.clearRect(0,0,c.width,c.height);
-p.forEach(a=>{
-a.y-=a.v;
-if(a.y<0) a.y=c.height;
-ctx.fillStyle="rgba(255,255,255,0.05)";
-ctx.fillRect(a.x,a.y,2,2);
-});
-requestAnimationFrame(draw);
-}
-draw();
 </script>
 
 </body>
