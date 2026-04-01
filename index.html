@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projekt Königsbrunn | Offizielles Portal</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -111,66 +114,7 @@
     &copy; 2026 PROJEKT KÖNIGSBRUNN | ESTABLISHED FOR EXCELLENCE
 </footer>
 
-<script>
-    const themeBtn = document.getElementById('theme-toggle');
-    const body = document.body;
-
-    themeBtn.addEventListener('click', () => {
-        const isLight = body.getAttribute('data-theme') === 'light';
-        body.setAttribute('data-theme', isLight ? 'dark' : 'light');
-        themeBtn.innerText = isLight ? 'Light Mode' : 'Dark Mode';
-    });
-
-    const glow = document.getElementById('mouse-glow');
-    document.addEventListener('mousemove', (e) => {
-        glow.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, var(--primary), transparent 50%)`;
-    });
-
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) entry.target.classList.add("visible");
-        });
-    }, { threshold: 0.1 });
-    document.querySelectorAll(".section").forEach(el => observer.observe(el));
-
-    fetch("https://discord.com/api/guilds/1477240537693028414/widget.json")
-    .then(r => r.json())
-    .then(d => {
-        document.getElementById("members").innerText = d.members ? d.members.length : "150+";
-        document.getElementById("online").innerText = d.presence_count || "24";
-    }).catch(() => {
-        document.getElementById("members").innerText = "200";
-        document.getElementById("online").innerText = "28";
-    });
-
-    const canvas = document.getElementById("particles");
-    const ctx = canvas.getContext("2d");
-    let particles = [];
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener("resize", resize); resize();
-
-    class P {
-        constructor() { this.reset(); }
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.s = Math.random() * 1.2;
-            this.v = Math.random() * 0.1; // Sehr langsame Bewegung für Ruhe
-        }
-        update() { this.y -= this.v; if(this.y < 0) this.reset(); }
-        draw() {
-            ctx.fillStyle = body.getAttribute('data-theme') === 'light' ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.03)";
-            ctx.beginPath(); ctx.arc(this.x, this.y, this.s, 0, Math.PI*2); ctx.fill();
-        }
-    }
-    for(let i=0; i<60; i++) particles.push(new P());
-    function anim() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(anim);
-    }
-    anim();
-</script>
+<script src="js/app.js"></script>
 
 </body>
 </html>
