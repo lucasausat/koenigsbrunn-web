@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="../css/style.css">
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* ✨ Micro Animations */
         .fade-in {
             opacity: 0;
@@ -27,7 +31,61 @@
             transition: 0.3s ease;
         }
 
-        /* ✅ HERO FIX - Z-Index erhöht & Sichtbarkeit erzwungen */
+        /* 🔥 HERO UPGRADE */
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            background: linear-gradient(90deg, #fff, #aaa, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 6s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { background-position: -200px; }
+            100% { background-position: 200px; }
+        }
+
+        .btn-main {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-main::before {
+            content: "";
+            position: absolute;
+            width: 120%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+            top: 0;
+            left: -120%;
+            transition: 0.5s;
+        }
+
+        .btn-main:hover::before {
+            left: 100%;
+        }
+
+        /* NAV HOVER */
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            background: white;
+            left: 0;
+            bottom: -4px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* HERO FIX */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -35,8 +93,8 @@
             flex-direction: column;
             justify-content: center;
             padding: 100px 20px;
-            z-index: 10; /* Erhöht, um über Partikeln zu liegen */
-            opacity: 1 !important; /* Sofort sichtbar */
+            z-index: 10;
+            opacity: 1 !important;
             transform: translateY(0) !important;
         }
 
@@ -64,27 +122,74 @@
             z-index: -1;
         }
 
-        /* ✅ PARTICLES FIX */
+        /* PARTICLES */
         #particles {
             position: fixed;
             z-index: -2;
-            pointer-events: none; /* Klicks gehen durch die Partikel hindurch */
+            pointer-events: none;
         }
 
+        /* DISCORD UPGRADE */
         .discord-section {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 40px;
             flex-wrap: wrap;
+            background: rgba(255,255,255,0.02);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
 
         .discord-text {
             max-width: 400px;
         }
+
+        /* SCROLL BAR */
+        #scroll-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: white;
+            z-index: 9999;
+        }
+
+        /* 📱 MOBILE MENU */
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background: #111;
+                padding: 20px;
+                border-radius: 12px;
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
+
+<div id="scroll-bar"></div>
 
 <div class="bg-glow" id="mouse-glow"></div>
 <canvas id="particles"></canvas>
@@ -92,7 +197,8 @@
 <nav>
     <div class="logo" onclick="window.location.href='./'">Königs<b>brunn</b></div>
     <div class="nav-right">
-        <div class="nav-links">
+        <div class="menu-toggle" id="menu-toggle">☰</div>
+        <div class="nav-links" id="nav-links">
             <a href="./">Home</a>
             <a href="../team.html">Team</a>
             <a href="../tos.html">ToS</a>
@@ -186,7 +292,7 @@
 <script src="../js/app.js"></script>
 
 <script>
-/* ✨ Scroll Animation Trigger */
+/* Scroll Animation */
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -194,8 +300,56 @@ const observer = new IntersectionObserver(entries => {
         }
     });
 });
-
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+/* Scroll Bar */
+window.addEventListener("scroll", () => {
+    let scroll = window.scrollY;
+    let height = document.body.scrollHeight - window.innerHeight;
+    document.getElementById("scroll-bar").style.width = (scroll / height) * 100 + "%";
+});
+
+/* Mobile Menu */
+document.getElementById("menu-toggle").onclick = () => {
+    document.getElementById("nav-links").classList.toggle("active");
+};
+
+/* Particles */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i = 0; i < 80; i++){
+    particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2,
+        dx: (Math.random()-0.5)*0.5,
+        dy: (Math.random()-0.5)*0.5
+    });
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach(p => {
+        p.x += p.dx;
+        p.y += p.dy;
+
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = "rgba(255,255,255,0.6)";
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
 </script>
 
 </body>
