@@ -87,7 +87,6 @@
 
         @media (max-width: 768px) {
 
-            /* 👉 NUR CONTENT AUSBLENDEN */
             nav,
             section,
             footer,
@@ -96,7 +95,6 @@
                 display: none !important;
             }
 
-            /* 👉 MOBILE SCREEN */
             .mobile-maintenance {
                 display: flex;
                 position: fixed;
@@ -138,7 +136,6 @@
 </head>
 <body>
 
-<!-- 📱 MOBILE SCREEN -->
 <div class="mobile-maintenance">
     <h1>Königs<br><b>Brunn</b></h1>
     <p>
@@ -151,7 +148,6 @@
     </a>
 </div>
 
-<!-- 🔥 ORIGINAL CONTENT (UNVERÄNDERT) -->
 <div class="bg-glow" id="mouse-glow"></div>
 <canvas id="particles"></canvas>
 
@@ -175,15 +171,47 @@
         Technologie trifft auf Realismus – und du bist mittendrin.
     </p>
 
+    <!-- 🔥 NEU: Vision / Recruiting Hinweis -->
+    <p style="margin-top:15px;opacity:0.6;">
+        Aktuell im Aufbau – wir suchen starke Entwickler, die etwas Großes erschaffen wollen.
+    </p>
+
     <div class="stats">
-        <div class="stats-item"><h3 id="members">--</h3><p>Bürger</p></div>
+        <!-- 🔥 NEU: bessere Wirkung -->
+        <div class="stats-item"><h3 id="members">25+</h3><p>Bewerbungen</p></div>
         <div class="stats-item">
-            <h3><span class="status-dot"></span> <span id="online">--</span></h3>
-            <p>Online</p>
+            <h3><span class="status-dot"></span> <span id="online">Team sucht aktiv</span></h3>
+            <p>Status</p>
         </div>
     </div>
 
     <a href="https://discord.gg/DM2Au3f6RS" class="btn btn-main">Discord Beitreten</a>
+</section>
+
+<!-- 🔥 NEU: RECRUITING SECTION -->
+<section class="section fade-in">
+    <h2>Werde Teil des Projekts</h2>
+
+    <div class="bento-grid">
+        <div class="card">
+            <h3>Developer gesucht</h3>
+            <p>Wir suchen aktive und erfahrene Entwickler für Script, Build und UI.</p>
+        </div>
+
+        <div class="card">
+            <h3>Projekt im Aufbau</h3>
+            <p>Du kannst von Anfang an dabei sein und das Projekt mitgestalten.</p>
+        </div>
+
+        <div class="card">
+            <h3>Langfristige Vision</h3>
+            <p>Ziel ist ein hochwertiges Roleplay-System mit eigenen Features.</p>
+        </div>
+    </div>
+
+    <a href="../team.html" class="btn btn-main" style="margin-top:20px;">
+        Zum Team & Bewerben
+    </a>
 </section>
 
 <section class="section fade-in">
@@ -206,12 +234,34 @@
     </div>
 </section>
 
+<!-- 🔥 NEU: MINI DEVLOG -->
+<section class="section fade-in">
+    <h2>Letzte Updates</h2>
+
+    <div class="bento-grid">
+        <div class="card">
+            <h3>Team erweitert</h3>
+            <p>Neue Entwickler sind dem Projekt beigetreten.</p>
+        </div>
+
+        <div class="card">
+            <h3>Systemplanung</h3>
+            <p>Grundstruktur für Gameplay wird aktuell definiert.</p>
+        </div>
+    </div>
+</section>
+
 <section id="features" class="section fade-in">
     <h2>Projekt-Status</h2>
     <div class="bento-grid">
         <div class="card large">
-            <h3> In Entwicklung</h3>
-            <p>Projekt Königsbrunn befindet sich aktuell in der aktiven Aufbauphase.</p>
+            <!-- 🔥 UPGRADE -->
+            <h3>🚧 Aufbauphase</h3>
+            <p>
+                Teamaufbau läuft aktiv.<br>
+                Erste Systeme in Planung.<br>
+                Entwicklung startet in Kürze.
+            </p>
         </div>
     </div>
 </section>
