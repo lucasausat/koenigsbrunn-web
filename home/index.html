@@ -7,6 +7,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css"> 
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         .fade-in {
@@ -159,9 +161,8 @@
         }
 
         .desktop-icon {
-            font-size: 40px;
             margin-bottom: 20px;
-            display: block;
+            display: inline-block;
             opacity: 0.8;
         }
 
@@ -236,7 +237,7 @@
 
 <div class="mobile-maintenance">
     <div class="glass-box">
-        <span class="desktop-icon">🖥️</span>
+        <i data-lucide="monitor" class="desktop-icon" style="width: 48px; height: 48px;"></i>
         
         <h1>Königs<b>Brunn</b></h1>
         
@@ -262,7 +263,9 @@
             <a href="../tos.html">ToS</a>
             <a href="#features">Systeme</a>
         </div>
-        <button id="theme-toggle" class="maintenance">🛠️ Wartung</button>
+        <button id="theme-toggle" class="maintenance">
+            <i data-lucide="wrench" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 4px;"></i> Wartung
+        </button>
     </div>
 </nav>
 
@@ -291,14 +294,17 @@
     <h2>Werde Teil des Projekts</h2>
     <div class="bento-grid">
         <div class="card">
+            <i data-lucide="code-2" style="margin-bottom: 15px; color: #7c5cff;"></i>
             <h3>Developer gesucht</h3>
             <p>Wir suchen aktive Entwickler für Scripting, Mapping und UI.</p>
         </div>
         <div class="card">
+            <i data-lucide="construction" style="margin-bottom: 15px; color: #7c5cff;"></i>
             <h3>Projekt im Aufbau</h3>
             <p>Gestalte die Grundpfeiler von Königsbrunn von Anfang an mit.</p>
         </div>
         <div class="card">
+            <i data-lucide="milestone" style="margin-bottom: 15px; color: #7c5cff;"></i>
             <h3>Langfristige Vision</h3>
             <p>Einzigartige Systeme statt Standard-Skripte für echtes RP.</p>
         </div>
@@ -310,14 +316,17 @@
     <h2>Warum Königsbrunn?</h2>
     <div class="bento-grid">
         <div class="card">
+            <i data-lucide="cpu" style="margin-bottom: 15px; color: #7c5cff;"></i>
             <h3>Eigene Systeme</h3>
             <p>Wir entwickeln Features, die du so auf keinem anderen Server findest.</p>
         </div>
         <div class="card">
+            <i data-lucide="users" style="margin-bottom: 15px; color: #7c5cff;"></i>
             <h3>Aktives Team</h3>
             <p>Täglicher Fortschritt und enge Zusammenarbeit mit der Community.</p>
         </div>
         <div class="card">
+            <i data-lucide="shield-check" style="margin-bottom: 15px; color: #7c5cff;"></i>
             <h3>Qualität</h3>
             <p>Fokus auf Performance und ein sauberes Spielerlebnis.</p>
         </div>
@@ -328,6 +337,7 @@
     <h2>Projekt-Status</h2>
     <div class="bento-grid">
         <div class="card large">
+            <i data-lucide="rocket" style="margin-bottom: 15px; color: #7c5cff;"></i>
             <h3> Aufbauphase</h3>
             <p>
                 Das Team wird aktuell massiv erweitert.<br>
@@ -345,6 +355,9 @@
 <script src="../js/app.js"></script>
 
 <script>
+    // Lucide Icons initialisieren
+    lucide.createIcons();
+
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
