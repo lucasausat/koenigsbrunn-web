@@ -61,6 +61,7 @@ nav{
     backdrop-filter: blur(15px);
     background:rgba(0,0,0,0.4);
     border-bottom:1px solid var(--border);
+    z-index: 1000;
 }
 
 .logo{font-weight:800;cursor:pointer;}
@@ -176,11 +177,11 @@ footer{
 <div class="bg bottom"></div>
 
 <nav>
-    <div class="logo" onclick="location.href='index.html'">Königs<b>brunn</b></div>
+    <div class="logo" onclick="location.href='./index.html'">Königs<b>brunn</b></div>
     <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="team.html">Team</a>
-        <a href="tos.html">ToS</a>
+        <a href="./home/index.html">Home</a>
+        <a href="./team/index.html">Team</a>
+        <a href="./tos.html">ToS</a>
     </div>
 </nav>
 
@@ -260,15 +261,18 @@ window.addEventListener("scroll", () => {
     document.getElementById("progress").style.width = (scroll / height) * 100 + "%";
 });
 
-// Scroll Animation
+// Scroll Animation (FIX: Prüft jetzt auch beim Laden)
 const cards = document.querySelectorAll(".card");
-window.addEventListener("scroll", () => {
+const checkVisible = () => {
     cards.forEach(card => {
         if(card.getBoundingClientRect().top < window.innerHeight - 100){
             card.classList.add("show");
         }
     });
-});
+};
+
+window.addEventListener("scroll", checkVisible);
+window.addEventListener("DOMContentLoaded", checkVisible);
 
 // Icons
 lucide.createIcons();
