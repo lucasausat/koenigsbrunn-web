@@ -1,265 +1,314 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apply | Königsbrunn</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bewerbung | Projekt Königsbrunn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-<script src="https://unpkg.com/lucide@latest"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg:#070A12;
+            --card:rgba(255,255,255,0.04);
+            --border:rgba(255,255,255,0.08);
+            --blue:#7dd3fc;
+            --purple:#7c5cff;
+            --red:#ff4d4d;
+            --green:#4ade80;
+            --gold:#fbbf24;
+        }
 
-<style>
-:root {
-    --bg: #070A12;
-    --primary: #7c5cff;
-    --blue: #7dd3fc;
-    --card: rgba(255,255,255,0.04);
-    --border: rgba(255,255,255,0.08);
-}
+        *{box-sizing:border-box;}
 
-* { box-sizing: border-box; }
+        body{
+            margin:0;
+            font-family:'Plus Jakarta Sans',sans-serif;
+            background:var(--bg);
+            color:white;
+            overflow-x:hidden;
+        }
 
-body {
-    margin: 0;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--bg);
-    color: white;
-}
+        .bg{
+            position:fixed;
+            inset:0;
+            z-index:-1;
+            background:radial-gradient(circle at top,#0d1230,#070A12);
+        }
 
-/* BACKGROUND */
-.bg {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background: radial-gradient(circle at top, #0d1230, #070A12);
-}
+        .glow{
+            position:absolute;
+            width:700px;
+            height:700px;
+            background:radial-gradient(circle, rgba(124,92,255,0.18), transparent 70%);
+            filter:blur(20px);
+            animation:float 12s ease-in-out infinite;
+        }
 
-/* NAV */
-nav {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 40px;
-    backdrop-filter: blur(16px);
-    background: rgba(0,0,0,0.35);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-}
+        .glow:nth-child(2){ top:50%; left:60%; animation-delay:-4s; }
 
-.logo {
-    font-weight:800;
-    cursor:pointer;
-}
-.logo span { color: var(--primary); }
+        @keyframes float{
+            0%,100%{transform:translate(0,0);}
+            50%{transform:translate(60px,-40px);}
+        }
 
-nav a {
-    color: rgba(255,255,255,0.7);
-    text-decoration:none;
-    margin-left: 15px;
-    font-size: 0.9rem;
-}
+        nav{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:18px 40px;
+            backdrop-filter:blur(16px);
+            background:rgba(0,0,0,0.35);
+            border-bottom:1px solid var(--border);
+            position:sticky;
+            top:0;
+            z-index: 100;
+        }
 
-/* HERO */
-.hero {
-    text-align:center;
-    padding:80px 20px 30px;
-}
-.hero h1 {
-    font-size:3rem;
-    margin:0;
-    color: var(--blue);
-}
-.hero p {
-    opacity:.6;
-}
+        nav a{
+            color:rgba(255,255,255,0.7);
+            text-decoration:none;
+            margin-left:18px;
+            font-size:.9rem;
+        }
 
-/* GRID */
-.grid {
-    max-width:1000px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:20px;
-    padding:20px;
-}
+        nav a:hover{color:white;}
 
-/* ROLE CARD */
-.card {
-    background: var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:20px;
-    position:relative;
-    overflow:hidden;
-    transition:.3s;
-}
+        .logo{ font-weight:800; cursor:pointer; }
+        .logo span{color:var(--purple);}
 
-.card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(125,211,252,0.4);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-}
+        .hero{ text-align:center; padding:90px 20px 40px; }
+        .hero h1{ font-size:3rem; margin:0; }
+        .hero p{ opacity:.6; }
 
-.badge {
-    position:absolute;
-    top:15px;
-    right:15px;
-    opacity:.8;
-}
+        .section{ max-width:1100px; margin:auto; padding:40px 20px; }
+        .section h2{ margin-bottom:25px; display: flex; align-items: center; gap: 10px; }
 
-.role {
-    font-size:.7rem;
-    color: var(--blue);
-    text-transform:uppercase;
-    letter-spacing:1px;
-    font-weight:700;
-}
+        /* INFO BOX */
+        .info-box {
+            background: rgba(124, 92, 255, 0.05);
+            border: 1px solid var(--purple);
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .info-item h4 { color: var(--purple); margin-top: 0; display: flex; align-items: center; gap: 8px; }
+        .info-item p { font-size: 0.95rem; opacity: 0.8; line-height: 1.6; }
 
-h3 {
-    margin:8px 0;
-}
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:20px;
+        }
 
-.desc {
-    opacity:.6;
-    font-size:.9rem;
-    line-height:1.5;
-}
+        .card{
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:18px;
+            padding:25px;
+            position:relative;
+            overflow:hidden;
+            transition:.3s;
+        }
 
-/* APPLY FORM */
-.form {
-    max-width:700px;
-    margin:40px auto;
-    padding:25px;
-    background: rgba(255,255,255,0.03);
-    border:1px solid var(--border);
-    border-radius:20px;
-    backdrop-filter: blur(10px);
-}
+        .card:hover{
+            transform:translateY(-8px);
+            border-color:rgba(124,92,255,0.4);
+            background: rgba(255,255,255,0.06);
+        }
 
-label {
-    font-size:.8rem;
-    color: rgba(125,211,252,0.8);
-    display:block;
-    margin-top:15px;
-}
+        .role-tag{
+            font-size:.7rem;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            color:var(--blue);
+            font-weight:700;
+            margin-bottom: 10px;
+            display: block;
+        }
 
-input, select, textarea {
-    width:100%;
-    margin-top:6px;
-    padding:12px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,0.08);
-    background: rgba(0,0,0,0.3);
-    color:white;
-    outline:none;
-}
+        .card h3 { margin: 10px 0; display: flex; align-items: center; gap: 8px; }
+        .card i { opacity: 0.8; }
 
-textarea {
-    min-height:120px;
-    resize:none;
-}
+        .desc{ opacity:.6; font-size:.9rem; line-height: 1.5; }
 
-/* BUTTON */
-button {
-    margin-top:20px;
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    background: linear-gradient(135deg, var(--primary), #3b82f6);
-    color:white;
-    font-weight:700;
-    cursor:pointer;
-    transition:.3s;
-}
+        .apply{
+            background:linear-gradient(135deg,rgba(124,92,255,0.15),rgba(125,211,252,0.08));
+            border:1px dashed rgba(125,211,252,0.3);
+            text-align:center;
+            margin-top: 40px;
+        }
 
-button:hover {
-    transform: scale(1.02);
-    opacity:.9;
-}
+        .apply-btn{
+            margin-top:20px;
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            padding:12px 24px;
+            background:var(--purple);
+            color:white;
+            border-radius:12px;
+            text-decoration:none;
+            font-weight: 600;
+            transition:.3s;
+        }
 
-/* FOOTER */
-footer {
-    text-align:center;
-    padding:40px;
-    opacity:.3;
-    font-size:.8rem;
-}
-</style>
+        .apply-btn:hover{ transform:scale(1.05); box-shadow: 0 10px 20px rgba(124,92,255,0.2); }
+
+        @media (max-width: 768px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        footer{ text-align:center; padding:50px; opacity:.3; font-size:.8rem; }
+    </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
+<div class="bg">
+    <div class="glow"></div>
+    <div class="glow"></div>
+</div>
 
 <nav>
-    <div class="logo" onclick="location.href='../'">Königs<span>brunn</span></div>
+    <div class="logo" onclick="location.href='../'">
+        Königs<span>brunn</span>
+    </div>
     <div>
-        <a href="../home/">Home</a>
+        <a href="../">Home</a>
         <a href="../team/">Team</a>
-        <a href="./">Apply</a>
+        <a href="#">Bewerbung</a>
     </div>
 </nav>
 
 <div class="hero">
-    <h1>Join Us</h1>
-    <p>Bewerbungssystem für das Projekt Königsbrunn</p>
+    <h1>Bewerbungssystem</h1>
+    <p>Dein Weg ins Team vom Projekt Königsbrunn</p>
 </div>
 
-<div class="grid">
-
-    <div class="card">
-        <div class="badge"><i data-lucide="code-2"></i></div>
-        <div class="role">Development</div>
-        <h3>Developer</h3>
-        <div class="desc">Backend, Features & Systementwicklung.</div>
+<section class="section">
+    <div class="info-box">
+        <h2><i data-lucide="trending-up"></i> Dein Aufstieg im Team</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <h4><i data-lucide="zap"></i> Durch Aktivität</h4>
+                <p>Der Weg vom <b>Test Supporter bis zum Moderator</b> erfolgt primär durch deine gezeigte Aktivität und Zuverlässigkeit im täglichen Support. Wer positiv auffällt, steigt automatisch auf.</p>
+            </div>
+            <div class="info-item">
+                <h4><i data-lucide="users"></i> Management & Leitung</h4>
+                <p>In die <b>Management- & Top Management Ebene</b> gelangst du durch Auswahl der Projektleitung. Bei Bedarf gibt es <b>Auswahlverfahren</b>, bei denen du Aktivität zeigen musst, gefolgt von einem persönlichen Gespräch.</p>
+            </div>
+        </div>
     </div>
+</section>
 
-    <div class="card">
-        <div class="badge"><i data-lucide="shield"></i></div>
-        <div class="role">Management</div>
-        <h3>Support</h3>
-        <div class="desc">Community & Organisation.</div>
+<section class="section">
+    <h2><i data-lucide="code-2"></i> Development</h2>
+    <div class="grid">
+        <div class="card">
+            <span class="role-tag" style="color: #e91e63;">Entry Level</span>
+            <h3><i data-lucide="wrench"></i> Test Developer</h3>
+            <p class="desc">Deine Testphase in der Entwicklung. Zeige uns dein Können in der Praxis.</p>
+        </div>
+        <div class="card">
+            <span class="role-tag" style="color: #e91e63;">Full Member</span>
+            <h3><i data-lucide="terminal"></i> Developer</h3>
+            <p class="desc">Festes Mitglied der Entwicklung. Umsetzung von neuen Features und Bugfixes.</p>
+        </div>
+        <div class="card">
+            <span class="role-tag" style="color: var(--gold);">Leitungsebene</span>
+            <h3><i data-lucide="cpu"></i> Head-of-Development</h3>
+            <p class="desc">Nebenrolle: Leitung der technischen Abteilung und Koordination der Developer.</p>
+        </div>
     </div>
+</section>
 
-    <div class="card">
-        <div class="badge"><i data-lucide="users"></i></div>
-        <div class="role">Leadership</div>
-        <h3>Fraktionsverwaltung</h3>
-        <div class="desc">Struktur & interne Verwaltung (internes System).</div>
+<section class="section">
+    <h2><i data-lucide="shield-question"></i> Support Team</h2>
+    <div class="grid">
+        <div class="card">
+            <span class="role-tag" style="color: #2ecc71;">Start</span>
+            <h3><i data-lucide="hard-hat"></i> Test Supporter</h3>
+            <p class="desc">Einstieg durch Bewerbung. Lerne unsere Support-Strukturen kennen.</p>
+        </div>
+        <div class="card">
+            <span class="role-tag" style="color: #2ecc71;">Level 1</span>
+            <h3><i data-lucide="message-square"></i> First level Support</h3>
+            <p class="desc">Aufstieg durch Aktivität. Bearbeitung täglicher Support-Tickets.</p>
+        </div>
+        <div class="card">
+            <span class="role-tag" style="color: #2ecc71;">Level 2</span>
+            <h3><i data-lucide="messages-square"></i> Second Support</h3>
+            <p class="desc">Erweiterte Rechte für komplexere Anliegen und tiefere Nutzer-Unterstützung.</p>
+        </div>
     </div>
+</section>
 
-</div>
+<section class="section">
+    <h2><i data-lucide="shield-check"></i> Moderation & Verwaltung</h2>
+    <div class="grid">
+        <div class="card">
+            <span class="role-tag" style="color: #e67e22;">Moderation</span>
+            <h3><i data-lucide="book-open"></i> Junior Moderator</h3>
+            <p class="desc">Einstieg in die Moderation. Überwachung der Regeln und Konfliktlösung.</p>
+        </div>
+        <div class="card">
+            <span class="role-tag" style="color: #e67e22;">Moderation</span>
+            <h3><i data-lucide="shield"></i> Moderator</h3>
+            <p class="desc">Vollwertiger Moderator. Aufstieg durch bewiesene Aktivität und Teamfähigkeit.</p>
+        </div>
+        <div class="card">
+            <span class="role-tag" style="color: #94a3b8;">In Bau</span>
+            <h3><i data-lucide="user-cog"></i> Fraktionsverwaltung</h3>
+            <p class="desc">Nebenrolle: Spezialisierte Betreuung der Fraktionen (System aktuell noch im Aufbau).</p>
+        </div>
+        <div class="card">
+            <span class="role-tag" style="color: var(--gold);">Leitungsebene</span>
+            <h3><i data-lucide="mic"></i> Head Of Moderation</h3>
+            <p class="desc">Nebenrolle: Leitung des Moderationsteams und finale Instanz bei Regeln.</p>
+        </div>
+    </div>
+</section>
 
-<div class="form">
+<section class="section">
+    <h2><i data-lucide="crown"></i> Projektleitung</h2>
+    <div class="grid">
+        <div class="card">
+            <span class="role-tag" style="color: #e91e63;">Management</span>
+            <h3><i data-lucide="fleur-de-lis"></i> Junior Management</h3>
+            <p class="desc">Unterstützung der Projektleitung. Auswahl durch Leitungsebene + Gespräch.</p>
+        </div>
+        <div class="card">
+            <span class="role-tag" style="color: #3498db;">Top Level</span>
+            <h3><i data-lucide="crown"></i> Top Management</h3>
+            <p class="desc">Höchste Instanz. Erreicht man durch herausragende Arbeit und Auswahlverfahren.</p>
+        </div>
+    </div>
+</section>
 
-    <h2 style="color:#7dd3fc;">Bewerbung</h2>
+<section class="section">
+    <div class="card apply">
+        <span class="role-tag">Ready to join?</span>
+        <h3>Bewirb dich jetzt!</h3>
+        <p class="desc">Wähle deinen Bereich und zeige uns, warum du perfekt in unser Team passt.</p>
+        <a class="apply-btn" href="https://dashboard.pwr.lol/website/Koenigsbrunn" target="_blank">
+            <i data-lucide="send"></i>
+            Bewerbung absenden
+        </a>
+    </div>
+</section>
 
-    <label>Discord Name</label>
-    <input type="text" placeholder="z.B. user#1234">
-
-    <label>Rolle</label>
-    <select>
-        <option>Developer</option>
-        <option>Support</option>
-        <option>Management</option>
-        <option>Fraktionsverwaltung</option>
-    </select>
-
-    <label>Erfahrung</label>
-    <textarea placeholder="Erzähl kurz über dich..."></textarea>
-
-    <button onclick="alert('Bewerbung aktuell extern angebunden 👍')">
-        Bewerbung absenden
-    </button>
-
-</div>
-
-<footer>© 2026 Projekt Königsbrunn</footer>
+<footer>
+    © 2026 Projekt Königsbrunn • Gestaltet für die Community
+</footer>
 
 <script>
-lucide.createIcons();
+    lucide.createIcons();
 </script>
 
 </body>
