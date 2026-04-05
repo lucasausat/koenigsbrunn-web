@@ -84,10 +84,13 @@ nav a {
 }
 nav a:hover { color:white; }
 
-/* Deaktivierter Button Style für Nav */
-nav a.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+/* Bewerbung Button Style in Nav */
+.btn-nav {
+    border: 1px solid var(--primary);
+    padding: 6px 14px;
+    border-radius: 10px;
+    background: rgba(124, 92, 255, 0.1);
+    color: white !important;
 }
 
 /* HERO */
@@ -111,7 +114,7 @@ nav a.disabled {
     max-width:1100px;
     margin:auto;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
     gap:20px;
     padding:20px;
 }
@@ -121,16 +124,15 @@ nav a.disabled {
     background: var(--card);
     border:1px solid var(--border);
     border-radius:20px;
-    padding:20px;
+    padding:25px;
     position:relative;
     overflow:hidden;
     transition:.35s;
-    cursor:pointer;
 }
 .card:hover {
-    transform: translateY(-8px) scale(1.01);
+    transform: translateY(-8px);
     border-color: rgba(124,92,255,0.5);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    background: rgba(255,255,255,0.06);
 }
 
 /* TOP */
@@ -169,25 +171,6 @@ nav a.disabled {
     background: rgba(255,255,255,0.06);
     border:1px solid var(--border);
 }
-
-/* APPLY CARD & BUTTON */
-.apply {
-    background: linear-gradient(135deg, rgba(124,92,255,0.15), rgba(59,130,246,0.1));
-    border:1px dashed rgba(124,92,255,0.4);
-}
-.apply-btn {
-    margin-top:15px;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:10px 16px;
-    background:var(--primary);
-    color:white;
-    border-radius:10px;
-    text-decoration:none;
-    transition:.3s;
-}
-.apply-btn:hover { transform:scale(1.05); }
 
 /* POPUP */
 .popup {
@@ -252,16 +235,16 @@ footer {
         Königs<span>brunn</span>
     </div>
     <div>
-        <a href="../home/">Home</a>
+        <a href="../">Home</a>
         <a href="./">Team</a>
         <a href="../tos.html">ToS</a>
-        <a href="#" class="disabled" onclick="event.preventDefault(); openPopup();">Bewerbungscenter</a>
+        <a href="../Bewerbung/" class="btn-nav">Bewerbungscenter</a>
     </div>
 </nav>
 
 <div class="hero">
     <h1>Unser Team</h1>
-    <p>Die Leute hinter dem Projekt</p>
+    <p>Die Köpfe hinter dem Projekt Königsbrunn</p>
 </div>
 
 <div class="grid">
@@ -287,7 +270,7 @@ footer {
                 <h3>joge2286</h3>
             </div>
         </div>
-        <div class="desc">Gleichgestellt im Top Management mit Verantwortung für Projektstruktur und Koordination. Aktiv eingebunden in die Entwicklung und Organisation der Fraktionsverwaltung innerhalb des Management-Systems.</div>
+        <div class="desc">Verantwortung für Projektstruktur und Koordination. Aktiv eingebunden in die Entwicklung und Organisation der Fraktionsverwaltung.</div>
     </div>
 
     <div class="card">
@@ -299,26 +282,7 @@ footer {
                 <h3>benschi1503</h3>
             </div>
         </div>
-        <div class="desc">Leitung der Entwicklungsabteilung im Management-System. Verantwortlich für Backend, Features und technische Stabilität des Projekts.</div>
-    </div>
-
-    <div class="card apply">
-        <div class="badge">
-            <i data-lucide="sparkles"></i>
-        </div>
-        <div class="top">
-            <div>
-                <div class="role">Recruitment</div>
-                <h3>Werde Teil des Teams</h3>
-            </div>
-        </div>
-        <div class="desc">
-            Wir suchen aktive Leute für Development & Support. Werde Teil des Projekts und gestalte Königsbrunn aktiv mit.
-        </div>
-        <a class="apply-btn" href="https://dashboard.pwr.lol/website/Koenigsbrunn" target="_blank">
-            <i data-lucide="arrow-right"></i>
-            Bewerben
-        </a>
+        <div class="desc">Leitung der Entwicklungsabteilung. Verantwortlich für Backend, Features und technische Stabilität des Projekts.</div>
     </div>
 
 </div>
