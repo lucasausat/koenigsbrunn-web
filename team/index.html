@@ -105,9 +105,7 @@ nav a:hover { color:white; }
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
-.hero p {
-    opacity:.6;
-}
+.hero p { opacity:.6; }
 
 /* GRID */
 .grid {
@@ -172,38 +170,6 @@ nav a:hover { color:white; }
     border:1px solid var(--border);
 }
 
-/* POPUP */
-.popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-.popup-box {
-    background: #111;
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    max-width: 300px;
-    border: 1px solid var(--border);
-}
-.popup button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    border: none;
-    background: var(--primary);
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* TEXT */
-h3 { margin:0; }
-.desc { opacity:.6; font-size:.9rem; line-height:1.5; margin-top:10px; }
-
 /* FOOTER */
 footer {
     text-align:center;
@@ -211,18 +177,13 @@ footer {
     opacity:.3;
     font-size:.8rem;
 }
+
+h3 { margin:0; }
+.desc { opacity:.6; font-size:.9rem; line-height:1.5; margin-top:10px; }
 </style>
 </head>
 
 <body>
-
-<div class="popup" id="popup">
-    <div class="popup-box">
-        <h3>Wartung</h3>
-        <p>Diese Seite ist aktuell noch nicht verfügbar.</p>
-        <button onclick="closePopup()">OK</button>
-    </div>
-</div>
 
 <div class="bg">
     <div class="glow"></div>
@@ -258,7 +219,7 @@ footer {
                 <h3>lucas.aus.at</h3>
             </div>
         </div>
-        <div class="desc">Leitung & Vision für das komplette Projekt.</div>
+        <div class="desc">Projektleitung & Vision für das komplette Projekt.</div>
     </div>
 
     <div class="card">
@@ -270,19 +231,47 @@ footer {
                 <h3>joge2286</h3>
             </div>
         </div>
-        <div class="desc">Verantwortung für Projektstruktur und Koordination. Aktiv eingebunden in die Entwicklung und Organisation der Fraktionsverwaltung.</div>
+        <div class="desc">Projektstruktur & Koordination der Fraktionsverwaltung.</div>
     </div>
 
-    <div class="card">
+    <div class="card" style="border-color: rgba(255, 20, 147, 0.3);">
         <div class="badge"><i data-lucide="code-2"></i></div>
         <div class="top">
-            <img class="avatar" src="https://cdn.discordapp.com/avatars/1204084190014865439/54fcde4be119f3fa0552e88adb204eca.png">
+            <img class="avatar" style="border-color: #ff1493;" src="https://cdn.discordapp.com/avatars/1204084190014865439/54fcde4be119f3fa0552e88adb204eca.png">
             <div>
-                <div class="role">Management · Head of Development</div>
+                <div class="role" style="color: #ff1493;">Head of Development</div>
                 <h3>benschi1503</h3>
             </div>
         </div>
-        <div class="desc">Leitung der Entwicklungsabteilung. Verantwortlich für Backend, Features und technische Stabilität des Projekts.</div>
+        <div class="desc">Backend, Features und technische Stabilität des Projekts.</div>
+    </div>
+
+    <div class="card" style="border-color: rgba(255, 50, 50, 0.3);">
+        <div class="badge"><i data-lucide="gavel"></i></div>
+        <div class="top">
+            <div class="avatar" style="border-color: #ff3232; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+                <i data-lucide="users"></i>
+            </div>
+            <div>
+                <div class="role" style="color: #ff3232;">Moderation</div>
+                <h3>Team gesucht</h3>
+            </div>
+        </div>
+        <div class="desc">Zuständig für Ordnung und Support im Spielbetrieb.</div>
+    </div>
+
+    <div class="card" style="border-color: rgba(46, 204, 113, 0.3);">
+        <div class="badge"><i data-lucide="life-buoy"></i></div>
+        <div class="top">
+            <div class="avatar" style="border-color: #2ecc71; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+                <i data-lucide="help-circle"></i>
+            </div>
+            <div>
+                <div class="role" style="color: #2ecc71;">Support</div>
+                <h3>Team gesucht</h3>
+            </div>
+        </div>
+        <div class="desc">Erste Hilfe für alle Spieler bei Fragen und Problemen.</div>
     </div>
 
 </div>
@@ -291,14 +280,6 @@ footer {
 
 <script>
 lucide.createIcons();
-
-function openPopup() {
-    document.getElementById("popup").style.display = "flex";
-}
-
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
 </script>
 
 </body>
