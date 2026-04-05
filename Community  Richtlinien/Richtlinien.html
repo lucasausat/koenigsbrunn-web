@@ -1,1 +1,200 @@
 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Richtlinien | Projekt Königsbrunn</title>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #7c5cff;
+            --bg: #070A12;
+            --card: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.08);
+            --text-muted: rgba(255,255,255,0.6);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* BACKGROUND EFFECTS */
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(circle at top, #0d1230, #070A12);
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            backdrop-filter: blur(16px);
+            background: rgba(0,0,0,0.35);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { font-weight: 800; cursor: pointer; font-size: 1.2rem; }
+        .logo span { color: var(--primary); }
+
+        .nav-links a {
+            color: var(--text-muted);
+            margin-left: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: white; }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin: 0;
+            background: linear-gradient(90deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p { color: var(--text-muted); max-width: 600px; margin: 10px auto; }
+
+        /* GRID */
+        .grid {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .card i {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .card h3 { margin: 0 0 10px 0; font-weight: 700; }
+        .card p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <nav>
+        <div class="logo" onclick="location.href='../home/index.html'">
+            Königs<span>brunn</span>
+        </div>
+        <div class="nav-links">
+            <a href="../home/index.html">Home</a>
+            <a href="../tos.html">ToS</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Community Richtlinien</h1>
+        <p>Ein respektvolles Miteinander ist die Basis für unser Projekt. Bitte halte dich an die folgenden Grundsätze.</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <i data-lucide="heart"></i>
+            <h3>Respekt & Höflichkeit</h3>
+            <p>Behandle andere Nutzer so, wie du selbst behandelt werden möchtest. Beleidigungen, Hetze oder Diskriminierung führen zum sofortigen Ausschluss.</p>
+        </div>
+
+        <div class="card">
+            <i data-lucide="shield-check"></i>
+            <h3>Sicherheit & Datenschutz</h3>
+            <p>Teile niemals private Daten (Adressen, Passwörter) von dir oder anderen. Schütze deinen Account und melde verdächtige Aktivitäten.</p>
+        </div>
+
+        <div class="card">
+            <i data-lucide="message-circle-off"></i>
+            <h3>Spam & Werbung</h3>
+            <p>Unerwünschte Werbung für andere Projekte oder das Fluten der Kanäle mit unnötigen Nachrichten ist untersagt.</p>
+        </div>
+
+        <div class="card">
+            <i data-lucide="gavel"></i>
+            <h3>Anweisungen des Teams</h3>
+            <p>Den Anweisungen der Teammitglieder (Moderatoren/Management) ist Folge zu leisten. Diskussionen über Strafen gehören in den Support-Bereich.</p>
+        </div>
+
+        <div class="card">
+            <i data-lucide="users"></i>
+            <h3>Kein Trolling</h3>
+            <p>Provokationen oder mutwilliges Stören der Community-Atmosphäre werden nicht geduldet. Wir fördern ein konstruktives Umfeld.</p>
+        </div>
+
+        <div class="card">
+            <i data-lucide="alert-triangle"></i>
+            <h3>Inhalte & Medien</h3>
+            <p>Das Teilen von pornografischen, gewaltverherrlichenden oder illegalen Inhalten ist strengstens verboten und wird rechtlich gemeldet.</p>
+        </div>
+
+        <div class="card">
+            <i data-lucide="help-circle"></i>
+            <h3>Support-Etikette</h3>
+            <p>Nutze die Support-Kanäle sachlich und geduldig. Eröffne keine Mehrfach-Tickets für dasselbe Anliegen.</p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Projekt Königsbrunn • Deine Community, deine Regeln.
+    </footer>
+
+    <script>
+        // Initialisiert die Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
