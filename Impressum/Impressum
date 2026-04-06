@@ -1,1 +1,272 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechtliches & Impressum | Königsbrunn</title>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
 
+    <style>
+        :root {
+            --primary: #7c5cff;
+            --bg: #070A12;
+            --card: rgba(255,255,255,0.03);
+            --card-hover: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.08);
+            --text-muted: rgba(255,255,255,0.6);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top, #10142a, var(--bg));
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            backdrop-filter: blur(15px);
+            background: rgba(0,0,0,0.4);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { font-weight: 800; cursor: pointer; text-decoration: none; color: white; }
+        .logo b { color: var(--primary); }
+
+        .tab-wrapper {
+            display: flex;
+            justify-content: center;
+            padding: 30px 0;
+            gap: 10px;
+        }
+
+        .selector-pill {
+            display: flex;
+            background: rgba(255,255,255,0.03);
+            padding: 4px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+        }
+
+        .select-btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .select-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(124,92,255,0.2); }
+
+        .container { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
+
+        .tab-content { display: none; animation: slideUp 0.4s ease-out; }
+        .tab-content.active { display: block; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .header { text-align: center; margin-bottom: 30px; padding-top: 40px; }
+        .header h1 { font-size: 3rem; background: linear-gradient(90deg,#fff,#7c5cff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 40px 0 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            font-weight: 800;
+        }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+
+        .card { 
+            background: var(--card); 
+            border: 1px solid var(--border); 
+            border-radius: 20px; 
+            padding: 30px; 
+            transition: 0.4s; 
+            position: relative;
+        }
+        .card:hover { border-color: var(--primary); background: var(--card-hover); transform: translateY(-5px); }
+        
+        .card i { color: var(--primary); margin-bottom: 18px; width: 28px; height: 28px; }
+        .card h3 { margin-bottom: 12px; font-size: 1.2rem; font-weight: 700; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
+        .card strong { color: white; }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 0.6rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(124, 92, 255, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 60px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo" onclick="location.href='../home/'">Königs<b>brunn</b></div>
+        <div class="nav-links">
+            <a href="../home/">Home</a>
+            <a href="../Community_Richtlinien/">Richtlinien</a>
+            <a href="../Nutzungsbedingungen/">ToS</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Impressum</h1>
+            <p style="color: var(--text-muted)">Wähle den geltenden Rechtsraum für spezifische Details</p>
+        </div>
+
+        <div class="tab-wrapper">
+            <div class="selector-pill">
+                <button class="select-btn active" onclick="showTab('eu', this)"><i data-lucide="globe"></i> EU-Recht</button>
+                <button class="select-btn" onclick="showTab('at', this)"><i data-lucide="landmark"></i> Österreich</button>
+                <button class="select-btn" onclick="showTab('de', this)"><i data-lucide="scale"></i> Deutschland</button>
+            </div>
+        </div>
+
+        <div id="eu" class="tab-content active">
+            <div class="section-title">EU-Verordnungen & Standards</div>
+            <div class="grid">
+                <div class="card">
+                    <i data-lucide="fingerprint"></i>
+                    <h3>DSGVO (GDPR)</h3>
+                    <p>Datenverarbeitung erfolgt streng nach <strong>Art. 6 Abs. 1 DSGVO</strong>. Wir wahren das Recht auf Auskunft, Löschung und Datenübertragbarkeit für alle EU-Bürger.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="shield-check"></i>
+                    <h3>Digital Services Act (DSA)</h3>
+                    <p>Gemäß der <strong>EU-Verordnung 2022/2065</strong> implementieren wir transparente Melde- und Abhilfeverfahren für rechtswidrige Inhalte auf unseren Plattformen.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="help-circle"></i>
+                    <h3>Online-Streitbeilegung</h3>
+                    <p>Die EU-Kommission bietet eine Plattform zur Online-Streitbeilegung (OS) an: <strong>ec.europa.eu/consumers/odr</strong>. Kontakt via Support-Ticket.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="file-warning"></i>
+                    <h3>P2B-Verordnung</h3>
+                    <p>Transparenz für gewerbliche Nutzer gemäß <strong>Verordnung (EU) 2019/1150</strong>. Unsere Ranking-Kriterien und Kündigungsfristen sind in den ToS definiert.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="at" class="tab-content">
+            <div class="section-title">Anbieterkennung Österreich (AT)</div>
+            <div class="grid">
+                <div class="card">
+                    <div class="badge">STRENG</div>
+                    <i data-lucide="briefcase"></i>
+                    <h3>E-Commerce Gesetz</h3>
+                    <p>Informationspflicht laut <strong>§ 5 ECG</strong>. Betreiber: <strong>lucasausat</strong>. Standort: Graz, Steiermark.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="scroll"></i>
+                    <h3>Mediengesetz (Offenlegung)</h3>
+                    <p>Pflicht zur Offenlegung gemäß <strong>§ 25 MedienG</strong>. Grundlegende Richtung: Förderung der digitalen Rollenspiel-Kultur.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="gavel"></i>
+                    <h3>UGB & GewO</h3>
+                    <p>Soweit anwendbar gelten die Bestimmungen des Unternehmensgesetzbuches (UGB) sowie der Gewerbeordnung (GewO).</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="de" class="tab-content">
+            <div class="section-title">Anbieterkennung Deutschland (DE)</div>
+            <div class="grid">
+                <div class="card">
+                    <div class="badge">NEU 2024</div>
+                    <i data-lucide="component"></i>
+                    <h3>Digitale-Dienste-Gesetz</h3>
+                    <p>Diensteanbieter gemäß <strong>§ 5 DDG</strong> (Nachfolger des TMG). Verantwortlich für den Betrieb der technischen Infrastruktur ist die Projektleitung.</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="pen-tool"></i>
+                    <h3>Medienstaatsvertrag</h3>
+                    <p>Verantwortlich für journalistisch-redaktionelle Inhalte gemäß <strong>§ 18 Abs. 2 MStV</strong>: Projektleitung lucasausat, Graz (AT).</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="shield-alert"></i>
+                    <h3>Jugendmedienschutz</h3>
+                    <p>Bestellung eines Jugendschutzbeauftragten gemäß <strong>§ 7 JMStV</strong> erfolgt intern. Wir nutzen anerkannte Filter-Labels für unsere Web-Inhalte.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">Haftung & Kontakt</div>
+        <div class="grid">
+            <div class="card">
+                <i data-lucide="mail"></i>
+                <h3>Direktkontakt</h3>
+                <p><strong>E-Mail:</strong> (April 2026)<br><strong>Discord:</strong> discord.gg/koenigsbrunn</p>
+            </div>
+            <div class="card">
+                <i data-lucide="external-link"></i>
+                <h3>Haftung für Links</h3>
+                <p>Gemäß ständiger Rechtsprechung haften wir nicht für Inhalte externer Links, sofern uns keine Rechtsverletzung bekannt ist.</p>
+            </div>
+            <div class="card">
+                <i data-lucide="copyright"></i>
+                <h3>Urheberrecht</h3>
+                <p>Inhalte, Grafiken und Skripte sind geistiges Eigentum des Projekts Königsbrunn. Eine Vervielfältigung ist streng untersagt.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 Projekt Königsbrunn • Dein Roleplay, deine Regeln.
+    </footer>
+
+    <script>
+        function showTab(tabId, btn) {
+            // Alle Tabs verstecken
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            // Alle Buttons deaktivieren
+            document.querySelectorAll('.select-btn').forEach(b => b.classList.remove('active'));
+            
+            // Ziel-Tab zeigen und Button aktivieren
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+            
+            // Icons neu rendern
+            lucide.createIcons();
+        }
+
+        // Initialisierung
+        lucide.createIcons();
+    </script>
+</body>
+</html>
