@@ -10,6 +10,46 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+        /* ===== MOBILE BLOCKER (PC ONLY) ===== */
+        #mobile-blocker {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #0a0a0a;
+            z-index: 10000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+        }
+
+        #mobile-blocker i {
+            color: #7c5cff;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 20px;
+        }
+
+        #mobile-blocker h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: white;
+            font-weight: 800;
+        }
+
+        #mobile-blocker p {
+            color: rgba(255,255,255,0.6);
+            line-height: 1.5;
+            max-width: 300px;
+        }
+
+        /* Blocker aktivieren bei Bildschirmen kleiner als 1024px (Tablets/Handys) */
+        @media (max-width: 1024px) {
+            #mobile-blocker { display: flex; }
+            body { overflow: hidden; }
+        }
+
         /* ===== EXTRA LIFE EFFECTS ===== */
         .card {
             position: relative;
@@ -31,13 +71,8 @@
             transition: 0.4s;
         }
 
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card:hover {
-            transform: translateY(-10px) scale(1.03);
-        }
+        .card:hover::before { opacity: 1; }
+        .card:hover { transform: translateY(-10px) scale(1.03); }
 
         .card i {
             font-size: 28px;
@@ -62,9 +97,7 @@
             max-width: 550px;
         }
 
-        .hero-text p {
-            margin-bottom: 10px;
-        }
+        .hero-text p { margin-bottom: 10px; }
 
         /* ===== STATUS ===== */
         .status-box {
@@ -104,6 +137,7 @@
             border-radius: 20px;
             text-align: center;
             max-width: 300px;
+            border: 1px solid rgba(124,92,255,0.3);
         }
 
         .popup button {
@@ -114,6 +148,33 @@
             color: white;
             border-radius: 10px;
             cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* ===== FOOTER STYLING ===== */
+        footer {
+            padding: 50px 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #7c5cff;
         }
 
         /* ===== FADE ===== */
@@ -132,6 +193,12 @@
 
 <body>
 
+    <div id="mobile-blocker">
+        <i data-lucide="monitor"></i>
+        <h2>PC erforderlich</h2>
+        <p>Das Erlebnis von <b>Königsbrunn</b> ist für Desktop-Monitore optimiert. Bitte besuche uns am Computer.</p>
+    </div>
+
     <div class="popup" id="popup">
         <div class="popup-box">
             <h3>Wartung</h3>
@@ -147,9 +214,8 @@
 
         <div class="nav-right">
             <div class="nav-links">
-                <a href="../team/">Team</a>  
-                <a href="../Nutzungsbedingungen/">ToS</a>
-                <a href="../Community_Richtlinien/">Community Richtlinien</a>
+                <a href="../home/">Home</a>
+                <a href="../team/">Team</a> 
             </div>
 
             <button id="theme-toggle" class="maintenance" onclick="event.preventDefault(); openPopup();">
@@ -223,7 +289,12 @@
     </section>
 
     <footer>
-        &copy; 2026 PROJEKT KÖNIGSBRUNN
+        <div>&copy; 2026 PROJEKT KÖNIGSBRUNN</div>
+        <div class="footer-links">
+            <a href="../Impressum/">Impressum</a>
+            <a href="../Nutzungsbedingungen/">ToS</a>
+            <a href="../Community_Richtlinien/">Richtlinien</a>
+        </div>
     </footer>
 
     <script src="../js/app.js"></script>
