@@ -3,323 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Königsbrunn | Home</title>
+    <title>Wartungsarbeiten | Projekt Under Construction</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css"> 
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* ===== MOBILE BLOCKER (PC ONLY) ===== */
-        #mobile-blocker {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: #0a0a0a;
-            z-index: 10000;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 30px;
+        :root {
+            --primary: #7c5cff;
+            --bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
         }
 
-        #mobile-blocker i {
-            color: #7c5cff;
-            width: 64px;
-            height: 64px;
-            margin-bottom: 20px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        #mobile-blocker h2 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+        body {
+            background-color: var(--bg);
             color: white;
-            font-weight: 800;
-        }
-
-        #mobile-blocker p {
-            color: rgba(255,255,255,0.6);
-            line-height: 1.5;
-            max-width: 300px;
-        }
-
-        /* Blocker aktivieren bei Bildschirmen kleiner als 1024px (Tablets/Handys) */
-        @media (max-width: 1024px) {
-            #mobile-blocker { display: flex; }
-            body { overflow: hidden; }
-        }
-
-        /* ===== EXTRA LIFE EFFECTS ===== */
-        .card {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .card-inner {
-            position: relative;
-            z-index: 2;
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(124,92,255,0.25), transparent);
-            opacity: 0;
-            transition: 0.4s;
-        }
-
-        .card:hover::before { opacity: 1; }
-        .card:hover { transform: translateY(-10px) scale(1.03); }
-
-        .card i {
-            font-size: 28px;
-            margin-bottom: 10px;
-            display: inline-block;
-            transition: 0.3s;
-        }
-
-        .card:hover i {
-            transform: rotate(8deg) scale(1.2);
-            color: #7c5cff;
-        }
-
-        /* ===== HERO FIX ===== */
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
-            line-height: 1.1;
-        }
-
-        .hero-text {
-            margin-top: 20px;
-            max-width: 550px;
-        }
-
-        .hero-text p { margin-bottom: 10px; }
-
-        /* ===== STATUS ===== */
-        .status-box {
-            padding: 20px;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .progress {
-            margin-top: 15px;
-            height: 6px;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 35%;
-            background: #7c5cff;
-        }
-
-        /* ===== POPUP ===== */
-        .popup {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .popup-box {
-            background: #111;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 300px;
-            border: 1px solid rgba(124,92,255,0.3);
-        }
-
-        .popup button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            border: none;
-            background: #7c5cff;
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        /* ===== FOOTER STYLING ===== */
-        footer {
-            padding: 50px 20px;
-            text-align: center;
-            background: rgba(0,0,0,0.3);
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .footer-links {
-            margin-top: 15px;
+            height: 100vh;
             display: flex;
             justify-content: center;
-            gap: 25px;
+            align-items: center;
+            overflow: hidden;
         }
 
-        .footer-links a {
-            color: rgba(255,255,255,0.4);
+        /* ===== BACKGROUND GLOW ===== */
+        .glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(124, 92, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 0;
+            animation: pulse 6s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); opacity: 0.5; }
+            to { transform: scale(1.3); opacity: 0.8; }
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+        }
+
+        .icon-box {
+            display: inline-flex;
+            padding: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            margin-bottom: 30px;
+            color: var(--primary);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        /* ===== RELOAD / DISCORD BUTTON ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
             text-decoration: none;
-            font-size: 0.85rem;
-            transition: 0.3s ease;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
-        .footer-links a:hover {
-            color: #7c5cff;
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(124, 92, 255, 0.3);
         }
 
-        /* ===== FADE ===== */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+        /* ===== PROGRESS BAR ===== */
+        .status-container {
+            margin-top: 50px;
+            width: 100%;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .status-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .progress-bg {
+            height: 6px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+            animation: fillProgress 2.5s forwards cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        @keyframes fillProgress {
+            to { width: 15%; } /* Zeigt an, dass der Umzug gerade erst beginnt */
+        }
+
+        footer {
+            position: absolute;
+            bottom: 30px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.2);
+            width: 100%;
+            text-align: center;
         }
     </style>
 </head>
-
 <body>
 
-    <div id="mobile-blocker">
-        <i data-lucide="monitor"></i>
-        <h2>PC erforderlich</h2>
-        <p>Das Erlebnis von <b>Königsbrunn</b> ist für Desktop-Monitore optimiert. Bitte besuche uns am Computer.</p>
-    </div>
+    <div class="glow"></div>
 
-    <div class="popup" id="popup">
-        <div class="popup-box">
-            <h3>Wartung</h3>
-            <p>Diese Seite ist aktuell noch nicht verfügbar.</p>
-            <button onclick="closePopup()">OK</button>
-        </div>
-    </div>
-
-    <nav>
-        <div class="logo" style="cursor: pointer;" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-            Königs<b>brunn</b>
+    <div class="container">
+        <div class="icon-box">
+            <i data-lucide="map-pin-off" size="40"></i>
         </div>
 
-        <div class="nav-right">
-            <div class="nav-links">
-                <a href="../home/">Home</a>
-                <a href="../team/">Team</a> 
-            </div>
+        <h1>Neuer Name. <br><span>Gleiche Vision.</span></h1>
+        
+        <p>
+            Wir ziehen um! Da wir uns für eine komplett fiktive Welt entschieden haben, 
+            verabschieden wir uns vom Namen <b>Königsbrunn</b>. Aktuell arbeiten wir 
+            am neuen Branding und den Systemen.
+        </p>
 
-            <button id="theme-toggle" class="maintenance" onclick="event.preventDefault(); openPopup();">
-                <i data-lucide="wrench"></i> Wartung
-            </button>
-        </div>
-    </nav>
-
-    <section class="hero">
-        <h1>Königsbrunn</h1>
-
-        <div class="hero-text">
-            <p>Eine lebendige RP-Stadt im Aufbau – Entscheidungen formen deine Geschichte.</p>
-            <p style="opacity:0.6;">Realistisches Roleplay trifft auf moderne Systeme und eine aktive Community.</p>
-        </div>
-
-        <div class="stats">
-            <div class="stats-item">
-                <h3><i data-lucide="users"></i> Community</h3>
-                <p>Wachsend & aktiv</p>
-            </div>
-
-            <div class="stats-item">
-                <h3><i data-lucide="radio"></i> RP Status</h3>
-                <p>Im Aufbau</p>
-            </div>
-        </div>
-
-        <a href="https://discord.gg/DM2Au3f6RS" class="btn btn-main">
-            <i data-lucide="send"></i> Discord beitreten
+        <a href="https://discord.gg/DM2Au3f6RS" class="btn">
+            <i data-lucide="message-circle"></i> Updates auf Discord
         </a>
-    </section>
 
-    <section class="section fade-in">
-        <h2>Die Welt von Königsbrunn</h2>
-
-        <div class="bento-grid">
-            <div class="card"><div class="card-inner">
-                <i data-lucide="cpu"></i>
-                <h3>Eigene Systeme</h3>
-                <p>Individuelle Features für einzigartiges Roleplay.</p>
-            </div></div>
-
-            <div class="card"><div class="card-inner">
-                <i data-lucide="users"></i>
-                <h3>Community</h3>
-                <p>Eine wachsende Community mit Fokus auf gutes RP.</p>
-            </div></div>
-
-            <div class="card"><div class="card-inner">
-                <i data-lucide="zap"></i>
-                <h3>Performance</h3>
-                <p>Flüssiges Gameplay ohne unnötige Lags.</p>
-            </div></div>
-        </div>
-    </section>
-
-    <section id="features" class="section fade-in">
-        <h2>Projekt-Status</h2>
-
-        <div class="bento-grid">
-            <div class="status-box">
-                <i data-lucide="activity"></i>
-                <h3>Aktueller Stand</h3>
-                <p style="opacity:0.7;">
-                    Wir stehen noch am Anfang – alles entwickelt sich Schritt für Schritt weiter.
-                </p>
-                <div class="progress"><div class="progress-bar"></div></div>
+        <div class="status-container">
+            <div class="status-text">
+                <span>Rebranding-Status</span>
+                <span>In Arbeit</span>
+            </div>
+            <div class="progress-bg">
+                <div class="progress-fill"></div>
             </div>
         </div>
-    </section>
+    </div>
 
     <footer>
-        <div>&copy; 2026 PROJEKT KÖNIGSBRUNN</div>
-        <div class="footer-links">
-            <a href="../Impressum/">Impressum</a>
-            <a href="../Nutzungsbedingungen/">ToS</a>
-            <a href="../Community_Richtlinien/">Richtlinien</a>
-        </div>
+        &copy; 2026 Projekt Management | Alle Rechte vorbehalten.
     </footer>
 
-    <script src="../js/app.js"></script>
-
     <script>
+        // Icons initialisieren
         lucide.createIcons();
-
-        function openPopup() {
-            document.getElementById("popup").style.display = "flex";
-        }
-
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-        }
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        });
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
-
 </body>
 </html>
