@@ -1,268 +1,327 @@
-<!DOCTYPE html>
+Setzt die Seite bitte mal komplett im Wartungsdienst es kommt ein neuer Name weil wir keine echte Stadt bauen möchten und ausversehen eine echte Stadt genommen haben <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KleinStadt Roleplay | Wartung</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Königsbrunn | Home</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css"> 
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-<style>
-:root {
-    --primary: #3ecf8e;
-    --secondary: #3aa6ff;
-    --bg: #070b08;
-    --card: rgba(255,255,255,0.04);
-    --border: rgba(255,255,255,0.08);
-    --text: #ffffff;
-    --muted: rgba(255,255,255,0.6);
-}
+    <style>
+        /* ===== MOBILE BLOCKER (PC ONLY) ===== */
+        #mobile-blocker {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #0a0a0a;
+            z-index: 10000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+        }
 
-* {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Plus Jakarta Sans', sans-serif;
-}
+        #mobile-blocker i {
+            color: #7c5cff;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 20px;
+        }
 
-body {
-    background: var(--bg);
-    color: var(--text);
-    overflow-x:hidden;
-}
+        #mobile-blocker h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: white;
+            font-weight: 800;
+        }
 
-/* 🌿 Smooth Background Glow */
-.glow {
-    position:fixed;
-    width:500px;
-    height:500px;
-    background: radial-gradient(circle, rgba(62,207,142,0.15), transparent 70%);
-    filter: blur(80px);
-    top:20%;
-    left:30%;
-    animation: moveGlow 12s infinite alternate ease-in-out;
-}
+        #mobile-blocker p {
+            color: rgba(255,255,255,0.6);
+            line-height: 1.5;
+            max-width: 300px;
+        }
 
-@keyframes moveGlow {
-    from { transform: translate(0,0); }
-    to { transform: translate(60px,40px); }
-}
+        /* Blocker aktivieren bei Bildschirmen kleiner als 1024px (Tablets/Handys) */
+        @media (max-width: 1024px) {
+            #mobile-blocker { display: flex; }
+            body { overflow: hidden; }
+        }
 
-/* 🧠 HERO */
-.hero {
-    min-height: 100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:40px 20px;
-}
+        /* ===== EXTRA LIFE EFFECTS ===== */
+        .card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
 
-.icon-box {
-    padding:18px;
-    border-radius:20px;
-    background:var(--card);
-    border:1px solid var(--border);
-    margin-bottom:25px;
-    color:var(--primary);
-}
+        .card-inner {
+            position: relative;
+            z-index: 2;
+        }
 
-h1 {
-    font-size:clamp(2.2rem,6vw,3.5rem);
-    font-weight:800;
-    margin-bottom:15px;
-}
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(124,92,255,0.25), transparent);
+            opacity: 0;
+            transition: 0.4s;
+        }
 
-h1 span {
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
+        .card:hover::before { opacity: 1; }
+        .card:hover { transform: translateY(-10px) scale(1.03); }
 
-p {
-    max-width:600px;
-    color:var(--muted);
-    margin-bottom:30px;
-    line-height:1.6;
-}
+        .card i {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: inline-block;
+            transition: 0.3s;
+        }
 
-/* 🔘 BUTTON */
-.btn {
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    background:linear-gradient(90deg, var(--primary), var(--secondary));
-    padding:14px 26px;
-    border-radius:12px;
-    text-decoration:none;
-    color:white;
-    font-weight:600;
-    transition:0.25s;
-}
+        .card:hover i {
+            transform: rotate(8deg) scale(1.2);
+            color: #7c5cff;
+        }
 
-.btn:hover {
-    transform:translateY(-2px);
-    filter:brightness(1.1);
-}
+        /* ===== HERO FIX ===== */
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            line-height: 1.1;
+        }
 
-/* 📊 PROGRESS */
-.status {
-    margin-top:40px;
-    width:100%;
-    max-width:400px;
-}
+        .hero-text {
+            margin-top: 20px;
+            max-width: 550px;
+        }
 
-.status-text {
-    display:flex;
-    justify-content:space-between;
-    font-size:0.75rem;
-    color:var(--muted);
-    margin-bottom:6px;
-}
+        .hero-text p { margin-bottom: 10px; }
 
-.bar {
-    height:6px;
-    background:var(--card);
-    border-radius:10px;
-    overflow:hidden;
-    border:1px solid var(--border);
-}
+        /* ===== STATUS ===== */
+        .status-box {
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
 
-.fill {
-    height:100%;
-    width:25%;
-    background:linear-gradient(90deg, var(--primary), var(--secondary));
-    box-shadow:0 0 10px var(--primary);
-    animation:load 2s ease forwards;
-}
+        .progress {
+            margin-top: 15px;
+            height: 6px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+        }
 
-@keyframes load {
-    from { width:0%; }
-    to { width:25%; }
-}
+        .progress-bar {
+            height: 100%;
+            width: 35%;
+            background: #7c5cff;
+        }
 
-/* 🧩 CARDS */
-.section {
-    padding:80px 10%;
-}
+        /* ===== POPUP ===== */
+        .popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
 
-.grid {
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-    gap:20px;
-}
+        .popup-box {
+            background: #111;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 300px;
+            border: 1px solid rgba(124,92,255,0.3);
+        }
 
-.card {
-    background:var(--card);
-    border:1px solid var(--border);
-    padding:25px;
-    border-radius:16px;
-    transition:0.3s;
-}
+        .popup button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            background: #7c5cff;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
 
-.card:hover {
-    transform:translateY(-5px);
-    border-color:rgba(62,207,142,0.4);
-}
+        /* ===== FOOTER STYLING ===== */
+        footer {
+            padding: 50px 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
 
-.card i {
-    color:var(--primary);
-    margin-bottom:15px;
-}
+        .footer-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
 
-.card h3 {
-    font-size:0.9rem;
-    margin-bottom:8px;
-}
+        .footer-links a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.3s ease;
+        }
 
-.card p {
-    font-size:0.8rem;
-    color:var(--muted);
-}
+        .footer-links a:hover {
+            color: #7c5cff;
+        }
 
-/* FOOTER */
-footer {
-    text-align:center;
-    padding:40px;
-    font-size:0.7rem;
-    color:rgba(255,255,255,0.3);
-}
-</style>
+        /* ===== FADE ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="glow"></div>
-
-<section class="hero">
-
-    <div class="icon-box">
-        <i data-lucide="map-pin-off" size="38"></i>
+    <div id="mobile-blocker">
+        <i data-lucide="monitor"></i>
+        <h2>PC erforderlich</h2>
+        <p>Das Erlebnis von <b>Königsbrunn</b> ist für Desktop-Monitore optimiert. Bitte besuche uns am Computer.</p>
     </div>
 
-    <h1>KleinStadt <span>Roleplay</span></h1>
-
-    <p>
-        Neuer Name, neues Kapitel.  
-        Wir entwickeln aktuell ein komplett überarbeitetes Konzept mit neuem Branding, 
-        verbesserten Systemen und einer eigenen fiktiven Welt.
-    </p>
-
-    <a href="https://discord.gg/DM2Au3f6RS" class="btn">
-        <i data-lucide="message-circle"></i> Discord beitreten
-    </a>
-
-    <div class="status">
-        <div class="status-text">
-            <span>Projektstatus</span>
-            <span>Im Aufbau</span>
-        </div>
-        <div class="bar">
-            <div class="fill"></div>
+    <div class="popup" id="popup">
+        <div class="popup-box">
+            <h3>Wartung</h3>
+            <p>Diese Seite ist aktuell noch nicht verfügbar.</p>
+            <button onclick="closePopup()">OK</button>
         </div>
     </div>
 
-</section>
-
-<section class="section">
-    <div class="grid">
-
-        <div class="card">
-            <i data-lucide="palette"></i>
-            <h3>Neues Branding</h3>
-            <p>Modernes, ruhiges Design mit klarer Struktur.</p>
+    <nav>
+        <div class="logo" style="cursor: pointer;" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+            Königs<b>brunn</b>
         </div>
 
-        <div class="card">
-            <i data-lucide="cpu"></i>
-            <h3>Neue Systeme</h3>
-            <p>Überarbeitete Features für besseres RP.</p>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="../home/">Home</a>
+                <a href="../team/">Team</a> 
+            </div>
+
+            <button id="theme-toggle" class="maintenance" onclick="event.preventDefault(); openPopup();">
+                <i data-lucide="wrench"></i> Wartung
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Königsbrunn</h1>
+
+        <div class="hero-text">
+            <p>Eine lebendige RP-Stadt im Aufbau – Entscheidungen formen deine Geschichte.</p>
+            <p style="opacity:0.6;">Realistisches Roleplay trifft auf moderne Systeme und eine aktive Community.</p>
         </div>
 
-        <div class="card">
-            <i data-lucide="map"></i>
-            <h3>Eigene Welt</h3>
-            <p>Komplett fiktive Stadt statt Real Life Vorlage.</p>
+        <div class="stats">
+            <div class="stats-item">
+                <h3><i data-lucide="users"></i> Community</h3>
+                <p>Wachsend & aktiv</p>
+            </div>
+
+            <div class="stats-item">
+                <h3><i data-lucide="radio"></i> RP Status</h3>
+                <p>Im Aufbau</p>
+            </div>
         </div>
 
-        <div class="card">
-            <i data-lucide="users"></i>
-            <h3>Community Fokus</h3>
-            <p>Mehr Mitbestimmung & bessere Einstiegshilfe.</p>
+        <a href="https://discord.gg/DM2Au3f6RS" class="btn btn-main">
+            <i data-lucide="send"></i> Discord beitreten
+        </a>
+    </section>
+
+    <section class="section fade-in">
+        <h2>Die Welt von Königsbrunn</h2>
+
+        <div class="bento-grid">
+            <div class="card"><div class="card-inner">
+                <i data-lucide="cpu"></i>
+                <h3>Eigene Systeme</h3>
+                <p>Individuelle Features für einzigartiges Roleplay.</p>
+            </div></div>
+
+            <div class="card"><div class="card-inner">
+                <i data-lucide="users"></i>
+                <h3>Community</h3>
+                <p>Eine wachsende Community mit Fokus auf gutes RP.</p>
+            </div></div>
+
+            <div class="card"><div class="card-inner">
+                <i data-lucide="zap"></i>
+                <h3>Performance</h3>
+                <p>Flüssiges Gameplay ohne unnötige Lags.</p>
+            </div></div>
         </div>
+    </section>
 
-    </div>
-</section>
+    <section id="features" class="section fade-in">
+        <h2>Projekt-Status</h2>
 
-<footer>
-© 2026 KleinStadt Roleplay – Entwicklung läuft
-</footer>
+        <div class="bento-grid">
+            <div class="status-box">
+                <i data-lucide="activity"></i>
+                <h3>Aktueller Stand</h3>
+                <p style="opacity:0.7;">
+                    Wir stehen noch am Anfang – alles entwickelt sich Schritt für Schritt weiter.
+                </p>
+                <div class="progress"><div class="progress-bar"></div></div>
+            </div>
+        </div>
+    </section>
 
-<script>
-lucide.createIcons();
-</script>
+    <footer>
+        <div>&copy; 2026 PROJEKT KÖNIGSBRUNN</div>
+        <div class="footer-links">
+            <a href="../Impressum/">Impressum</a>
+            <a href="../Nutzungsbedingungen/">ToS</a>
+            <a href="../Community_Richtlinien/">Richtlinien</a>
+        </div>
+    </footer>
+
+    <script src="../js/app.js"></script>
+
+    <script>
+        lucide.createIcons();
+
+        function openPopup() {
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
 
 </body>
 </html>
+
+Mach aber einen modernen schönen Ladescreen
