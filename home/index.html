@@ -31,7 +31,6 @@
             line-height: 1.6;
         }
 
-        /* Überschriften (nicht mehr so fett) */
         h1, h2, h3 { font-weight: 300; }
         h1 b, h2 b, h3 b { font-weight: 600; color: var(--primary); }
 
@@ -44,7 +43,7 @@
         .loader-logo { font-size: 2rem; letter-spacing: 5px; margin-bottom: 20px; animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 0.5; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
 
-        /* ===== NAVIGATION (Vom alten Skript übernommen & angepasst) ===== */
+        /* ===== NAVIGATION ===== */
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 8%;
             display: flex; justify-content: space-between; align-items: center;
@@ -107,11 +106,17 @@
         .fade { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
         .fade.show { opacity: 1; transform: translateY(0); }
 
-        /* ===== FOOTER (Vom alten Skript übernommen) ===== */
+        /* ===== FOOTER ===== */
         footer { padding: 80px; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); font-size: 0.8rem; }
         .footer-links { margin-top: 15px; display: flex; justify-content: center; gap: 25px; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
-        .footer-links a:hover { color: var(--primary); }
+        /* Geänderter Footer Link Style für "In Arbeit" */
+        .footer-links a { 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            transition: 0.3s; 
+            cursor: not-allowed; /* Zeigt an, dass es nicht klickbar ist */
+        }
+        .footer-links a:hover { color: #ef4444; } /* Rote Farbe beim Hover als Warnung */
     </style>
 </head>
 <body>
@@ -131,9 +136,10 @@
 
     <div class="popup" id="popup">
         <div class="popup-box">
-            <h3>Wartung</h3>
-            <p>Diese Seite ist aktuell noch nicht verfügbar.</p>
-            <button onclick="closePopup()">OK</button>
+            <i data-lucide="construction" color="#10b981" style="margin-bottom: 15px;"></i>
+            <h3>In Arbeit</h3>
+            <p id="popup-text">Diese Seite ist aktuell noch nicht verfügbar.</p>
+            <button onclick="closePopup()">Verstanden</button>
         </div>
     </div>
 
@@ -145,8 +151,8 @@
             <div class="nav-links">
                 <a href="../home/">Home</a>
                 <a href="../team/">Team</a> 
-            </div>
-            <button id="theme-toggle" class="maintenance" onclick="openPopup();">
+                <a href="../Regelwerk/">Regelwerk</a> </div>
+            <button class="maintenance" onclick="openPopup('Wartung: Das Bewerbungssystem folgt bald.');">
                 <i data-lucide="wrench"></i> Wartung
             </button>
         </div>
@@ -218,20 +224,23 @@
         <div class="logo" style="margin-bottom: 10px; opacity: 0.5;">KLEIN<b>STADT</b></div>
         <div>&copy; 2026 PROJEKT KLEIN STADT</div>
         <div class="footer-links">
-            <a href="../Impressum/">Impressum</a>
-            <a href="../Nutzungsbedingungen/">ToS</a>
-            <a href="../Community_Richtlinien/">Richtlinien</a>
+            <a href="javascript:void(0)" onclick="openPopup('Das Impressum wird derzeit rechtlich geprüft und bald hinzugefügt.');">Impressum</a>
+            <a href="javascript:void(0)" onclick="openPopup('Die Nutzungsbedingungen befinden sich in der finalen Bearbeitung.');">ToS</a>
+            <a href="javascript:void(0)" onclick="openPopup('Die Community-Richtlinien werden gerade für Klein Stadt optimiert.');">Richtlinien</a>
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
 
-        // Beim Neuladen nach oben scrollen
         window.onbeforeunload = function () { window.scrollTo(0, 0); };
         if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
 
-        function openPopup() { document.getElementById("popup").style.display = "flex"; }
+        // Popup Funktion mit Text-Parameter
+        function openPopup(text) { 
+            if(text) document.getElementById("popup-text").innerText = text;
+            document.getElementById("popup").style.display = "flex"; 
+        }
         function closePopup() { document.getElementById("popup").style.display = "none"; }
 
         window.addEventListener('load', () => {
@@ -248,7 +257,7 @@
         function animateProgressBar() {
             const bar = document.getElementById('main-bar');
             const val = document.getElementById('perc-val');
-            const target = 12; // Realistischer niedriger Wert
+            const target = 12; 
             bar.style.width = target + '%';
             let current = 0;
             let interval = setInterval(() => {
