@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regelwerk & Richtlinien | Königsbrunn</title>
+    <title>Regelwerk | Klein Stadt</title>
     
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary: #7c5cff;
-            --primary-hover: #967aff;
-            --bg: #070A12;
-            --card: rgba(255,255,255,0.03);
-            --border: rgba(255,255,255,0.06);
-            --text-muted: rgba(255,255,255,0.5);
-            --safe: #22c55e;
-            --accent-blue: #3b82f6;
+            --primary: #10b981;
+            --primary-soft: rgba(16, 185, 129, 0.1);
+            --bg: #05070a;
+            --card-bg: rgba(15, 23, 42, 0.3);
+            --border: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,269 +24,184 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background: var(--bg);
-            color: white;
+            color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        .bg-glow {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background: radial-gradient(circle at top, #0d1230, #070A12);
-        }
-
+        /* ===== NAVIGATION ===== */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            backdrop-filter: blur(16px);
-            background: rgba(0,0,0,0.3);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: fixed; top: 0; width: 100%; padding: 20px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(20px); background: rgba(5, 7, 10, 0.8);
+            z-index: 1000; border-bottom: 1px solid var(--border);
         }
-
-        .logo { font-weight: 800; cursor: pointer; font-size: 1.1rem; }
-        .logo span { color: var(--primary); }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: 0.3s;
+        .logo { font-size: 1.1rem; text-transform: uppercase; cursor: pointer; letter-spacing: 2px; }
+        .logo b { color: var(--primary); font-weight: 800; }
+        .nav-links a { 
+            text-decoration: none; color: var(--text-muted); font-size: 0.75rem; 
+            font-weight: 700; text-transform: uppercase; transition: 0.3s; 
         }
+        .nav-links a:hover { color: var(--primary); }
 
-        .nav-links a:hover {
-            color: white;
-        }
+        /* ===== HERO SECTION ===== */
+        .hero { padding: 140px 20px 40px; text-align: center; }
+        .hero h1 { font-size: 3rem; font-weight: 300; margin-bottom: 10px; }
+        .hero h1 b { font-weight: 700; color: var(--primary); }
+        .hero p { color: var(--text-muted); font-size: 1rem; }
 
-        /* SLICK TAB SELECTOR */
+        /* ===== TAB SELECTOR ===== */
         .tab-wrapper {
-            display: flex;
-            justify-content: center;
-            padding: 25px 0;
+            display: flex; justify-content: center; padding: 20px 0 40px;
         }
-
         .selector-pill {
-            display: flex;
-            background: rgba(255,255,255,0.03);
-            padding: 4px;
-            border-radius: 100px;
-            border: 1px solid var(--border);
-            gap: 5px;
+            display: flex; background: var(--card-bg); padding: 6px;
+            border-radius: 14px; border: 1px solid var(--border); gap: 8px;
         }
-
         .select-btn {
-            padding: 8px 24px;
-            border-radius: 100px;
-            border: none;
-            background: transparent;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            padding: 10px 24px; border-radius: 10px; border: none;
+            background: transparent; color: var(--text-muted);
+            font-weight: 700; font-size: 0.8rem; text-transform: uppercase;
+            cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px;
         }
+        .select-btn.active { background: var(--primary); color: white; }
+        .select-btn:hover:not(.active) { background: rgba(255,255,255,0.05); color: white; }
 
-        .select-btn i { width: 16px; height: 16px; }
-        .select-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(124,92,255,0.2); }
-        .select-btn:hover:not(.active) { color: white; background: rgba(255,255,255,0.05); }
-
-        /* CONTENT */
-        .tab-content { display: none; max-width: 1200px; margin: auto; padding: 20px 20px 60px; animation: slideUp 0.4s ease-out; }
+        /* ===== CONTENT GRID ===== */
+        .tab-content { display: none; max-width: 1200px; margin: auto; padding: 0 20px 100px; animation: fadeIn 0.5s ease; }
         .tab-content.active { display: block; }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
 
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: 0.3s; }
-        .card:hover { border-color: var(--primary); background: rgba(124,92,255,0.02); transform: translateY(-3px); }
-        .card i { color: var(--primary); margin-bottom: 12px; }
-        .card h3 { margin-bottom: 10px; font-size: 1.1rem; font-weight: 700; }
-        .card p { color: var(--text-muted); font-size: 0.9rem; }
-        .card ul { padding-left: 18px; color: var(--text-muted); font-size: 0.85rem; margin-top: 10px; }
-        .card li { margin-bottom: 6px; }
-
-        .divider { grid-column: 1 / -1; margin: 30px 0 10px; color: var(--primary); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; }
-
-        /* ===== FOOTER STYLING ===== */
-        footer { 
-            text-align: center; 
-            padding: 50px 20px; 
-            color: var(--text-muted); 
-            font-size: 0.85rem; 
-            border-top: 1px solid var(--border); 
-            background: rgba(0,0,0,0.2);
+        .card { 
+            background: var(--card-bg); border: 1px solid var(--border); 
+            border-radius: 24px; padding: 30px; transition: 0.3s;
+            position: relative; overflow: hidden;
         }
+        .card:hover { border-color: var(--primary); background: rgba(16, 185, 129, 0.03); transform: translateY(-5px); }
+        
+        .card i { color: var(--primary); margin-bottom: 15px; opacity: 0.8; }
+        .card h3 { margin-bottom: 12px; font-size: 1.15rem; font-weight: 600; color: white; }
+        .card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
 
-        .footer-links {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
+        .divider { 
+            grid-column: 1 / -1; margin: 40px 0 10px; 
+            color: var(--primary); font-size: 0.7rem; font-weight: 800; 
+            text-transform: uppercase; letter-spacing: 4px; opacity: 0.6;
+            display: flex; align-items: center; gap: 15px;
         }
+        .divider::after { content: ""; height: 1px; flex-grow: 1; background: linear-gradient(90deg, var(--primary), transparent); opacity: 0.3; }
 
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: 0.3s ease;
-        }
+        /* ===== FOOTER ===== */
+        footer { padding: 80px; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); font-size: 0.8rem; }
+        .footer-links { margin-top: 15px; display: flex; justify-content: center; gap: 25px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--primary); }
 
-        .footer-links a:hover {
-            color: var(--primary);
-        }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
-
     <nav>
-        <div class="logo" onclick="location.href='../home/'">Königs<span>brunn</span></div>
+        <div class="logo" onclick="location.href='../home/'">KLEIN<b>STADT</b></div>
         <div class="nav-links">
             <a href="../home/">Home</a>
+            <a href="../team/">Team</a>
         </div>
     </nav>
 
+    <header class="hero">
+        <h1>REGE<b>LWERK</b></h1>
+        <p>Fairness und Respekt bilden das Fundament unserer Stadt.</p>
+    </header>
+
     <div class="tab-wrapper">
         <div class="selector-pill">
-            <button class="select-btn active" onclick="showTab('rules', this)"><i data-lucide="gavel"></i> Regelwerk</button>
-            <button class="select-btn" onclick="showTab('community', this)"><i data-lucide="heart"></i> Richtlinien</button>
+            <button class="select-btn active" onclick="showTab('rules', this)"><i data-lucide="gavel"></i> Server-Regeln</button>
+            <button class="select-btn" onclick="showTab('community', this)"><i data-lucide="heart"></i> Community</button>
         </div>
     </div>
 
     <div id="rules" class="tab-content active">
         <div class="grid">
-            <div class="divider">Allgemeiner Server-Betrieb</div>
+            <div class="divider">Basis-Gesetze</div>
             <div class="card">
                 <i data-lucide="shield-check"></i>
-                <h3>Support-Hierarchie</h3>
-                <p>Bei normalen Fällen hat das Team das Sagen. Das <b>Management & Top-Management</b> hat bei großen Fällen (Team-Reports, Entbannungen) immer das letzte Wort.</p>
+                <h3>Support-Entscheidungen</h3>
+                <p>Anweisungen des Teams ist Folge zu leisten. Das Management behält sich in strittigen Fällen das finale Entscheidungsrecht vor.</p>
             </div>
             <div class="card">
                 <i data-lucide="monitor"></i>
-                <h3>Discord & OOC</h3>
-                <p>OOC-Inhalte gehören nicht in das Roleplay. Streitigkeiten auf Discord dürfen nicht in das Spiel übertragen werden.</p>
+                <h3>OOC & Vermischung</h3>
+                <p>Out-of-Character Informationen haben im Spiel nichts zu suchen. Trenne Privatleben strikt von deinem Charakter.</p>
             </div>
             <div class="card">
                 <i data-lucide="alert-octagon"></i>
-                <h3>RDM & VDM</h3>
-                <p>Töten ohne RP-Grund oder das Nutzen von Fahrzeugen als Waffe ist streng verboten und wird hart sanktioniert.</p>
+                <h3>RDM / VDM</h3>
+                <p>Wahlloses Töten oder das Benutzen von Fahrzeugen als primäre Waffe ohne RP-Hintergrund ist streng untersagt.</p>
             </div>
 
-            <div class="divider">Roleplay Standards</div>
+            <div class="divider">Verhalten im Roleplay</div>
             <div class="card">
                 <i data-lucide="user-minus"></i>
-                <h3>New Life Rule (NLR)</h3>
-                <p>Nach dem Tod beginnt ein neues Leben. Informationen aus dem alten Leben (Täter, Ort) dürfen nicht verwendet werden.</p>
-            </div>
-            <div class="card">
-                <i data-lucide="megaphone"></i>
-                <h3>RP-Flucht</h3>
-                <p>Das Ausloggen oder Verlassen der Situation während einer aktiven Handlung (z.B. Festnahme) ist verboten.</p>
+                <h3>New Life (NLR)</h3>
+                <p>Wenn du stirbst, vergisst dein Charakter die unmittelbaren Geschehnisse. Eine Rache-Aktion ist ausgeschlossen.</p>
             </div>
             <div class="card">
                 <i data-lucide="Zap"></i>
                 <h3>Power-RP</h3>
-                <p>Dem Gegenüber muss immer eine realistische Chance gelassen werden. "Erzwingen" von Handlungen ist untersagt.</p>
+                <p>Lasse deinem Gegenüber immer eine Handlungsmöglichkeit. Realismus steht über dem eigenen Sieg.</p>
             </div>
             <div class="card">
                 <i data-lucide="siren"></i>
-                <h3>Blaulicht-Schutz</h3>
-                <p>Feuerwehr und Rettungsdienst dürfen nicht als Geiseln genommen werden. Ihre Arbeit ist unantastbar.</p>
-            </div>
-
-            <div class="divider">Sicherheit & Zonen</div>
-            <div class="card">
-                <i data-lucide="anchor"></i>
-                <h3>Safezones</h3>
-                <p>Spawn, Krankenhäuser und Polizeiwachen sind absolut gewaltfrei. Hier darf niemand ausgeraubt werden.</p>
-            </div>
-            <div class="card">
-                <i data-lucide="bug"></i>
-                <h3>Bug-Using</h3>
-                <p>Das Ausnutzen von Fehlern im Spielsystem führt zum permanenten Ausschluss. Melde Fehler sofort im Support.</p>
-            </div>
-            <div class="card">
-                <i data-lucide="user-x"></i>
-                <h3>Combat Logging</h3>
-                <p>Das absichtliche Verlassen des Servers, um einer Strafe oder einer RP-Situation zu entgehen, wird bestraft.</p>
+                <h3>Fraktions-Schutz</h3>
+                <p>Medics und Feuerwehrleute im Dienst sind unantastbar, sofern sie nicht aktiv in kriminelle Handlungen eingreifen.</p>
             </div>
         </div>
     </div>
 
     <div id="community" class="tab-content">
         <div class="grid">
-            <div class="divider">Verhaltenskodex</div>
+            <div class="divider">Miteinander</div>
             <div class="card">
                 <i data-lucide="smile"></i>
-                <h3>Respektpflicht</h3>
-                <p>Jeder Mensch hinter dem Bildschirm verdient Respekt. Beleidigungen werden bei uns nicht toleriert.</p>
+                <h3>Respekt & Anstand</h3>
+                <p>Wir pflegen einen höflichen Umgangston. Toxisches Verhalten wird auf keiner Ebene geduldet.</p>
             </div>
             <div class="card">
                 <i data-lucide="heart-handshake"></i>
-                <h3>Diskriminierung</h3>
-                <p>Rassismus, Sexismus oder homophobe Äußerungen führen zum sofortigen und permanenten Bann.</p>
-            </div>
-            <div class="card">
-                <i data-lucide="message-circle"></i>
-                <h3>Spam & Werbung</h3>
-                <p>Unerwünschte Werbung für andere Projekte oder das Fluten von Textkanälen ist untersagt.</p>
-            </div>
-
-            <div class="divider">Account & Sicherheit</div>
-            <div class="card">
-                <i data-lucide="key"></i>
-                <h3>Account-Sicherheit</h3>
-                <p>Jeder ist für seinen Account selbst verantwortlich. "Mein Bruder war am PC" ist keine gültige Ausrede.</p>
+                <h3>Null Toleranz</h3>
+                <p>Diskriminierung jeglicher Art (Rassismus, Sexismus, Hate Speech) führt zum sofortigen permanenten Ausschluss.</p>
             </div>
             <div class="card">
                 <i data-lucide="eye-off"></i>
-                <h3>Datenschutz (Doxing)</h3>
-                <p>Das Veröffentlichen privater Daten anderer Personen führt zur sofortigen Meldung und einem Bann.</p>
-            </div>
-            <div class="card">
-                <i data-lucide="image"></i>
-                <h3>Medien-Inhalte</h3>
-                <p>Das Teilen von Gore, NSFW oder illegalen Inhalten ist strengstens verboten.</p>
+                <h3>Privatsphäre</h3>
+                <p>Doxing oder das Drohen mit der Veröffentlichung privater Daten wird rechtlich und intern verfolgt.</p>
             </div>
 
-            <div class="divider">Community-Management</div>
+            <div class="divider">Technisches</div>
             <div class="card">
-                <i data-lucide="crown"></i>
-                <h3>Management-Entscheid</h3>
-                <p>Bei Unklarheiten oder Team-Beschwerden hat das Top-Management die finale Entscheidungsgewalt.</p>
+                <i data-lucide="bug"></i>
+                <h3>Exploiting</h3>
+                <p>Das Ausnutzen von Fehlern (Bugs) zur eigenen Bereicherung ist untersagt. Melde Fehler im Ticket-System.</p>
             </div>
             <div class="card">
-                <i data-lucide="ticket"></i>
+                <i data-lucide="message-square"></i>
                 <h3>Support-Etikette</h3>
-                <p>Tickets sind höflich und mit Beweisen (Video/Bild) zu führen. Pings an das Team sind zu unterlassen.</p>
-            </div>
-            <div class="card">
-                <i data-lucide="users"></i>
-                <h3>Trolling</h3>
-                <p>Wer nur joint, um die Atmosphäre zu stören, wird ohne Vorwarnung der Community verwiesen.</p>
-            </div>
-            <div class="card">
-                <i data-lucide="thumbs-up"></i>
-                <h3>Konstruktive Kritik</h3>
-                <p>Feedback ist erwünscht, solange es sachlich bleibt und der Verbesserung des Projekts dient.</p>
+                <p>Bleibe in Tickets sachlich. Beleidigungen gegenüber dem Team führen zur sofortigen Schließung des Falls.</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <div>&copy; 2026 Projekt Königsbrunn • Dein Roleplay, deine Regeln.</div>
+        <div class="logo" style="margin-bottom: 10px; opacity: 0.5;">KLEIN<b>STADT</b></div>
+        <div>&copy; 2026 PROJEKT KLEIN STADT • Authentisches Roleplay</div>
         <div class="footer-links">
-            <a href="../Impressum/index.html">Impressum</a>
-            <a href="../Nutzungsbedingungen/index.html">Nutzungsbedingungen</a>
+            <a href="../Impressum/">Impressum</a>
+            <a href="../Nutzungsbedingungen/">ToS</a>
+            <a href="../Datenschutz/">Datenschutz</a>
         </div>
     </footer>
 
